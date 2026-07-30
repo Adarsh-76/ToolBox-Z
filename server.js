@@ -25,6 +25,9 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const app = express();
+// NEW: Fix for Render proxy rate-limiting error
+app.set('trust proxy', 1);
 
 // ==========================================
 // CONFIGURATION (From .env)
@@ -1130,10 +1133,11 @@ app.get('/api/fetch-url', async (req, res) => {
 });
 
 // ==========================================
-// SERVE FRONTEND BUILD
+// SERVE FRONTEND BUILD (Removed because frontend is on Vercel now)
 // ==========================================
-app.use(express.static('dist'));
-app.get('/*splat', (req, res) => res.sendFile(path.join(__dirname, 'dist', 'index.html')));
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'ToolBox Z API is running successfully!' });
+});
 
 // ==========================================
 // START SERVER
