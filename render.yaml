@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: toolboxz-api
+    env: node
+    plan: free
+    buildCommand: npm install && pip install yt-dlp
+    startCommand: node server.js
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+    aptPackages:
+      - ffmpeg
