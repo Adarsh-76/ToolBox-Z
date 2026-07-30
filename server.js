@@ -590,95 +590,75 @@ io.on('connection', async (socket) => {
 // API ROUTES (TOOLS)
 // ==========================================
 
-// 1. YouTube Downloader (Fetch Info)
+
+// 1. YouTube Downloader (Fetch Info using yt-dlp to bypass blocks)
 app.get('/api/youtube-download', async (req, res) => {
   const url = req.query.url;
-  if (!url || !ytdl.validateURL(url)) return res.status(400).json({ success: false, error: 'Invalid YouTube URL' });
-  try {
-    const info = await ytdl.getInfo(url);
-    const title = info.videoDetails.title;
-    const thumbnail = info.videoDetails.thumbnails.pop().url;
-    const formats = info.formats;
 
-    const authorName = info.videoDetails.author ? info.videoDetails.author.name : 'Unknown Channel';
-    const authorAvatar = info.videoDetails.author && info.videoDetails.author.thumbnails && info.videoDetails.author.thumbnails.length > 0 
-                         ? info.videoDetails.author.thumbnails[0].url : '';
-    const views = info.videoDetails.viewCount;
-    const uploadDate = info.videoDetails.uploadDate;
-    const likes = info.videoDetails.likes || 0;
-    const description = info.videoDetails.shortDescription || 'No description available.';
+  if (!url || !ytdl.validateURL(url)) {
+    return res.status(400).json({ success: false, error: 'Invalid YouTube URL' });
+  }
 
-    const videoVariants = [];
-    const audioVariants = [];
-    const seenResolutions = new Set();
-
-    const videoFormats = formats.filter((f) => f.hasVideo).sort((a, b) => (b.height || 0) - (a.height || 0));
-    videoFormats.forEach((f) => {
-      const height = f.height;
-      if (height && !seenResolutions.has(height)) {
-        videoVariants.push({ quality: `${height}p`, height: height, itag: f.itag, size: f.contentLength ? formatBytes(parseInt(f.contentLength, 10)) : 'Unknown', hasAudio: f.hasAudio });
-        seenResolutions.add(height);
-      }
-    });
-
-    const bestAudio = formats.filter((f) => f.hasAudio && !f.hasVideo).sort((a, b) => b.bitrate - a.bitrate)[0];
-    if (bestAudio) {
-      audioVariants.push({ quality: 'High Quality Audio', itag: bestAudio.itag, size: bestAudio.contentLength ? formatBytes(parseInt(bestAudio.contentLength, 10)) : 'Unknown' });
+  // Use yt-dlp -J to get all info as a JSON string safely
+  execFile('yt-dlp', ['-J', '--no-warnings', '--skip-download', url], async (error, stdout, stderr) => {
+    if (error) {
+      console.error('yt-dlp Info Error: ' + stderr);
+      return res.status(500).json({ success: false, error: 'YouTube blocked the server from fetching video data.' });
     }
 
-    res.json({ success: true, details: { title, thumbnail, authorName, authorAvatar, views, uploadDate, likes, description }, videoVariants, audioVariants });
-  } catch (error) {
-    console.error('YouTube Fetch Error:', error.message);
-    res.status(500).json({ success: false, error: 'Failed to fetch YouTube video data.' });
-  }
-});
+    try {
+      const info = JSON.parse(stdout);
+      
+      const details = {
+        title: info.title || 'YouTube Video',
+        thumbnail: info.thumbnail || '',
+        authorName: info.uploader || info.channel || 'Unknown Channel',
+        authorAvatar: info.channel_thumbnail || '',
+        views: info.view_count || 0,
+        uploadDate: info.upload_date || 'Recently',
+        likes: info.like_count || 0,
+        description: info.description || 'No description available.'
+      };
 
-// YouTube Stream (Download, Merge & Stream using yt-dlp + ffmpeg)
-app.get('/api/youtube-stream', async (req, res) => {
-  const { url, height, type, filename } = req.query;
-  if (!url) return res.status(400).json({ error: 'Invalid URL' });
+      const videoVariants = [];
+      const audioVariants = [];
+      const seenResolutions = new Set();
 
-  const tempFile = path.join(os.tmpdir(), 'yt_' + Date.now() + (type === 'audio' ? '.mp3' : '.mp4'));
-  let args = [];
-  if (type === 'audio') {
-    args = ['-x', '--audio-format', 'mp3', '-o', tempFile, url];
-  } else {
-    const formatStr = height 
-      ? `bestvideo[ext=mp4][height<=${height}]+bestaudio[ext=m4a]/best[ext=mp4][height<=${height}]/best`
-      : 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best';
-    args = ['-f', formatStr, '--merge-output-format', 'mp4', '-o', tempFile, url];
-  }
+      // Extract all video formats
+      const videoFormats = info.formats.filter((f) => f.vcodec !== 'none' && f.ext === 'mp4');
+      videoFormats.sort((a, b) => (b.height || 0) - (a.height || 0));
 
-  const ytdlp = spawn('yt-dlp', args);
-
-  ytdlp.stderr.on('data', (data) => {
-    console.error(`yt-dlp stderr: ${data}`);
-  });
-
-  ytdlp.on('close', (code) => {
-    if (code === 0 && fs.existsSync(tempFile)) {
-      res.setHeader('Content-Disposition', `attachment; filename="${filename || 'download.mp4'}"`);
-      res.setHeader('Content-Type', type === 'audio' ? 'audio/mpeg' : 'video/mp4');
-      const stream = fs.createReadStream(tempFile);
-      stream.pipe(res);
-      stream.on('end', () => { fs.unlink(tempFile, (err) => { if (err) console.error('Error deleting temp file: ' + err.message); }); });
-      stream.on('error', () => {
-        fs.unlink(tempFile, (err) => { if (err) console.error('Error deleting temp file: ' + err.message); });
-        if (!res.headersSent) res.status(500).json({ error: 'Failed to stream file.' });
+      videoFormats.forEach((f) => {
+        const height = f.height;
+        if (height && !seenResolutions.has(height)) {
+          videoVariants.push({
+            quality: `${height}p`,
+            height: height,
+            itag: f.format_id,
+            size: f.filesize ? formatBytes(f.filesize) : 'Unknown',
+            hasAudio: f.acodec !== 'none'
+          });
+          seenResolutions.add(height);
+        }
       });
-    } else {
-      console.error('yt-dlp exited with code ' + code);
-      if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-      if (!res.headersSent) res.status(500).json({ error: 'Failed to download YouTube media. Check if ffmpeg is installed.' });
+
+      const bestAudio = info.formats.filter((f) => f.vcodec === 'none' && f.acodec !== 'none').sort((a, b) => b.bitrate - a.bitrate)[0];
+      if (bestAudio) {
+        audioVariants.push({
+          quality: 'High Quality Audio',
+          itag: bestAudio.format_id,
+          size: bestAudio.filesize ? formatBytes(bestAudio.filesize) : 'Unknown'
+        });
+      }
+
+      res.json({ success: true, details, videoVariants, audioVariants });
+    } catch (parseError) {
+      console.error('YouTube Parse Error:', parseError.message);
+      res.status(500).json({ success: false, error: 'Failed to parse YouTube data.' });
     }
   });
-
-  ytdlp.on('error', (err) => {
-    console.error('Spawn Error:', err.message);
-    if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-    if (!res.headersSent) res.status(500).json({ error: 'Failed to start yt-dlp.' });
-  });
 });
+
 
 // 2. Social Media Analytics
 app.get('/api/social-analytics', async (req, res) => {
