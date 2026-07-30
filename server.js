@@ -589,7 +589,7 @@ io.on('connection', async (socket) => {
 // ==========================================
 
 // ==========================================
-// 1. YOUTUBE DOWNLOADER (Invidious API Method - Bypasses All Blocks)
+// 1. YOUTUBE DOWNLOADER (Piped + Invidious API Method)
 // ==========================================
 app.get('/api/youtube-download', async (req, res) => {
   const url = req.query.url;
@@ -601,86 +601,148 @@ app.get('/api/youtube-download', async (req, res) => {
   if (match && match[1]) videoId = match[1];
   else return res.status(400).json({ success: false, error: 'Invalid YouTube URL' });
 
-  // Use multiple Invidious instances as fallbacks
-  const instances = [
-    'https://inv.nadeko.net',
-    'https://invidious.nerdvpn.de',
-    'https://invidious.jing.rocks'
+  // 1. Try Piped API Instances First (Very reliable)
+  const pipedInstances = [
+    'https://pipedapi.kavin.rocks',
+    'https://pipedapi.adminforge.de',
+    'https://api.piped.yt'
   ];
 
   let info = null;
-  let lastError = '';
 
-  for (const instance of instances) {
+  for (const instance of pipedInstances) {
     try {
-      const apiUrl = `${instance}/api/v1/videos/${videoId}?fields=title,videoThumbnails,author,authorThumbnails,viewCount,likeCount,published,description,formatStreams,adaptiveFormats`;
+      const apiUrl = `${instance}/streams/${videoId}`;
       const response = await axios.get(apiUrl, { timeout: 5000 });
-      info = response.data;
-      break; // Success
+      if (response.data && response.data.videoStreams) {
+        info = { source: 'piped', data: response.data };
+        break;
+      }
     } catch (err) {
-      lastError = err.message;
+      // Silently fail and try next instance
+    }
+  }
+
+  // 2. If Piped failed, try Invidious Instances
+  if (!info) {
+    const invidiousInstances = [
+      'https://inv.nadeko.net',
+      'https://invidious.nerdvpn.de',
+      'https://invidious.jing.rocks'
+    ];
+
+    for (const instance of invidiousInstances) {
+      try {
+        const apiUrl = `${instance}/api/v1/videos/${videoId}?fields=title,videoThumbnails,author,authorThumbnails,viewCount,likeCount,published,description,formatStreams,adaptiveFormats`;
+        const response = await axios.get(apiUrl, { timeout: 5000 });
+        if (response.data) {
+          info = { source: 'invidious', data: response.data };
+          break;
+        }
+      } catch (err) {
+        // Silently fail
+      }
     }
   }
 
   if (!info) {
-    return res.status(500).json({ success: false, error: 'Failed to fetch video data. YouTube is blocking all servers.' });
+    return res.status(500).json({ success: false, error: 'All APIs failed. YouTube is blocking the server.' });
   }
 
-  // Parse info
-  const details = {
-    title: info.title || 'YouTube Video',
-    thumbnail: info.videoThumbnails && info.videoThumbnails.length > 0 ? info.videoThumbnails[0].url : '',
-    authorName: info.author || 'Unknown',
-    authorAvatar: info.authorThumbnails && info.authorThumbnails.length > 0 ? info.authorThumbnails[0].url : '',
-    views: info.viewCount || 0,
-    uploadDate: info.published ? new Date(info.published * 1000).toLocaleDateString() : 'Recently',
-    likes: info.likeCount || 0,
-    description: info.description || 'No description available.'
-  };
+  // Parse the data based on which API succeeded
+  let details = {};
+  let videoVariants = [];
+  let audioVariants = [];
 
-  const videoVariants = [];
-  const audioVariants = [];
+  if (info.source === 'piped') {
+    const d = info.data;
+    details = {
+      title: d.title || 'YouTube Video',
+      thumbnail: d.thumbnailUrl || '',
+      authorName: d.uploader || 'Unknown',
+      authorAvatar: d.uploaderAvatar || '',
+      views: d.views || 0,
+      uploadDate: d.uploadDate ? new Date(d.uploadDate).toLocaleDateString() : 'Recently',
+      likes: d.likes || 0,
+      description: d.description || 'No description available.'
+    };
 
-  // 1. Combined streams (Video + Audio, usually up to 720p)
-  if (info.formatStreams) {
-    info.formatStreams.forEach(f => {
-      if (f.url && f.type && f.type.includes('mp4')) {
+    // Piped video streams
+    const seenRes = new Set();
+    d.videoStreams.forEach(f => {
+      if (f.url && f.quality && !seenRes.has(f.quality)) {
         videoVariants.push({
-          quality: f.qualityLabel || f.quality || 'Unknown',
+          quality: f.quality,
           url: f.url,
           size: 'Unknown',
-          hasAudio: true
+          hasAudio: f.videoOnly === false
         });
+        seenRes.add(f.quality);
       }
     });
-  }
 
-  // 2. Adaptive streams (Video only or Audio only)
-  if (info.adaptiveFormats) {
-    const seenVideoRes = new Set();
-    info.adaptiveFormats.forEach(f => {
-      if (f.type && f.type.includes('video/mp4') && f.url) {
-        const quality = f.qualityLabel || f.quality || 'Unknown';
-        if (!seenVideoRes.has(quality)) {
+    // Piped audio streams
+    if (d.audioStreams && d.audioStreams.length > 0) {
+      const bestAudio = d.audioStreams[d.audioStreams.length - 1]; // Usually highest quality is last
+      audioVariants.push({
+        quality: 'High Quality Audio',
+        url: bestAudio.url,
+        size: 'Unknown'
+      });
+    }
+
+  } else {
+    // Invidious Parser
+    const d = info.data;
+    details = {
+      title: d.title || 'YouTube Video',
+      thumbnail: d.videoThumbnails && d.videoThumbnails.length > 0 ? d.videoThumbnails[0].url : '',
+      authorName: d.author || 'Unknown',
+      authorAvatar: d.authorThumbnails && d.authorThumbnails.length > 0 ? d.authorThumbnails[0].url : '',
+      views: d.viewCount || 0,
+      uploadDate: d.published ? new Date(d.published * 1000).toLocaleDateString() : 'Recently',
+      likes: d.likeCount || 0,
+      description: d.description || 'No description available.'
+    };
+
+    if (d.formatStreams) {
+      d.formatStreams.forEach(f => {
+        if (f.url && f.type && f.type.includes('mp4')) {
           videoVariants.push({
-            quality: quality,
+            quality: f.qualityLabel || f.quality || 'Unknown',
             url: f.url,
-            size: f.clen ? formatBytes(parseInt(f.clen, 10)) : 'Unknown',
-            hasAudio: false
-          });
-          seenVideoRes.add(quality);
-        }
-      } else if (f.type && f.type.includes('audio/mp4') && f.url) {
-        const bestAudio = audioVariants.find(a => a.quality === 'High Quality Audio');
-        if (!bestAudio) {
-          audioVariants.push({
-            quality: 'High Quality Audio',
-            url: f.url,
-            size: f.clen ? formatBytes(parseInt(f.clen, 10)) : 'Unknown'
+            size: 'Unknown',
+            hasAudio: true
           });
         }
-      }
-    });
+      });
+    }
+
+    if (d.adaptiveFormats) {
+      const seenVideoRes = new Set();
+      d.adaptiveFormats.forEach(f => {
+        if (f.type && f.type.includes('video/mp4') && f.url) {
+          const quality = f.qualityLabel || f.quality || 'Unknown';
+          if (!seenVideoRes.has(quality)) {
+            videoVariants.push({
+              quality: quality,
+              url: f.url,
+              size: f.clen ? formatBytes(parseInt(f.clen, 10)) : 'Unknown',
+              hasAudio: false
+            });
+            seenVideoRes.add(quality);
+          }
+        } else if (f.type && f.type.includes('audio/mp4') && f.url) {
+          if (audioVariants.length === 0) {
+            audioVariants.push({
+              quality: 'High Quality Audio',
+              url: f.url,
+              size: f.clen ? formatBytes(parseInt(f.clen, 10)) : 'Unknown'
+            });
+          }
+        }
+      });
+    }
   }
 
   res.json({ success: true, details, videoVariants, audioVariants });
