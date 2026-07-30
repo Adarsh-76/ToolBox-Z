@@ -3,9 +3,7 @@ import styles from './Achievements.module.css';
 import Reveal from './Reveal';
 import { fireConfetti, fireSideCannons } from '../utils/celebrate';
 
-const API_BASE_URL = window.location.hostname === 'localhost'
-  ? 'http://localhost:5000'
-  : 'http://' + window.location.hostname + ':5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL}`;
 
 const badges = [
   { id: 'rookie', icon: '👶', name: 'Rookie', desc: 'Used your first tool', requirement: 1 },

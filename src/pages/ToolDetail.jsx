@@ -6,9 +6,7 @@ import PrivacyBanner from '../components/PrivacyBanner';
 import SaveSnippet from '../components/SaveSnippet';
 import styles from './ToolDetail.module.css';
 
-const API_BASE_URL = window.location.hostname === 'localhost'
-  ? 'http://localhost:5000'
-  : 'http://' + window.location.hostname + ':5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL}`;
 
 const LoadingFallback = () => <div className={styles.placeholder}><h2>Loading Tool...</h2></div>;
 

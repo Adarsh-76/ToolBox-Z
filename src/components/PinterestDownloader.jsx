@@ -41,7 +41,7 @@ const PinterestDownloader = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/pinterest?url=${encodeURIComponent(url)}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/pinterest?url=${encodeURIComponent(url)}`);
       const data = await response.json();
 
       if (data.success) {
@@ -64,7 +64,7 @@ const PinterestDownloader = () => {
     // Use the backend proxy to force download instead of opening in a new tab
     const safeQuality = quality.replace(/[^a-zA-Z0-9]/g, '_');
     const fileName = `pinterest_${safeQuality}_${Date.now()}.jpg`;
-    const downloadProxyUrl = `http://localhost:5000/api/download?url=${encodeURIComponent(mediaUrl)}&filename=${fileName}`;
+    const downloadProxyUrl = `${import.meta.env.VITE_API_URL}/api/download?url=${encodeURIComponent(mediaUrl)}&filename=${fileName}`;
     
     // Create a hidden anchor tag to trigger the download stream
     const link = document.createElement('a');
@@ -77,7 +77,7 @@ const PinterestDownloader = () => {
     // Save to MongoDB History if user is logged in
     const token = localStorage.getItem('token');
     if (token) {
-      fetch('http://localhost:5000/api/history/pinterest-downloader', {
+      fetch(`${import.meta.env.VITE_API_URL}/api/history/pinterest-downloader`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

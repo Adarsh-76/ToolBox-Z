@@ -28,7 +28,7 @@ const YoutubeTagsExtractor = () => {
 
     try {
       // Fetch from our Node.js Backend
-      const response = await fetch(`http://localhost:5000/api/youtube-tags?v=${videoId}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/youtube-tags?v=${videoId}`);
       const data = await response.json();
 
       if (data.success && data.tags.length > 0) {

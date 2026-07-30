@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import styles from './DailymotionDownloader.module.css';
 
-const API_BASE_URL = window.location.hostname === 'localhost'
-  ? 'http://localhost:5000'
-  : 'http://' + window.location.hostname + ':5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || `${import.meta.env.VITE_API_URL}`;
 
 const DailymotionDownloader = () => {
   const [url, setUrl] = useState('');
