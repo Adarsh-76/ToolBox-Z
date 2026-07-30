@@ -588,72 +588,85 @@ io.on('connection', async (socket) => {
 // API ROUTES (TOOLS)
 // ==========================================
 
-// 1. YOUTUBE DOWNLOADER (Cobalt API Method - Bypasses All Blocks)
+// ==========================================
+// 1. YOUTUBE DOWNLOADER (Multi-Instance Cobalt API)
+// ==========================================
 app.get('/api/youtube-download', async (req, res) => {
   const url = req.query.url;
   const isAudio = req.query.audio === 'true';
   if (!url) return res.status(400).json({ success: false, error: 'Invalid URL' });
 
-  try {
-    const payload = {
-      url: url,
-      vCodec: 'h264',
-      vQuality: '1080',
-      aFormat: 'mp3',
-      isAudioOnly: isAudio
-    };
+  // List of public Cobalt API instances
+  const cobaltInstances = [
+    'https://api.cobalt.tools/api/json',
+    'https://co.wuk.sh/api/json',
+    'https://cobalt-api.kwiatekmiki.com/api/json',
+    'https://cobalt.eepy.today/api/json'
+  ];
 
-    const cobaltResponse = await axios.post('https://api.cobalt.tools/api/json', payload, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'User-Agent': 'ToolBoxZ/1.0'
-      }
-    });
+  let cobaltData = null;
 
-    const cobaltData = cobaltResponse.data;
-
-    if (cobaltData.status === 'stream' || cobaltData.status === 'redirect') {
-      
-      let videoInfo = { title: 'YouTube Video', thumbnail: '', authorName: 'YouTube' };
-      try {
-        const videoIdMatch = url.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-        if (videoIdMatch && videoIdMatch[1]) {
-          const videoId = videoIdMatch[1];
-          videoInfo.thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-          const oembedRes = await axios.get(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
-          videoInfo.title = oembedRes.data.title || 'YouTube Video';
-          videoInfo.authorName = oembedRes.data.author_name || 'Unknown';
-        }
-      } catch (e) {}
-
-      return res.json({
-        success: true,
-        details: {
-          title: videoInfo.title,
-          thumbnail: videoInfo.thumbnail,
-          authorName: videoInfo.authorName,
-          authorAvatar: '',
-          views: 0,
-          uploadDate: 'Recently',
-          likes: 0,
-          description: 'Click Download to save this video. (Processed via Cobalt API)'
+  // Try each instance until one works
+  for (const instance of cobaltInstances) {
+    try {
+      const cobaltResponse = await axios.post(instance, {
+        url: url,
+        vCodec: 'h264',
+        vQuality: '1080',
+        aFormat: 'mp3',
+        isAudioOnly: isAudio
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'User-Agent': 'ToolBoxZ/1.0'
         },
-        videoVariants: [{ quality: isAudio ? 'Audio' : '1080p (Best)', url: cobaltData.url, hasAudio: true }],
-        audioVariants: []
+        timeout: 10000 // 10 second timeout per instance
       });
 
-    } else if (cobaltData.status === 'picker') {
-      return res.status(400).json({ success: false, error: 'This video type is not supported.' });
-    } else {
-      return res.status(400).json({ success: false, error: cobaltData.text || 'Cobalt API failed to process the video.' });
+      if (cobaltResponse.data && (cobaltResponse.data.status === 'stream' || cobaltResponse.data.status === 'redirect')) {
+        cobaltData = cobaltResponse.data;
+        break; // Success! Stop trying other instances.
+      }
+    } catch (err) {
+      // Silently fail and try the next instance
     }
-
-  } catch (err) {
-    console.error('Cobalt API Error:', err.message);
-    return res.status(500).json({ success: false, error: 'Failed to fetch video. The Cobalt API may be overloaded.' });
   }
+
+  if (!cobaltData) {
+    return res.status(500).json({ success: false, error: 'Failed to fetch video. All Cobalt servers are blocked or down.' });
+  }
+
+  // Fetch basic video info (thumbnail/title) safely using oEmbed
+  let videoInfo = { title: 'YouTube Video', thumbnail: '', authorName: 'YouTube' };
+  try {
+    const videoIdMatch = url.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    if (videoIdMatch && videoIdMatch[1]) {
+      const videoId = videoIdMatch[1];
+      videoInfo.thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+      const oembedRes = await axios.get(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
+      videoInfo.title = oembedRes.data.title || 'YouTube Video';
+      videoInfo.authorName = oembedRes.data.author_name || 'Unknown';
+    }
+  } catch (e) {}
+
+  return res.json({
+    success: true,
+    details: {
+      title: videoInfo.title,
+      thumbnail: videoInfo.thumbnail,
+      authorName: videoInfo.authorName,
+      authorAvatar: '',
+      views: 0,
+      uploadDate: 'Recently',
+      likes: 0,
+      description: 'Click Download to save this video. (Processed via Cobalt API)'
+    },
+    videoVariants: [{ quality: isAudio ? 'Audio' : '1080p (Best)', url: cobaltData.url, hasAudio: true }],
+    audioVariants: []
+  });
 });
+
 
 // YOUTUBE PROXY STREAM (Downloads direct Cobalt URLs)
 app.get('/api/youtube-proxy', async (req, res) => {
