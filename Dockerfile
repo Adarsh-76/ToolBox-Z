@@ -1,9 +1,9 @@
-# Use Node.js 20 base image (Fixes the File is not defined error)
+# Use Node.js 20 base image
 FROM node:20
 
-# Install ffmpeg, python, and yt-dlp
+# Install ffmpeg, python, and yt-dlp (force latest version)
 RUN apt-get update && apt-get install -y ffmpeg python3 python3-pip
-RUN pip3 install yt-dlp --break-system-packages
+RUN pip3 install --upgrade yt-dlp --break-system-packages
 
 # Create app directory
 WORKDIR /usr/src/app

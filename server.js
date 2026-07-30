@@ -14,8 +14,8 @@ import { Server } from 'socket.io';
 import { fileURLToPath } from 'url';
 import { execFile, spawn } from 'child_process';
 import os from 'os';
-import dotenv from 'dotenv'; // NEW: For environment variables
-import rateLimit from 'express-rate-limit'; // NEW: For rate limiting
+import dotenv from 'dotenv';
+import rateLimit from 'express-rate-limit';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -23,11 +23,11 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = process.env.PORT || 5000;
-
 const app = express();
-// NEW: Fix for Render proxy rate-limiting error
+// Fix for Render proxy rate-limiting error
 app.set('trust proxy', 1);
+
+const PORT = process.env.PORT || 5000;
 
 // ==========================================
 // CONFIGURATION (From .env)
@@ -40,7 +40,6 @@ const EMAIL_PASS = process.env.EMAIL_PASS || '';
 
 // ==========================================
 // RATE LIMITING (Prevent API Abuse)
-// Limits users to 100 requests per 15 minutes
 // ==========================================
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -54,7 +53,6 @@ app.use('/api/', apiLimiter);
 // ==========================================
 // CORS & SOCKET.IO SETUP
 // ==========================================
-// Only allow requests from your frontend URL
 const corsOptions = {
   origin: process.env.FRONTEND_URL || '*',
   credentials: true
@@ -590,17 +588,13 @@ io.on('connection', async (socket) => {
 // API ROUTES (TOOLS)
 // ==========================================
 
-
 // 1. YouTube Downloader (Fetch Info using yt-dlp to bypass blocks)
 app.get('/api/youtube-download', async (req, res) => {
   const url = req.query.url;
+  if (!url || !ytdl.validateURL(url)) return res.status(400).json({ success: false, error: 'Invalid YouTube URL' });
 
-  if (!url || !ytdl.validateURL(url)) {
-    return res.status(400).json({ success: false, error: 'Invalid YouTube URL' });
-  }
-
-  // Use yt-dlp -J to get all info as a JSON string safely
-  execFile('yt-dlp', ['-J', '--no-warnings', '--skip-download', url], async (error, stdout, stderr) => {
+  // Use yt-dlp -J with mobile client bypass to get info safely
+  execFile('yt-dlp', ['-J', '--no-warnings', '--skip-download', '--extractor-args', 'youtube:player_client=android,ios', url], async (error, stdout, stderr) => {
     if (error) {
       console.error('yt-dlp Info Error: ' + stderr);
       return res.status(500).json({ success: false, error: 'YouTube blocked the server from fetching video data.' });
@@ -624,7 +618,6 @@ app.get('/api/youtube-download', async (req, res) => {
       const audioVariants = [];
       const seenResolutions = new Set();
 
-      // Extract all video formats
       const videoFormats = info.formats.filter((f) => f.vcodec !== 'none' && f.ext === 'mp4');
       videoFormats.sort((a, b) => (b.height || 0) - (a.height || 0));
 
@@ -659,6 +652,55 @@ app.get('/api/youtube-download', async (req, res) => {
   });
 });
 
+// YouTube Stream (Download, Merge & Stream using yt-dlp + ffmpeg)
+app.get('/api/youtube-stream', async (req, res) => {
+  const { url, height, type, filename } = req.query;
+  if (!url) return res.status(400).json({ error: 'Invalid URL' });
+
+  const tempFile = path.join(os.tmpdir(), 'yt_' + Date.now() + (type === 'audio' ? '.mp3' : '.mp4'));
+  let args = [];
+  if (type === 'audio') {
+    args = ['-x', '--audio-format', 'mp3', '-o', tempFile, url];
+  } else {
+    const formatStr = height 
+      ? `bestvideo[ext=mp4][height<=${height}]+bestaudio[ext=m4a]/best[ext=mp4][height<=${height}]/best`
+      : 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best';
+    args = ['-f', formatStr, '--merge-output-format', 'mp4', '-o', tempFile, url];
+  }
+
+  // Bypass YouTube bot block for streaming too
+  args.push('--extractor-args', 'youtube:player_client=android,ios');
+
+  const ytdlp = spawn('yt-dlp', args);
+
+  ytdlp.stderr.on('data', (data) => {
+    console.error(`yt-dlp stderr: ${data}`);
+  });
+
+  ytdlp.on('close', (code) => {
+    if (code === 0 && fs.existsSync(tempFile)) {
+      res.setHeader('Content-Disposition', `attachment; filename="${filename || 'download.mp4'}"`);
+      res.setHeader('Content-Type', type === 'audio' ? 'audio/mpeg' : 'video/mp4');
+      const stream = fs.createReadStream(tempFile);
+      stream.pipe(res);
+      stream.on('end', () => { fs.unlink(tempFile, (err) => { if (err) console.error('Error deleting temp file: ' + err.message); }); });
+      stream.on('error', () => {
+        fs.unlink(tempFile, (err) => { if (err) console.error('Error deleting temp file: ' + err.message); });
+        if (!res.headersSent) res.status(500).json({ error: 'Failed to stream file.' });
+      });
+    } else {
+      console.error('yt-dlp exited with code ' + code);
+      if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
+      if (!res.headersSent) res.status(500).json({ error: 'Failed to download YouTube media. Check if ffmpeg is installed.' });
+    }
+  });
+
+  ytdlp.on('error', (err) => {
+    console.error('Spawn Error:', err.message);
+    if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
+    if (!res.headersSent) res.status(500).json({ error: 'Failed to start yt-dlp.' });
+  });
+});
 
 // 2. Social Media Analytics
 app.get('/api/social-analytics', async (req, res) => {
