@@ -588,118 +588,126 @@ io.on('connection', async (socket) => {
 // API ROUTES (TOOLS)
 // ==========================================
 
-// 1. YouTube Downloader (Fetch Info using yt-dlp to bypass blocks)
+// ==========================================
+// 1. YOUTUBE DOWNLOADER (Invidious API Method - Bypasses All Blocks)
+// ==========================================
 app.get('/api/youtube-download', async (req, res) => {
   const url = req.query.url;
-  if (!url || !ytdl.validateURL(url)) return res.status(400).json({ success: false, error: 'Invalid YouTube URL' });
+  if (!url) return res.status(400).json({ success: false, error: 'Invalid URL' });
 
-  // Use yt-dlp -J with mobile client bypass to get info safely
-  execFile('yt-dlp', ['-J', '--no-warnings', '--skip-download', '--extractor-args', 'youtube:player_client=android,ios', url], async (error, stdout, stderr) => {
-    if (error) {
-      console.error('yt-dlp Info Error: ' + stderr);
-      return res.status(500).json({ success: false, error: 'YouTube blocked the server from fetching video data.' });
-    }
+  // Extract Video ID
+  let videoId = '';
+  const match = url.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  if (match && match[1]) videoId = match[1];
+  else return res.status(400).json({ success: false, error: 'Invalid YouTube URL' });
 
+  // Use multiple Invidious instances as fallbacks
+  const instances = [
+    'https://inv.nadeko.net',
+    'https://invidious.nerdvpn.de',
+    'https://invidious.jing.rocks'
+  ];
+
+  let info = null;
+  let lastError = '';
+
+  for (const instance of instances) {
     try {
-      const info = JSON.parse(stdout);
-      
-      const details = {
-        title: info.title || 'YouTube Video',
-        thumbnail: info.thumbnail || '',
-        authorName: info.uploader || info.channel || 'Unknown Channel',
-        authorAvatar: info.channel_thumbnail || '',
-        views: info.view_count || 0,
-        uploadDate: info.upload_date || 'Recently',
-        likes: info.like_count || 0,
-        description: info.description || 'No description available.'
-      };
-
-      const videoVariants = [];
-      const audioVariants = [];
-      const seenResolutions = new Set();
-
-      const videoFormats = info.formats.filter((f) => f.vcodec !== 'none' && f.ext === 'mp4');
-      videoFormats.sort((a, b) => (b.height || 0) - (a.height || 0));
-
-      videoFormats.forEach((f) => {
-        const height = f.height;
-        if (height && !seenResolutions.has(height)) {
-          videoVariants.push({
-            quality: `${height}p`,
-            height: height,
-            itag: f.format_id,
-            size: f.filesize ? formatBytes(f.filesize) : 'Unknown',
-            hasAudio: f.acodec !== 'none'
-          });
-          seenResolutions.add(height);
-        }
-      });
-
-      const bestAudio = info.formats.filter((f) => f.vcodec === 'none' && f.acodec !== 'none').sort((a, b) => b.bitrate - a.bitrate)[0];
-      if (bestAudio) {
-        audioVariants.push({
-          quality: 'High Quality Audio',
-          itag: bestAudio.format_id,
-          size: bestAudio.filesize ? formatBytes(bestAudio.filesize) : 'Unknown'
-        });
-      }
-
-      res.json({ success: true, details, videoVariants, audioVariants });
-    } catch (parseError) {
-      console.error('YouTube Parse Error:', parseError.message);
-      res.status(500).json({ success: false, error: 'Failed to parse YouTube data.' });
+      const apiUrl = `${instance}/api/v1/videos/${videoId}?fields=title,videoThumbnails,author,authorThumbnails,viewCount,likeCount,published,description,formatStreams,adaptiveFormats`;
+      const response = await axios.get(apiUrl, { timeout: 5000 });
+      info = response.data;
+      break; // Success
+    } catch (err) {
+      lastError = err.message;
     }
-  });
-});
-
-// YouTube Stream (Download, Merge & Stream using yt-dlp + ffmpeg)
-app.get('/api/youtube-stream', async (req, res) => {
-  const { url, height, type, filename } = req.query;
-  if (!url) return res.status(400).json({ error: 'Invalid URL' });
-
-  const tempFile = path.join(os.tmpdir(), 'yt_' + Date.now() + (type === 'audio' ? '.mp3' : '.mp4'));
-  let args = [];
-  if (type === 'audio') {
-    args = ['-x', '--audio-format', 'mp3', '-o', tempFile, url];
-  } else {
-    const formatStr = height 
-      ? `bestvideo[ext=mp4][height<=${height}]+bestaudio[ext=m4a]/best[ext=mp4][height<=${height}]/best`
-      : 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best';
-    args = ['-f', formatStr, '--merge-output-format', 'mp4', '-o', tempFile, url];
   }
 
-  // Bypass YouTube bot block for streaming too
-  args.push('--extractor-args', 'youtube:player_client=android,ios');
+  if (!info) {
+    return res.status(500).json({ success: false, error: 'Failed to fetch video data. YouTube is blocking all servers.' });
+  }
 
-  const ytdlp = spawn('yt-dlp', args);
+  // Parse info
+  const details = {
+    title: info.title || 'YouTube Video',
+    thumbnail: info.videoThumbnails && info.videoThumbnails.length > 0 ? info.videoThumbnails[0].url : '',
+    authorName: info.author || 'Unknown',
+    authorAvatar: info.authorThumbnails && info.authorThumbnails.length > 0 ? info.authorThumbnails[0].url : '',
+    views: info.viewCount || 0,
+    uploadDate: info.published ? new Date(info.published * 1000).toLocaleDateString() : 'Recently',
+    likes: info.likeCount || 0,
+    description: info.description || 'No description available.'
+  };
 
-  ytdlp.stderr.on('data', (data) => {
-    console.error(`yt-dlp stderr: ${data}`);
-  });
+  const videoVariants = [];
+  const audioVariants = [];
 
-  ytdlp.on('close', (code) => {
-    if (code === 0 && fs.existsSync(tempFile)) {
-      res.setHeader('Content-Disposition', `attachment; filename="${filename || 'download.mp4'}"`);
-      res.setHeader('Content-Type', type === 'audio' ? 'audio/mpeg' : 'video/mp4');
-      const stream = fs.createReadStream(tempFile);
-      stream.pipe(res);
-      stream.on('end', () => { fs.unlink(tempFile, (err) => { if (err) console.error('Error deleting temp file: ' + err.message); }); });
-      stream.on('error', () => {
-        fs.unlink(tempFile, (err) => { if (err) console.error('Error deleting temp file: ' + err.message); });
-        if (!res.headersSent) res.status(500).json({ error: 'Failed to stream file.' });
-      });
-    } else {
-      console.error('yt-dlp exited with code ' + code);
-      if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-      if (!res.headersSent) res.status(500).json({ error: 'Failed to download YouTube media. Check if ffmpeg is installed.' });
-    }
-  });
+  // 1. Combined streams (Video + Audio, usually up to 720p)
+  if (info.formatStreams) {
+    info.formatStreams.forEach(f => {
+      if (f.url && f.type && f.type.includes('mp4')) {
+        videoVariants.push({
+          quality: f.qualityLabel || f.quality || 'Unknown',
+          url: f.url,
+          size: 'Unknown',
+          hasAudio: true
+        });
+      }
+    });
+  }
 
-  ytdlp.on('error', (err) => {
-    console.error('Spawn Error:', err.message);
-    if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-    if (!res.headersSent) res.status(500).json({ error: 'Failed to start yt-dlp.' });
-  });
+  // 2. Adaptive streams (Video only or Audio only)
+  if (info.adaptiveFormats) {
+    const seenVideoRes = new Set();
+    info.adaptiveFormats.forEach(f => {
+      if (f.type && f.type.includes('video/mp4') && f.url) {
+        const quality = f.qualityLabel || f.quality || 'Unknown';
+        if (!seenVideoRes.has(quality)) {
+          videoVariants.push({
+            quality: quality,
+            url: f.url,
+            size: f.clen ? formatBytes(parseInt(f.clen, 10)) : 'Unknown',
+            hasAudio: false
+          });
+          seenVideoRes.add(quality);
+        }
+      } else if (f.type && f.type.includes('audio/mp4') && f.url) {
+        const bestAudio = audioVariants.find(a => a.quality === 'High Quality Audio');
+        if (!bestAudio) {
+          audioVariants.push({
+            quality: 'High Quality Audio',
+            url: f.url,
+            size: f.clen ? formatBytes(parseInt(f.clen, 10)) : 'Unknown'
+          });
+        }
+      }
+    });
+  }
+
+  res.json({ success: true, details, videoVariants, audioVariants });
+});
+
+// ==========================================
+// YOUTUBE PROXY STREAM (Downloads direct GoogleVideo URLs)
+// ==========================================
+app.get('/api/youtube-proxy', async (req, res) => {
+  const { url, filename } = req.query;
+  if (!url) return res.status(400).json({ error: 'Missing URL' });
+
+  try {
+    const response = await axios.get(url, {
+      responseType: 'stream',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Referer': 'https://www.youtube.com/'
+      }
+    });
+    res.setHeader('Content-Disposition', `attachment; filename="${filename || 'download.mp4'}"`);
+    res.setHeader('Content-Type', response.headers['content-type'] || 'application/octet-stream');
+    response.data.pipe(res);
+  } catch (error) {
+    console.error('Proxy Error:', error.message);
+    res.status(500).json({ error: 'Failed to download file.' });
+  }
 });
 
 // 2. Social Media Analytics

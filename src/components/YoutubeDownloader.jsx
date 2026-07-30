@@ -43,14 +43,14 @@ const YoutubeDownloader = () => {
     }
   };
 
-  // UPDATED: Now passes 'height' instead of 'itag'
-  const handleDownload = (height, quality, type) => {
+  const handleDownload = (directUrl, quality, type) => {
     const safeTitle = (videoData?.details.title || 'youtube_video').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
     const ext = type === 'audio' ? 'mp3' : 'mp4';
     const fileName = `${safeTitle}_${quality}.${ext}`;
 
-    const streamUrl = `${API_BASE_URL}/api/youtube-stream?url=${encodeURIComponent(url)}&height=${height || ''}&type=${type}&filename=${fileName}`;
-    window.open(streamUrl, '_blank');
+    // Use the new proxy route
+    const proxyUrl = `${API_BASE_URL}/api/youtube-proxy?url=${encodeURIComponent(directUrl)}&filename=${fileName}`;
+    window.open(proxyUrl, '_blank');
   };
 
   const handleClear = () => {
@@ -107,16 +107,11 @@ const YoutubeDownloader = () => {
                 👍 {formatNumber(videoData.details.likes)}
               </div>
             </div>
-
-            <div className={styles.descriptionBox}>
-              <h4 className={styles.descTitle}>Description</h4>
-              <p className={styles.descText}>{videoData.details.description}</p>
-            </div>
           </div>
 
           {/* Download Section */}
           <div className={styles.downloadHeader}>
-            <span>Download Options (Video + Audio Merged):</span>
+            <span>Download Options:</span>
           </div>
 
           <div className={styles.downloadGrid}>
@@ -124,17 +119,16 @@ const YoutubeDownloader = () => {
               <button
                 key={i}
                 className={`${styles.downloadBtn} ${styles.videoBtn}`}
-                // Pass variant.height to handleDownload
-                onClick={() => handleDownload(variant.height, variant.quality, 'video')}
+                onClick={() => handleDownload(variant.url, variant.quality, 'video')}
               >
-                ⬇️ Download {variant.quality} <span className={styles.tag}>(Video + Audio)</span>
+                ⬇️ Download {variant.quality} {!variant.hasAudio && <span className={styles.tag}>(Video Only)</span>}
               </button>
             ))}
             {videoData.audioVariants.map((variant, i) => (
               <button
                 key={i}
                 className={`${styles.downloadBtn} ${styles.audioBtn}`}
-                onClick={() => handleDownload(null, 'High', 'audio')}
+                onClick={() => handleDownload(variant.url, 'High', 'audio')}
               >
                 🎵 Extract Audio (MP3)
               </button>
