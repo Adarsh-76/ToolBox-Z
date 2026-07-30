@@ -43,20 +43,34 @@ const YoutubeDownloader = () => {
     }
   };
 
-  const handleDownload = (directUrl, quality, type) => {
+   const handleDownload = async (directUrl, quality, type) => {
     const safeTitle = (videoData?.details.title || 'youtube_video').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
     const ext = type === 'audio' ? 'mp3' : 'mp4';
     const fileName = `${safeTitle}_${quality}.${ext}`;
 
-    // Use the new proxy route
+    // If it's an audio request, we need to ask Cobalt for an audio-only stream
+    if (type === 'audio') {
+      try {
+        const cobaltRes = await fetch(`${API_BASE_URL}/api/youtube-download?url=${encodeURIComponent(url)}&audio=true`);
+        const cobaltData = await cobaltRes.json();
+        if (cobaltData.success && cobaltData.videoVariants.length > 0) {
+          const audioUrl = cobaltData.videoVariants[0].url;
+          const proxyUrl = `${API_BASE_URL}/api/youtube-proxy?url=${encodeURIComponent(audioUrl)}&filename=${fileName}`;
+          window.open(proxyUrl, '_blank');
+          return;
+        } else {
+          alert('Failed to extract audio for this video.');
+          return;
+        }
+      } catch (err) {
+        alert('Error fetching audio.');
+        return;
+      }
+    }
+
+    // For video, just proxy the URL we already have
     const proxyUrl = `${API_BASE_URL}/api/youtube-proxy?url=${encodeURIComponent(directUrl)}&filename=${fileName}`;
     window.open(proxyUrl, '_blank');
-  };
-
-  const handleClear = () => {
-    setUrl('');
-    setVideoData(null);
-    setError('');
   };
 
   return (

@@ -588,168 +588,82 @@ io.on('connection', async (socket) => {
 // API ROUTES (TOOLS)
 // ==========================================
 
+
 // ==========================================
-// 1. YOUTUBE DOWNLOADER (Piped + Invidious API Method)
+// 1. YOUTUBE DOWNLOADER (Cobalt API Method - Bypasses All Blocks)
 // ==========================================
 app.get('/api/youtube-download', async (req, res) => {
   const url = req.query.url;
   if (!url) return res.status(400).json({ success: false, error: 'Invalid URL' });
 
-  // Extract Video ID
-  let videoId = '';
-  const match = url.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-  if (match && match[1]) videoId = match[1];
-  else return res.status(400).json({ success: false, error: 'Invalid YouTube URL' });
-
-  // 1. Try Piped API Instances First (Very reliable)
-  const pipedInstances = [
-    'https://pipedapi.kavin.rocks',
-    'https://pipedapi.adminforge.de',
-    'https://api.piped.yt'
-  ];
-
-  let info = null;
-
-  for (const instance of pipedInstances) {
-    try {
-      const apiUrl = `${instance}/streams/${videoId}`;
-      const response = await axios.get(apiUrl, { timeout: 5000 });
-      if (response.data && response.data.videoStreams) {
-        info = { source: 'piped', data: response.data };
-        break;
-      }
-    } catch (err) {
-      // Silently fail and try next instance
-    }
-  }
-
-  // 2. If Piped failed, try Invidious Instances
-  if (!info) {
-    const invidiousInstances = [
-      'https://inv.nadeko.net',
-      'https://invidious.nerdvpn.de',
-      'https://invidious.jing.rocks'
-    ];
-
-    for (const instance of invidiousInstances) {
-      try {
-        const apiUrl = `${instance}/api/v1/videos/${videoId}?fields=title,videoThumbnails,author,authorThumbnails,viewCount,likeCount,published,description,formatStreams,adaptiveFormats`;
-        const response = await axios.get(apiUrl, { timeout: 5000 });
-        if (response.data) {
-          info = { source: 'invidious', data: response.data };
-          break;
-        }
-      } catch (err) {
-        // Silently fail
-      }
-    }
-  }
-
-  if (!info) {
-    return res.status(500).json({ success: false, error: 'All APIs failed. YouTube is blocking the server.' });
-  }
-
-  // Parse the data based on which API succeeded
-  let details = {};
-  let videoVariants = [];
-  let audioVariants = [];
-
-  if (info.source === 'piped') {
-    const d = info.data;
-    details = {
-      title: d.title || 'YouTube Video',
-      thumbnail: d.thumbnailUrl || '',
-      authorName: d.uploader || 'Unknown',
-      authorAvatar: d.uploaderAvatar || '',
-      views: d.views || 0,
-      uploadDate: d.uploadDate ? new Date(d.uploadDate).toLocaleDateString() : 'Recently',
-      likes: d.likes || 0,
-      description: d.description || 'No description available.'
-    };
-
-    // Piped video streams
-    const seenRes = new Set();
-    d.videoStreams.forEach(f => {
-      if (f.url && f.quality && !seenRes.has(f.quality)) {
-        videoVariants.push({
-          quality: f.quality,
-          url: f.url,
-          size: 'Unknown',
-          hasAudio: f.videoOnly === false
-        });
-        seenRes.add(f.quality);
+  try {
+    // Use Cobalt API to fetch video info and direct links
+    const cobaltResponse = await axios.post('https://api.cobalt.tools/api/json', {
+      url: url,
+      vCodec: 'h264',
+      vQuality: '1080',
+      aFormat: 'mp3',
+      isAudioOnly: false
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'User-Agent': 'ToolBoxZ/1.0' // Cobalt requires a custom User-Agent
       }
     });
 
-    // Piped audio streams
-    if (d.audioStreams && d.audioStreams.length > 0) {
-      const bestAudio = d.audioStreams[d.audioStreams.length - 1]; // Usually highest quality is last
-      audioVariants.push({
-        quality: 'High Quality Audio',
-        url: bestAudio.url,
-        size: 'Unknown'
-      });
-    }
+    const cobaltData = cobaltResponse.data;
 
-  } else {
-    // Invidious Parser
-    const d = info.data;
-    details = {
-      title: d.title || 'YouTube Video',
-      thumbnail: d.videoThumbnails && d.videoThumbnails.length > 0 ? d.videoThumbnails[0].url : '',
-      authorName: d.author || 'Unknown',
-      authorAvatar: d.authorThumbnails && d.authorThumbnails.length > 0 ? d.authorThumbnails[0].url : '',
-      views: d.viewCount || 0,
-      uploadDate: d.published ? new Date(d.published * 1000).toLocaleDateString() : 'Recently',
-      likes: d.likeCount || 0,
-      description: d.description || 'No description available.'
-    };
-
-    if (d.formatStreams) {
-      d.formatStreams.forEach(f => {
-        if (f.url && f.type && f.type.includes('mp4')) {
-          videoVariants.push({
-            quality: f.qualityLabel || f.quality || 'Unknown',
-            url: f.url,
-            size: 'Unknown',
-            hasAudio: true
-          });
+    // If Cobalt returns a direct stream URL
+    if (cobaltData.status === 'stream' || cobaltData.status === 'redirect') {
+      
+      // We don't get rich metadata from Cobalt, so we fetch basic info safely using oEmbed (doesn't get blocked)
+      let videoInfo = { title: 'YouTube Video', thumbnail: '', authorName: 'YouTube' };
+      try {
+        const videoIdMatch = url.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+        if (videoIdMatch && videoIdMatch[1]) {
+          const videoId = videoIdMatch[1];
+          videoInfo.thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+          const oembedRes = await axios.get(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
+          videoInfo.title = oembedRes.data.title || 'YouTube Video';
+          videoInfo.authorName = oembedRes.data.author_name || 'Unknown';
         }
+      } catch (e) {
+        // If oembed fails, just use defaults
+      }
+
+      return res.json({
+        success: true,
+        details: {
+          title: videoInfo.title,
+          thumbnail: videoInfo.thumbnail,
+          authorName: videoInfo.authorName,
+          authorAvatar: '',
+          views: 0,
+          uploadDate: 'Recently',
+          likes: 0,
+          description: 'Click Download to save this video. (Processed via Cobalt API)'
+        },
+        // We pass the direct Cobalt URL back to the frontend
+        videoVariants: [{ quality: '1080p (Best)', url: cobaltData.url, hasAudio: true }],
+        audioVariants: [] // Cobalt handles audio extraction on the fly, so we provide a separate button in frontend
       });
+
+    } else if (cobaltData.status === 'picker') {
+      // Sometimes Cobalt returns a picker (e.g., for images), not needed for standard videos
+      return res.status(400).json({ success: false, error: 'This video type is not supported.' });
+    } else {
+      return res.status(400).json({ success: false, error: cobaltData.text || 'Cobalt API failed to process the video.' });
     }
 
-    if (d.adaptiveFormats) {
-      const seenVideoRes = new Set();
-      d.adaptiveFormats.forEach(f => {
-        if (f.type && f.type.includes('video/mp4') && f.url) {
-          const quality = f.qualityLabel || f.quality || 'Unknown';
-          if (!seenVideoRes.has(quality)) {
-            videoVariants.push({
-              quality: quality,
-              url: f.url,
-              size: f.clen ? formatBytes(parseInt(f.clen, 10)) : 'Unknown',
-              hasAudio: false
-            });
-            seenVideoRes.add(quality);
-          }
-        } else if (f.type && f.type.includes('audio/mp4') && f.url) {
-          if (audioVariants.length === 0) {
-            audioVariants.push({
-              quality: 'High Quality Audio',
-              url: f.url,
-              size: f.clen ? formatBytes(parseInt(f.clen, 10)) : 'Unknown'
-            });
-          }
-        }
-      });
-    }
+  } catch (err) {
+    console.error('Cobalt API Error:', err.message);
+    return res.status(500).json({ success: false, error: 'Failed to fetch video. The Cobalt API may be overloaded.' });
   }
-
-  res.json({ success: true, details, videoVariants, audioVariants });
 });
 
 // ==========================================
-// YOUTUBE PROXY STREAM (Downloads direct GoogleVideo URLs)
+// YOUTUBE PROXY STREAM (Downloads direct Cobalt URLs)
 // ==========================================
 app.get('/api/youtube-proxy', async (req, res) => {
   const { url, filename } = req.query;
@@ -772,7 +686,8 @@ app.get('/api/youtube-proxy', async (req, res) => {
   }
 });
 
-// 2. Social Media Analytics
+
+2. Social Media Analytics
 app.get('/api/social-analytics', async (req, res) => {
   const { platform, query } = req.query;
   if (platform !== 'YouTube') return res.json({ success: false, error: 'Live data unavailable.' });
