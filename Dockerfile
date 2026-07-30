@@ -1,5 +1,5 @@
-# Use Node.js 18 base image
-FROM node:18
+# Use Node.js 20 base image (Fixes the File is not defined error)
+FROM node:20
 
 # Install ffmpeg, python, and yt-dlp
 RUN apt-get update && apt-get install -y ffmpeg python3 python3-pip
