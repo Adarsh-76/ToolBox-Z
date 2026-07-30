@@ -1,0 +1,265 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.urlInput {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.urlInput::placeholder {
+  color: #ffffff;
+  opacity: 0.5;
+}
+
+.urlInput:focus {
+  border-color: var(--accent-color);
+}
+
+.fetchBtn, .clearBtn {
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-dark);
+  transition: background 0.2s;
+}
+
+.fetchBtn:hover {
+  background: var(--accent-color);
+}
+
+.clearBtn {
+  background: transparent;
+  font-size: 0.9rem;
+}
+
+.clearBtn:hover {
+  color: #ff4d4d;
+}
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.resultArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+}
+
+.postHeader {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.previewWrapper {
+  flex: 1;
+  max-width: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.videoPreview {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.postInfo {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.resultTitle {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+}
+
+.desc {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  color: var(--text-dark);
+}
+
+.downloadHeader {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  opacity: 0.9;
+  color: var(--text-dark);
+  border-top: 1px solid var(--glass-border);
+  padding-top: 1.5rem;
+}
+
+.downloadGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.downloadBtn {
+  flex: 1;
+  min-width: 200px;
+  padding: 1rem;
+  background: var(--accent-color);
+  color: var(--bg-dark) !important;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.audioBtn {
+  background: #FF0000; 
+  color: white !important;
+}
+
+.downloadBtn:hover {
+  opacity: 0.9;
+}
+
+.fileSize {
+  font-weight: 400;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* Video Info & Description Styles */
+.videoInfoSection {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.channelInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.channelAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #333;
+}
+
+.channelText {
+  display: flex;
+  flex-direction: column;
+}
+
+.channelName {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.videoStats {
+  margin: 0.2rem 0 0 0;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  color: var(--text-dark);
+}
+
+.likeCount {
+  margin-left: auto;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+.descriptionBox {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid var(--glass-border);
+}
+
+.descTitle {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.descText {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  opacity: 0.8;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.descText::-webkit-scrollbar {
+  width: 6px;
+}
+.descText::-webkit-scrollbar-track {
+  background: transparent;
+}
+.descText::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 3px;
+}
+
+@media (max-width: 600px) {
+  .postHeader {
+    flex-direction: column;
+  }
+  .previewWrapper {
+    max-width: 100%;
+  }
+}

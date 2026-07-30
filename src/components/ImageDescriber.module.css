@@ -1,0 +1,149 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.uploadArea {
+  padding: 3rem;
+  border: 2px dashed var(--glass-border);
+  border-radius: 16px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.uploadArea:hover { border-color: var(--accent-color); }
+.hiddenInput { display: none; }
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.uploadIcon { font-size: 3rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.paneWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.paneLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.imagePreviewWrapper {
+  padding: 1rem;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewImg {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.analyzeBtn {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.analyzeBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.resultsArea {
+  padding: 1.5rem;
+  height: 302px; /* Match image wrapper height roughly */
+  overflow-y: auto;
+}
+
+.placeholderText {
+  text-align: center;
+  opacity: 0.5;
+  margin-top: 4rem;
+}
+
+.descriptionBox {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.descriptionBox:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.boxTitle {
+  font-size: 0.95rem;
+  color: var(--accent-color);
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+
+.descText {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+.tagGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.colorSwatches {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

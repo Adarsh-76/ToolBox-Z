@@ -1,0 +1,98 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.calculatorCard {
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem;
+  border-radius: 24px;
+}
+
+.displayWrapper {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: right;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.history {
+  color: var(--text-dark);
+  opacity: 0.4;
+  font-size: 1rem;
+  min-height: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.display {
+  color: var(--text-dark);
+  font-size: 2.5rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.buttonGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.8rem;
+}
+
+.btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-dark);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.sciBtn {
+  background: rgba(75, 83, 104, 0.3);
+  color: var(--accent-color);
+  font-size: 0.95rem;
+}
+
+.clearBtn {
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff6b6b;
+  border-color: rgba(255, 0, 0, 0.2);
+}
+
+.equalsBtn {
+  background: var(--primary-gradient);
+  color: white;
+  font-size: 1.5rem;
+}
+
+.equalsBtn:hover {
+  background: var(--primary-gradient);
+  opacity: 0.9;
+}

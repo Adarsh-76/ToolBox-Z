@@ -1,0 +1,93 @@
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon {
+  font-size: 2rem;
+  background: rgba(255,255,255,0.05);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+
+.cardDesc {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.openBtn {
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: flex-start;
+  font-size: 0.9rem;
+}
+
+.card:hover .openBtn {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+}

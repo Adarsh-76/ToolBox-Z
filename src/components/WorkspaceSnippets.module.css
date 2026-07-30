@@ -1,0 +1,226 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  opacity: 0.7;
+  margin-bottom: 2rem;
+}
+
+.loading, .errorBox {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+}
+
+.errorBox {
+  color: #ff4d4d;
+  border: 1px solid #ff4d4d;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 16px;
+  border: 1px dashed var(--glass-border);
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 0.8rem;
+}
+
+.cardIcon {
+  font-size: 1.5rem;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+}
+
+.contentBox {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1rem;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.contentBox pre {
+  margin: 0;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #c9d1d9;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.cardFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.toolName {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.copyBtn, .deleteBtn {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.copyBtn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+}
+
+.copyBtn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.deleteBtn {
+  background: transparent;
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+}
+
+.deleteBtn:hover {
+  background: rgba(255, 77, 77, 0.1);
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999; /* Maximum z-index to cover navbar */
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.confirmModal {
+  width: 90%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid #ff4d4d;
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.confirmModal h3 {
+  color: #ff4d4d;
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.confirmModal p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+}
+
+.cancelBtn {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cancelBtn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.confirmDeleteBtn {
+  flex: 1;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirmDeleteBtn:hover {
+  opacity: 0.9;
+}

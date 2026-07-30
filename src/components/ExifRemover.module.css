@@ -1,0 +1,156 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dropzone {
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  border: 2px dashed var(--glass-border);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropzone:hover, .dragging {
+  border-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.uploadIcon {
+  font-size: 3rem;
+}
+
+.dropzone p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.dropzone small {
+  opacity: 0.5;
+}
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.resultArea {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.imageCard {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.imageCard h4 {
+  margin: 0 0 1rem 0;
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+.previewImg {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.warningText {
+  color: #ff4d4d;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: block;
+}
+
+.safeText {
+  color: #00FFAB;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: block;
+}
+
+.loading {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.downloadBtn {
+  flex: 1;
+  padding: 1rem;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.downloadBtn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.downloadBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.clearBtn {
+  padding: 1rem;
+  background: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clearBtn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 600px) {
+  .imageGrid {
+    grid-template-columns: 1fr;
+  }
+  .buttonRow {
+    flex-direction: column;
+  }
+}

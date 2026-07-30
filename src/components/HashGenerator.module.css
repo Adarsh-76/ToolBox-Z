@@ -1,0 +1,96 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+  position: relative;
+}
+
+.inputArea label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.textarea {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 1rem;
+  color: var(--text-dark);
+  font-size: 1rem;
+  outline: none;
+  resize: vertical;
+  font-family: monospace;
+}
+
+.clearBtn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.resultsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.hashCard {
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.cardHeader h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--accent-color);
+}
+
+.copyBtn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.hashValue {
+  margin: 0;
+  font-family: monospace;
+  font-size: 0.85rem;
+  word-break: break-all;
+  background: rgba(0,0,0,0.2);
+  padding: 0.8rem;
+  border-radius: 8px;
+  color: #c9d1d9;
+  min-height: 45px;
+}

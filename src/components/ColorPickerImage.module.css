@@ -1,0 +1,163 @@
+.container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.uploadArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.uploadLabel {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.uploadArea p {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.clearBtn {
+  background: transparent;
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* Zoom Controls */
+.zoomControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+}
+
+.zoomControls label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.zoomSlider {
+  flex: 1;
+  cursor: pointer;
+}
+
+/* Scrollable Image Container */
+.imageWrapper {
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  overflow: auto; /* Allows scrolling when zoomed in */
+  border: 1px solid var(--glass-border);
+  max-height: 500px; /* Prevents it from taking up the whole screen */
+  position: relative;
+}
+
+.image {
+  display: block;
+  max-width: none; /* Allows image to grow when zoomed */
+  width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.resultArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+}
+
+.resultArea h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.colorDisplay {
+  height: 120px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: background-color 0.2s ease;
+}
+
+.colorDisplay span {
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.codesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.codeCard {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: border 0.2s;
+}
+
+.codeCard:hover {
+  border-color: var(--accent-color);
+}
+
+.label {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.value {
+  font-family: monospace;
+  font-size: 1rem;
+  margin: 0.3rem 0;
+  color: var(--text-dark);
+}
+
+.copyText {
+  font-size: 0.75rem;
+  color: var(--accent-color);
+  opacity: 0.8;
+}
+
+@media (max-width: 500px) {
+  .codesGrid {
+    grid-template-columns: 1fr;
+  }
+}

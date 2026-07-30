@@ -1,0 +1,131 @@
+.container {
+  width: 100%;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.controls {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.controlRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.controlRow label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.controlRow label span {
+  color: var(--accent-color);
+  font-weight: 800;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--glass-bg);
+  border-radius: 5px;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  cursor: pointer;
+  border: 2px solid var(--bg-dark);
+}
+
+.colorRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+.colorPicker {
+  width: 50px;
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: none;
+}
+
+.previewColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.previewArea {
+  background: var(--bg-light);
+  border-radius: 16px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--glass-border);
+}
+
+.previewBox {
+  width: 120px;
+  height: 120px;
+  background: var(--accent-color);
+  transition: box-shadow 0.1s, border-radius 0.1s;
+}
+
+.codeBlock {
+  padding: 1.5rem;
+  position: relative;
+}
+
+.codeText {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+  color: var(--accent-color);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.copyBtn {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  margin-top: 1rem;
+  width: 100%;
+  transition: var(--transition);
+}
+
+.copyBtn:hover {
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,108 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.controlsArea {
+  padding: 2rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.inputGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.selectRow, .colorRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.textInput, .selectInput, .numberInput {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.textInput:focus, .selectInput:focus, .numberInput:focus {
+  border-color: var(--accent-color);
+}
+
+.colorInput {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.previewArea {
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.canvasWrapper {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.canvasWrapper canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.downloadBtn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}

@@ -1,0 +1,310 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.formArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formArea h3, .formArea h4 {
+  margin: 0.5rem 0;
+  color: var(--accent-color);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.inputGroup label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.input {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 0.6rem;
+  color: var(--text-dark);
+  outline: none;
+  min-width: 0;
+}
+
+.itemRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.itemDesc, .itemQty, .itemPrice {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 0.5rem;
+  color: var(--text-dark);
+  outline: none;
+  min-width: 0;
+}
+
+.removeItemBtn {
+  background: rgba(255,0,0,0.2);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  border-radius: 6px;
+  cursor: pointer;
+  height: 38px;
+  width: 38px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addItemBtn {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px dashed var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.taxDiscountRow {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.taxInput {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 0.5rem;
+  color: var(--text-dark);
+  outline: none;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.printBtn {
+  flex: 1;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.clearDataBtn {
+  flex: 1;
+  background: transparent;
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Invoice Preview (Printable) */
+.invoicePreview {
+  background: white;
+  color: #000;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.invoiceHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #000;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.invoiceHeader h2, .invoiceHeader h1 {
+  margin: 0;
+}
+
+.invoiceHeader p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.billToSection {
+  margin-bottom: 2rem;
+}
+
+.billToSection p {
+  margin: 0.1rem 0;
+  font-size: 0.95rem;
+}
+
+.invoiceTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.invoiceTable th {
+  text-align: left;
+  background: #f0f0f0;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+}
+
+.invoiceTable td {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+}
+
+.totalsSection {
+  margin-left: auto;
+  width: 300px;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.discountText {
+  color: #e53935; /* Red for discount */
+}
+
+.grandTotal {
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+
+.confirmModal {
+  width: 90%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid #ff4d4d;
+}
+
+.confirmModal h3 {
+  color: #ff4d4d;
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.confirmModal p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+}
+
+.cancelBtn {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirmClearBtn {
+  flex: 1;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Responsive Mobile Fixes */
+@media (max-width: 600px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .itemRow {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+      "desc desc"
+      "qty price"
+      "remove remove";
+    gap: 0.5rem;
+    background: rgba(0,0,0,0.2);
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  .itemDesc { grid-area: desc; }
+  .itemQty { grid-area: qty; }
+  .itemPrice { grid-area: price; }
+  .removeItemBtn { 
+    grid-area: remove; 
+    width: 100%; 
+    height: auto; 
+    padding: 0.6rem;
+  }
+  .buttonRow {
+    flex-direction: column;
+  }
+  .totalsSection {
+    width: 100%;
+  }
+}

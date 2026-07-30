@@ -1,0 +1,202 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.uploadArea {
+  padding: 3rem;
+  border: 2px dashed var(--glass-border);
+  border-radius: 16px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.uploadArea:hover { border-color: var(--accent-color); }
+.hiddenInput { display: none; }
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.uploadIcon { font-size: 3rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.paneWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.paneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.paneLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.removeBtn {
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff4d4d;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.removeBtn:hover { background: #ff4d4d; color: white; }
+
+.imagePreviewWrapper {
+  padding: 1rem;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewImg {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.infoCard {
+  padding: 1.5rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 0.5rem;
+}
+
+.infoRow:last-child { border-bottom: none; padding-bottom: 0; }
+.infoKey { font-weight: 600; opacity: 0.7; }
+.infoVal { font-weight: 700; color: var(--accent-color); }
+
+.controlsArea {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 300px;
+  justify-content: center;
+}
+
+.inputRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.inputGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.numberInput {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: var(--text-dark);
+  font-size: 1.1rem;
+  font-weight: 700;
+  outline: none;
+  width: 100%;
+}
+
+.xIcon {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  opacity: 0.5;
+}
+
+.controlRow {
+  cursor: pointer;
+}
+
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toggleSwitch {
+  width: 48px;
+  height: 26px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.toggleKnob {
+  width: 20px;
+  height: 20px;
+  background: var(--text-dark);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s;
+}
+
+.toggleOn { background: var(--accent-color); }
+.toggleOn .toggleKnob { transform: translateX(22px); background: var(--bg-dark); }
+
+.downloadBtn {
+  background: var(--primary-gradient);
+  color: #1A1A1A; /* Dark text for pink button */
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: auto;
+}
+
+.downloadBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+.downloadBtn:not(:disabled):hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .controlsArea { height: auto; }
+}

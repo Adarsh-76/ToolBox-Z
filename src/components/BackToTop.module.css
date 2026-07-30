@@ -1,0 +1,47 @@
+.backToTop {
+  position: fixed;
+  bottom: 6rem; /* Moved up to sit above the AI Assistant */
+  right: 2rem;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.btn {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  transition: var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .backToTop {
+    bottom: 6rem; /* Moved up to sit above the mobile AI Assistant */
+    right: 1.5rem;
+  }
+  .btn {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+  }
+}

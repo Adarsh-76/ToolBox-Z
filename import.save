@@ -1,0 +1,259 @@
+import styles from './PaletteGenerator.module.css';
+
+const PaletteGenerator = () => { const [colors, setColors] = 
+  useState([]); const [locked, setLocked] = useState([false, 
+  false, false, false, false]);import styles from 
+  './PaletteGenerator.module.css'; const [copied, setCopied] = 
+  useState(''); const [activeOptions, setActiveOptions] = 
+  useState([]);const PaletteGenerator = () => { const [colors, 
+  setColors] = useState([]); const [locked, setLocked] = 
+  useState([false, false, false, false, false]); const [copied, 
+  setCopied] = useState('');
+
+  const generateColor = () => { return '#' + 
+    Math.floor(Math.random() * 
+    16777215).toString(16).padStart(6, '0');
+  const availableOptions = [ }; 'Pastel', 'Vintage', 'Neon', 
+    'Dark', 'Warm', 'Cold', 'Summer', 'Winter', const 
+    generatePalette = () => { const newColors = 
+    colors.map((color, index) => import { jsPDF } from 'jspdf'; 
+    'Muted', 'Gold', 'Earthy' locked[index] ? color : 
+    generateColor()import styles from
+  ]; './PdfGenerator.module.css'; ); const PdfGenerator = () => 
+    { setColors(newColors); const [images, setImages] = 
+    useState([]);
+  };  const [pdfPreviewUrl, setPdfPreviewUrl] = useState(null);
+  // Helper: Convert HSL to Hex const [isGenerating, 
+  // setIsGenerating] = useState(false); Generate initial 
+  // palette on mount
+  const hslToHex = (h, s, l) => { useEffect(() => { const 
+    handleFileChange = (e) => { const files = 
+    Array.from(e.target.files); if (files.length === 0) return; 
+    setColors(Array.from({ length: 5 }, () => generateColor())); 
+    const newImages = files.map((file) => ({ l /= 100; }, []); 
+    file, const a = s * Math.min(l, 1 - l) / 100; url: 
+    URL.createObjectURL(file), name: file.name, const const f = 
+    n => { toggleLock = (index) => { })); const newLocked = 
+    [...locked]; setImages((prev) => [...prev, ...newImages]); 
+    setPdfPreviewUrl(null); newLocked[index] =
+      const k = (n + h / 30) % 12; !newLocked[index]; }; 
+    setLocked(newLocked); const removeImage = (indexToRemove) =>
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), 
+      -1); { setImages((prev) => return Math.round(255 * 
+      color).toString(16).padStart(2, '0'); }; prev.filter((_, 
+      index) => index !== indexToRemove));
+    };    setPdfPreviewUrl(null); const handleCopy = (color, 
+    };    index) =>
+    return `#${f(0)}${f(8)}${f(4)}`; { }; const clearAllImages = 
+    () => { setImages([]); navigator.clipboard.writeText(color); 
+    setPdfPreviewUrl(null); setCopied(index); }; setTimeout(() 
+    => setCopied(''), 1500); const moveImage = (index, 
+    direction) => { const newImages = [...images]; const 
+    targetIndex = index + direction; if (targetIndex < 0 || 
+    targetIndex >= newImages.length) return; [newImages[index], 
+    newImages[targetIndex]] = [newImages[targetIndex], 
+    newImages[index]]; setImages(newImages); 
+    setPdfPreviewUrl(null);
+  };  };  };
+  const generatePreview = async () => { if (images.length === 0) 
+    return; setIsGenerating(true); const pdf = new jsPDF({
+      orientation: 'portrait', unit: 'px', format: 'a4', 
+      hotfixes: ['px_scaling']
+  // Generate colors based on selected options using HSL return 
+  // ( }); for (let i = 0; i < images.length; i++) { const
+  const generateColor = () => { imgObj = <div 
+      className={styles.container}> images[i]; <div 
+      className={styles.controls}> const img = await new 
+      Promise((resolve) => { const tempImg
+    let h = Math.random() * 360; <button 
+        className={styles.generateBtn} 
+        onClick={generatePalette}> = new Image(); tempImg.onload 
+        = () => resolve(tempImg); tempImg.src = imgObj.url;
+    let s = 50 + Math.random() * 50; // 50-100% 🎲 Generate New 
+      Palette }); const width = img.width; const height = 
+      img.height; if (i
+    let l = 40 + Math.random() * 40; // 40-80% </button> > 0) 
+      pdf.addPage([width, height], width > height ? 'landscape' 
+      : 'portrait'); else pdf.internal.pages[1] = [width, 
+      height]; pdf.addImage(imgObj.url, 'JPEG', 0, 0, width, 
+      height);
+        <p className={styles.hint}>Click a color to copy its HEX 
+    code. Click 🔒 to lock it.</p> } const blob = 
+    pdf.output('blob'); const url = URL.createObjectURL(blob); 
+    setPdfPreviewUrl(url); setIsGenerating(false); if 
+    (activeOptions.length === 0) { </div> };
+      return hslToHex(h, s, l); // Pure random // Opens the PDF 
+      in a new browser tab so mobile devices can
+    }  // view it natively
+      <div className={styles.paletteGrid}> const openInNewTab = 
+      () => { if (pdfPreviewUrl) { window.open(pdfPreviewUrl, 
+      '_blank');
+    // Apply rules based on active options {colors.map((color, 
+    // index) => ( } <div }; key={index}
+    activeOptions.forEach(opt => { return ( <div 
+            className={styles.container}> <div 
+            className={styles.colorColumn} 
+            className={`liquid-glass ${styles.uploadArea}`}> 
+            style={{ backgroundColor: color }} <input 
+            type="file" multiple accept="image/*" onClick={() => 
+            handleCopy(color, index)} 
+            onChange={handleFileChange} id="fileInput"
+      switch(opt) { > className={styles.hiddenInput} <div 
+            className={styles.colorActions}> /> <label
+        case 'Pastel': l = 75 + Math.random() * 15; s = 40 + 
+              Math.random() * 20; break; htmlFor="fileInput" 
+              className={styles.uploadLabel}> <button <span
+        case 'Vintage': l = 45 + Math.random() * 15; s = 25 + 
+          Math.random() * 20; break; 
+          className={styles.uploadIcon}>📁</span> <span>Click to 
+          select multiple images</span>
+        case 'Neon': s = 90 + Math.random() * 10; l = 50 + 
+          Math.random() * 10; break; className={styles.lockBtn} 
+          </label> </div> {images.length > 0 && ( <> <div 
+          className={styles.grid}>
+        case 'Dark': l = 15 + Math.random() * 20; break; 
+              onClick={(e) => { e.stopPropagation(); 
+              toggleLock(index); }} {images.map((img, index) => 
+              ( <div key={index} className={`liquid-glass 
+              ${styles.previewCard}`}>
+        case 'Warm': h = Math.random() * 60; break; // Reds to 
+        Yellow > <img src={img.url} alt={`preview case 'Cold': h 
+        = 180 + Math.random() * 80; break; // Cyan to Blue > 
+        ${index}`} case 'Summer': h = Math.random() * 60; s = 70 
+        + Math.random() * 20; l = 50 + Math.random() * 20; 
+        break; {locked[index] ? '🔒' : '🔓'} case 'Winter': h = 
+        180 + Math.random() * 80; s = 20 + Math.random() * 20; l 
+        = 60 + Math.random() * 20; break; 
+        className={styles.previewImg} /> case 'Muted': s = 15 + 
+        Math.random() * 15; break; </button> <div 
+        className={styles.reorderButtons}> case 'Gold': h = 40 + 
+        Math.random() * 15; s = 80 + Math.random() * 20; l = 45 
+        + Math.random() * 10; break; <button case 'Earthy': h = 
+        20 + Math.random() * 40; s = 30 + Math.random() * 20; l 
+        = 35 + Math.random() * 20; break; </div> 
+        className={styles.arrowBtn} onClick={() => default: 
+        break; moveImage(index, -1)} disabled={index === 0}
+      }                              >
+                    ← </button> <button 
+                    className={styles.removeBtn} onClick={() => 
+                    removeImage(index)}
+    }); <div className={`liquid-glass ${styles.hexBox}`}> >
+                    ❌ </button> <button 
+                    className={styles.arrowBtn} onClick={() => 
+                    moveImage(index, 1)} disabled={index === 
+                    images.length - 1}
+    return hslToHex(h, s, l); {copied === index ? '✅ Copied!' : 
+                    color.toUpperCase()} > → </button> </div>
+  };            </div> <span className={styles.pageNumber}>Page
+                {index + 1}</span> </div> </div> ))} </div> <div 
+          className={styles.actionRow}>
+  const generatePalette = () => { ))} <button 
+              className={styles.generateBtn} 
+              onClick={generatePreview} disabled={isGenerating}> 
+              {isGenerating ? '⏳ Generating Preview...' : '👁️ 
+              Generate PDF Preview'}
+    // FIX: Explicitly create a new array of 5 items to prevent 
+    // map() bugs </div> </button> <button 
+    // className={styles.clearAllBtn}
+    const newColors = Array.from({ length: 5 }, (_, index) => { 
+    onClick={clearAllImages}> </div> 🗑️ Remove All </button> ); 
+    </div>
+      // Keep the color if it's locked AND exists}; </>
+      if (locked[index] && colors[index]) { )} export default 
+PaletteGenerator;
+        return colors[index]; {pdfPreviewUrl && ( <div 
+        className={`liquid-glass ${styles.previewArea}`}>
+      }          <h3 className={styles.previewTitle}>PDF is 
+      }          Ready!</h3>
+      return generateColor(); <p 
+      className={styles.previewText}>Your PDF has been 
+      generated. Click below to view it in a new tab or download 
+      it directly.</p>
+    });
+    setColors(newColors); <button className={styles.openTabBtn} 
+            onClick={openInNewTab}> 📄 Open PDF in New Tab
+  };          </button>
+          
+          <a href={pdfPreviewUrl} 
+            download="ToolVerse_HD_Images.pdf" 
+            className={styles.downloadBtn}> ⬇️ Download HD PDF
+  // Generate initial palette on mount </a>
+  useEffect(() => { </div> )} setColors(Array.from({ length: 5 
+    }, () => generateColor())); </div>
+    // eslint-disable-next-line react-hooks/exhaustive-deps );
+  }, []);};
+
+export default PdfGenerator;
+  // Regenerate palette automatically when options change
+  useEffect(() => { if (locked.every(l => l)) return; 
+    generatePalette();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeOptions]);
+  const toggleOption = (opt) => { setActiveOptions(prev => { if 
+      (prev.includes(opt)) {
+        return prev.filter(o => o !== opt);
+      }
+      if (prev.length >= 3) { alert("You can select a maximum of 
+        3 options."); return prev;
+      }
+      return [...prev, opt];
+    });
+  };
+  const toggleLock = (index) => { const newLocked = [...locked]; 
+    newLocked[index] = !newLocked[index]; setLocked(newLocked);
+  };
+  const handleCopy = (color, index) => { 
+    navigator.clipboard.writeText(color); setCopied(index); 
+    setTimeout(() => setCopied(''), 1500);
+  };
+  return ( <div className={styles.container}> <div 
+      className={styles.controls}>
+        {/* Options Section */} <div 
+        className={styles.optionsWrapper}>
+          <p className={styles.optionsLabel}>Filter by 
+          Mood/Theme (Max 3)</p> <div 
+          className={styles.optionsGrid}>
+            {availableOptions.map(opt => ( <button key={opt}
+                className={`${styles.optionBtn} ${activeOptions.includes(opt) ? styles.optionActive : ''}`}
+                onClick={() => toggleOption(opt)}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <button className={styles.generateBtn} onClick={generatePalette}>
+          🎲 Generate New Palette
+        </button>
+        <p className={styles.hint}>Click a color to copy its HEX code. Click 🔒 to lock it.</p>
+      </div>
+
+      <div className={styles.paletteGrid}>
+        {colors.map((color, index) => (
+          <div 
+            key={index} 
+            className={styles.colorColumn}
+            style={{ backgroundColor: color }}
+            onClick={() => handleCopy(color, index)}
+          >
+            <div className={styles.colorActions}>
+              <button 
+                className={styles.lockBtn}
+                onClick={(e) => { e.stopPropagation(); toggleLock(index); }}
+              >
+                {locked[index] ? '🔒' : '🔓'}
+              </button>
+            </div>
+            
+            <div className={`liquid-glass ${styles.hexBox}`}>
+              {copied === index ? '✅ Copied!' : color.toUpperCase()}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default PaletteGenerator;

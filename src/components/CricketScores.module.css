@@ -1,0 +1,184 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.loading, .noMatches, .errorBox {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+}
+
+/* New Header Styles */
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.refreshBtn {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s;
+}
+
+.refreshBtn:hover:not(:disabled) {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border-color: transparent;
+}
+
+.refreshBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Spinning animation for the refresh icon */
+.spinning {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Match Card Styles */
+.matchCard {
+  padding: 1.5rem;
+  border-radius: 16px;
+  transition: transform 0.2s;
+}
+
+.matchCard:hover {
+  transform: translateY(-3px);
+}
+
+.liveMatch {
+  border: 1px solid #ff4d4d;
+  box-shadow: 0 0 15px rgba(255, 77, 77, 0.1);
+}
+
+.matchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 0.8rem;
+}
+
+.seriesName {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.liveBadge {
+  background: #ff4d4d;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-weight: 700;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.teamRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.teamInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.flag {
+  width: 32px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.teamName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.teamScore {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  text-align: right;
+}
+
+.matchFooter {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.status {
+  font-weight: 600;
+  color: var(--text-dark);
+  opacity: 0.9;
+}
+
+.venue {
+  opacity: 0.5;
+}
+
+.updateTime {
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.4;
+}

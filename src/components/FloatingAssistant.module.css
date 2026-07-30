@@ -1,0 +1,234 @@
+.assistantBtn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  border: 1px solid var(--glass-border);
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 2px 2px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assistantBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Dark Overlay Background (No Blur) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); /* Solid dark overlay */
+  z-index: 9997;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Centered Chat Window (Solid Background) */
+.chatWindow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  max-width: 90vw;
+  height: 600px;
+  max-height: 80vh;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  animation: scaleIn 0.3s ease-out;
+  /* Solid dark background so it doesn't blur the overlay */
+  background-color: #050810; 
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.header {
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.onlineDot {
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #4ade80;
+}
+
+.closeBtn {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 0, 0, 0.2);
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+}
+
+.chatBody {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.message {
+  max-width: 85%;
+  padding: 0.8rem 1rem;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.message p {
+  margin: 0;
+}
+
+.message.bot {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-bottom-left-radius: 4px;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: var(--primary-gradient);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.toolSuggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.toolBtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.toolBtn:hover {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+}
+
+.inputArea {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  gap: 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.inputArea input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.inputArea button {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.inputArea button:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .assistantBtn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 55px;
+    height: 55px;
+    font-size: 1.6rem;
+  }
+  .chatWindow {
+    width: 95vw;
+    height: 85vh;
+  }
+}

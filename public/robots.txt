@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://your-website-domain.com/</loc></url>
+  <url><loc>https://your-website-domain.com/tools</loc></url>
+  <url><loc>https://your-website-domain.com/workflows</loc></url>
+  <!-- Google will automatically crawl the tool links from the /tools page -->
+</urlset>

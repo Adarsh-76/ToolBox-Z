@@ -1,0 +1,148 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.uploadArea {
+  padding: 3rem;
+  border: 2px dashed var(--glass-border);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.uploadArea:hover { border-color: var(--accent-color); }
+.hiddenInput { display: none; }
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.uploadIcon { font-size: 3rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.paneWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.paneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.paneLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.removeBtn {
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff4d4d;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.removeBtn:hover { background: #ff4d4d; color: white; }
+
+.imageWrapper {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.previewImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Checkerboard pattern to show transparency */
+.checkerboard {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(-45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e0e0e0 75%),
+    linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, 10px 0px;
+}
+
+.placeholderText {
+  color: var(--text-dark);
+  opacity: 0.5;
+  font-weight: 600;
+}
+
+.magicBtn {
+  background: var(--primary-gradient);
+  color: #132440; /* Navy text for contrast */
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 1rem;
+}
+
+.magicBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+.magicBtn:not(:disabled):hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+
+.progressTrack {
+  width: 100%;
+  height: 8px;
+  background: var(--glass-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.downloadBtn {
+  background: var(--accent-color);
+  color: #132440;
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 1rem;
+}
+
+.downloadBtn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+}

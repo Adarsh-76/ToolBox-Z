@@ -1,0 +1,296 @@
+import { useParams, useNavigate } from 'react-router-dom'; 
+import { toolsList } from '../data/toolsData'; import 
+WordCounter from '../components/WordCounter'; import 
+WordCounterInfo from '../components/WordCounterInfo'; import 
+PasswordGenerator from '../components/PasswordGenerator'; import 
+PasswordGeneratorInfo from 
+'../components/PasswordGeneratorInfo'; import ColorPicker from 
+'../components/ColorPicker'; import ColorPickerInfo from 
+'../components/ColorPickerInfo'; import JsonFormatter from 
+'../components/JsonFormatter'; import JsonFormatterInfo from 
+'../components/JsonFormatterInfo'; import Base64Tool from 
+'../components/Base64Tool'; import Base64Info from 
+'../components/Base64Info'; import CssGenerator from 
+'../components/CssGenerator'; import CssGeneratorInfo from 
+'../components/CssGeneratorInfo'; import PdfGenerator from 
+'../components/PdfGenerator'; import PdfGeneratorInfo from 
+'../components/PdfGeneratorInfo'; import MediaEnhancer from 
+'../components/MediaEnhancer'; import MediaEnhancerInfo from 
+'../components/MediaEnhancerInfo'; import ImageToText from 
+'../components/ImageToText'; import ImageToTextInfo from 
+'../components/ImageToTextInfo'; import ImageDescriber from 
+'../components/ImageDescriber'; import ImageDescriberInfo from 
+'../components/ImageDescriberInfo'; import PaletteGenerator from 
+'../components/PaletteGenerator';import styles from 
+'./PaletteGenerator.module.css'; import PaletteGeneratorInfo 
+from '../components/PaletteGeneratorInfo'; const 
+PaletteGenerator = () => { import MarkdownPreviewer from 
+'../components/MarkdownPreviewer'; const [colors, setColors] = 
+useState([]); import MarkdownPreviewerInfo from 
+'../components/MarkdownPreviewerInfo'; const [locked, setLocked] 
+= useState([false, false, false, false, false]); import 
+QrGenerator from '../components/QrGenerator'; const [copied, 
+setCopied] = useState(''); import QrGeneratorInfo from 
+'../components/QrGeneratorInfo'; import CaseConverter from 
+'../components/CaseConverter'; const generateColor = () => { 
+import CaseConverterInfo from '../components/CaseConverterInfo'; 
+return '#' + Math.floor(Math.random() * 
+16777215).toString(16).padStart(6, '0'); import ImageConverter 
+from '../components/ImageConverter'; }; import 
+ImageConverterInfo from '../components/ImageConverterInfo'; 
+import ImageResizer from '../components/ImageResizer'; const 
+generatePalette = () => { const newColors = import 
+ImageResizerInfo from '../components/ImageResizerInfo'; 
+colors.map((color, index) => import { jsPDF } from 'jspdf'; 
+import ImageCompressor from '../components/ImageCompressor'; 
+locked[index] ? color : generateColor()import styles from import 
+ImageCompressorInfo from '../components/ImageCompressorInfo'; 
+'./PdfGenerator.module.css'; import GifMaker from 
+'../components/GifMaker'; ); const PdfGenerator = () => { 
+setColors(newColors); const import GifMakerInfo from 
+'../components/GifMakerInfo'; [images, setImages] = 
+useState([]); import ImageCropper from 
+'../components/ImageCropper'; }; const [pdfPreviewUrl, 
+setPdfPreviewUrl] = useState(null); import ImageCropperInfo from 
+'../components/ImageCropperInfo'; const [isGenerating, 
+setIsGenerating] = useState(false); import BackgroundRemover 
+from '../components/BackgroundRemover'; // Generate initial 
+palette on mount import BackgroundRemoverInfo from 
+'../components/BackgroundRemoverInfo'; useEffect(() => { const 
+handleFileChange = (e) => { const import ImageRotator from 
+'../components/ImageRotator'; files = 
+Array.from(e.target.files); if (files.length === 0) import 
+ImageRotatorInfo from '../components/ImageRotatorInfo'; return; 
+setColors(Array.from({ length: 5 }, () => import WatermarkAdder 
+from '../components/WatermarkAdder'; generateColor())); const 
+newImages = files.map((file) => ({ import WatermarkAdderInfo 
+from '../components/WatermarkAdderInfo'; }, []); file, import 
+BrightnessAdjuster from '../components/BrightnessAdjuster'; url: 
+URL.createObjectURL(file), name: file.name, const import 
+BrightnessAdjusterInfo from 
+'../components/BrightnessAdjusterInfo'; toggleLock = (index) => 
+{ })); import MetadataViewer from 
+'../components/MetadataViewer'; const newLocked = [...locked]; 
+setImages((prev) => [...prev, import MetadataViewerInfo from 
+'../components/MetadataViewerInfo'; ...newImages]); 
+setPdfPreviewUrl(null); newLocked[index] = import 
+ScientificCalculator from '../components/ScientificCalculator'; 
+!newLocked[index]; };
+import ScientificCalculatorInfo from 
+  '../components/ScientificCalculatorInfo'; 
+  setLocked(newLocked); const removeImage = (indexToRemove) => { 
+  setImages((prev) =>
+import ImageBlur from '../components/ImageBlur'; }; 
+    prev.filter((_, index) => index !== indexToRemove)); 
+    setPdfPreviewUrl(null); const handleCopy = (color, index) =>
+import ImageBlurInfo from '../components/ImageBlurInfo'; { }; 
+    const clearAllImages = () => { setImages([]); 
+    navigator.clipboard.writeText(color); 
+    setPdfPreviewUrl(null); setCopied(index); }; setTimeout(() 
+    => setCopied(''), 1500); const moveImage = (index, 
+    direction) => { const newImages = [...images]; const 
+    targetIndex = index + direction; if (targetIndex < 0 || 
+    targetIndex >= newImages.length) return; [newImages[index], 
+    newImages[targetIndex]] = [newImages[targetIndex], 
+    newImages[index]]; setImages(newImages); 
+    setPdfPreviewUrl(null);
+import UuidGenerator from '../components/UuidGenerator'; }; }; 
+  const generatePreview = async () => { if (images.length === 0)
+import UuidGeneratorInfo from '../components/UuidGeneratorInfo'; 
+      return; setIsGenerating(true); const pdf = new jsPDF({ 
+      orientation: 'portrait', unit: 'px', format: 'a4', 
+      hotfixes: ['px_scaling']
+import SpeechTool from '../components/SpeechTool'; return ( }); 
+    for (let i = 0; i < images.length; i++) { const imgObj = 
+    <div className={styles.container}> images[i];
+import SpeechToolInfo from '../components/SpeechToolInfo'; <div 
+      className={styles.controls}> const img = await new 
+      Promise((resolve) => { const tempImg
+import styles from './ToolDetail.module.css'; <button 
+        className={styles.generateBtn} 
+        onClick={generatePalette}> = new Image(); tempImg.onload 
+        = () => resolve(tempImg); tempImg.src = imgObj.url;
+          🎲 Generate New Palette }); const width = img.width; 
+      const height = img.height; if (i
+const ToolDetail = () => { </button> > 0) pdf.addPage([width, 
+      height], width > height ? 'landscape' : 'portrait'); else 
+      pdf.internal.pages[1] = [width, height]; 
+      pdf.addImage(imgObj.url, 'JPEG', 0, 0, width, height);
+  const { toolId } = useParams(); <p 
+    className={styles.hint}>Click a color to copy its HEX code. 
+    Click 🔒 to lock it.</p> } const blob = pdf.output('blob'); 
+    const url = URL.createObjectURL(blob); 
+    setPdfPreviewUrl(url); setIsGenerating(false);
+  const navigate = useNavigate(); </div> };
+  // Opens the PDF in a new browser tab so mobile devices can 
+  // view it natively
+  const tool = toolsList.find((t) => t.id === toolId); <div 
+      className={styles.paletteGrid}> const openInNewTab = () => 
+      { if (pdfPreviewUrl) { window.open(pdfPreviewUrl, 
+      '_blank');
+        {colors.map((color, index) => ( } <div }; key={index} 
+            return ( <div className={styles.container}> <div 
+            className={styles.colorColumn} 
+            className={`liquid-glass ${styles.uploadArea}`}> 
+            style={{ backgroundColor: color }} <input 
+            type="file" multiple accept="image/*" onClick={() => 
+            handleCopy(color, index)} 
+            onChange={handleFileChange} id="fileInput"
+  if (!tool) { > className={styles.hiddenInput} <div 
+            className={styles.colorActions}> /> <label
+    return ( htmlFor="fileInput" className={styles.uploadLabel}> 
+              <button <span
+      <div className={styles.container}> 
+          className={styles.uploadIcon}>📁</span> <span>Click to 
+          select multiple images</span>
+        <h2>Tool not found!</h2> className={styles.lockBtn} 
+          </label> </div> {images.length > 0 && ( <> <div 
+          className={styles.grid}>
+        <button className={styles.btn} onClick={() => 
+              navigate('/tools')}>Back to Tools</button> 
+              onClick={(e) => { e.stopPropagation(); 
+              toggleLock(index); }} {images.map((img, index) => 
+              ( <div key={index} className={`liquid-glass 
+              ${styles.previewCard}`}>
+      </div> > <img src={img.url} alt={`preview ); > ${index}`}
+  }                {locked[index] ? '🔒' : '🔓'}
+                className={styles.previewImg} /> </button> <div 
+              className={styles.reorderButtons}>
+  const activeTools = [ <button </div> 
+            className={styles.arrowBtn} onClick={() =>
+    'word-counter', 'password-gen', 'color-picker', 
+    'json-formatter', 'base64-encode', moveImage(index, -1)} 
+    disabled={index === 0}
+    'css-generator', 'pdf-generator', 'media-enhancer', 'image-to-text', 'image-describer', 
+    'palette-generator', 'markdown-previewer', 'qr-generator', 'case-converter', 
+    'image-converter', 'image-resizer', 'image-compressor', 'gif-maker', 'image-cropper', 
+    'background-remover', 'image-rotator', 'watermark-adder', 'brightness-adjuster', 
+    'metadata-viewer', 'scientific-calculator', 'image-blur', 'uuid-generator', 'speech-tool'
+  ];
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <span className={styles.bigIcon}>{tool.icon}</span>
+        <h1 className={styles.title}>{tool.name}</h1>
+        <p className={styles.desc}>{tool.desc}</p>
+      </div>
+
+      <div className={`liquid-glass ${styles.toolWorkspace}`}>
+        {tool.id === 'word-counter' && <WordCounter />}
+        {tool.id === 'password-gen' && <PasswordGenerator />}
+        {tool.id === 'color-picker' && <ColorPicker />}
+        {tool.id === 'json-formatter' && <JsonFormatter />}
+        {tool.id === 'base64-encode' && <Base64Tool />}
+        {tool.id === 'css-generator' && <CssGenerator />}
+        {tool.id === 'pdf-generator' && <PdfGenerator />}
+        {tool.id === 'media-enhancer' && <MediaEnhancer />}
+        {tool.id === 'image-to-text' && <ImageToText />}
+        {tool.id === 'image-describer' && <ImageDescriber />}
+        {tool.id === 'palette-generator' && <PaletteGenerator />}
+        {tool.id === 'markdown-previewer' && <MarkdownPreviewer />}
+        {tool.id === 'qr-generator' && <QrGenerator />}
+        {tool.id === 'case-converter' && <CaseConverter />}
+        {tool.id === 'image-converter' && <ImageConverter />}
+        {tool.id === 'image-resizer' && <ImageResizer />}
+        {tool.id === 'image-compressor' && <ImageCompressor />}
+        {tool.id === 'gif-maker' && <GifMaker />}
+        {tool.id === 'image-cropper' && <ImageCropper />}
+        {tool.id === 'background-remover' && <BackgroundRemover />}
+        {tool.id === 'image-rotator' && <ImageRotator />}
+        {tool.id === 'watermark-adder' && <WatermarkAdder />}
+        {tool.id === 'brightness-adjuster' && <BrightnessAdjuster />}
+        {tool.id === 'metadata-viewer' && <MetadataViewer />}
+        {tool.id === 'scientific-calculator' && <ScientificCalculator />}
+        {tool.id === 'image-blur' && <ImageBlur />}
+        {tool.id === 'uuid-generator' && <UuidGenerator />}
+        {tool.id === 'speech-tool' && <SpeechTool />}
+        
+        {!activeTools.includes(tool.id) && (
+          <div className={styles.placeholder}>
+            <h2>Workspace Coming Soon!</h2>
+            <p>This is where the actual interactive tool for {tool.name} will live.</p>
+          </div>
+        )}
+      </div>
+      
+      <button className={styles.btn} onClick={() => navigate('/tools')}>
+        ← Back to all tools
+      </button>
+
+      {tool.id === 'word-counter' && <WordCounterInfo />}
+      {tool.id === 'password-gen' && <PasswordGeneratorInfo />}
+      {tool.id === 'color-picker' && <ColorPickerInfo />}
+      {tool.id === 'json-formatter' && <JsonFormatterInfo />}
+      {tool.id === 'base64-encode' && <Base64Info />}
+      {tool.id === 'css-generator' && <CssGeneratorInfo />}
+      {tool.id === 'pdf-generator' && <PdfGeneratorInfo />}
+      {tool.id === 'media-enhancer' && <MediaEnhancerInfo />}
+      {tool.id === 'image-to-text' && <ImageToTextInfo />}
+      {tool.id === 'image-describer' && <ImageDescriberInfo />}
+      {tool.id === 'palette-generator' && <PaletteGeneratorInfo />}
+      {tool.id === 'markdown-previewer' && <MarkdownPreviewerInfo />}
+      {tool.id === 'qr-generator' && <QrGeneratorInfo />}
+      {tool.id === 'case-converter' && <CaseConverterInfo />}
+      {tool.id === 'image-converter' && <ImageConverterInfo />}
+      {tool.id === 'image-resizer' && <ImageResizerInfo />}
+      {tool.id === 'image-compressor' && <ImageCompressorInfo />}
+      {tool.id === 'gif-maker' && <GifMakerInfo />}
+      {tool.id === 'image-cropper' && <ImageCropperInfo />}
+      {tool.id === 'background-remover' && <BackgroundRemoverInfo />}
+      {tool.id === 'image-rotator' && <ImageRotatorInfo />}
+      {tool.id === 'watermark-adder' && <WatermarkAdderInfo />}
+      {tool.id === 'brightness-adjuster' && <BrightnessAdjusterInfo />}
+      {tool.id === 'metadata-viewer' && <MetadataViewerInfo />}
+      {tool.id === 'scientific-calculator' && <ScientificCalculatorInfo />}
+      {tool.id === 'image-blur' && <ImageBlurInfo />}
+      {tool.id === 'uuid-generator' && <UuidGeneratorInfo />}
+      {tool.id === 'speech-tool' && <SpeechToolInfo />}
+    </div>
+  );
+};
+
+export default ToolDetail;                              >
+                    ← </button> <button 
+                    className={styles.removeBtn} onClick={() => 
+                    removeImage(index)}
+            <div className={`liquid-glass ${styles.hexBox}`}> > 
+                    ❌ </button> <button 
+                    className={styles.arrowBtn} onClick={() => 
+                    moveImage(index, 1)} disabled={index === 
+                    images.length - 1}
+              {copied === index ? '✅ Copied!' : 
+                    color.toUpperCase()} > → </button> </div>
+            </div> <span className={styles.pageNumber}>Page 
+                {index + 1}</span>
+          </div> </div> ))} </div> <div 
+          className={styles.actionRow}>
+        ))} <button className={styles.generateBtn} 
+              onClick={generatePreview} disabled={isGenerating}> 
+              {isGenerating ? '⏳ Generating Preview...' : '👁️ 
+              Generate PDF Preview'}
+      </div> </button> <button className={styles.clearAllBtn} 
+            onClick={clearAllImages}>
+    </div> 🗑️ Remove All </button> ); </div>
+};        </>
+      )}
+export default PaletteGenerator;
+      {pdfPreviewUrl && (
+        <div className={`liquid-glass ${styles.previewArea}`}>
+          <h3 className={styles.previewTitle}>PDF is Ready!</h3>
+          <p className={styles.previewText}>Your PDF has been generated. Click below to view it in a new tab or download it directly.</p>
+          
+          <button className={styles.openTabBtn} onClick={openInNewTab}>
+            📄 Open PDF in New Tab
+          </button>
+          
+          <a href={pdfPreviewUrl} download="ToolVerse_HD_Images.pdf" className={styles.downloadBtn}>
+            ⬇️ Download HD PDF
+          </a>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default PdfGenerator;

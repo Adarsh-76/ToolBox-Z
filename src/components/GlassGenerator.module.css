@@ -1,0 +1,115 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.previewArea {
+  /* Gradient background to show the glass effect */
+  background: linear-gradient(135deg, #9FA1FF 0%, #D1D8FF 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 2rem;
+}
+
+.glassCard {
+  padding: 2rem;
+  text-align: center;
+  color: #fff;
+  width: 80%;
+}
+
+.glassCard h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.glassCard p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.controlsArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.inputGroup label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+.range {
+  width: 100%;
+  cursor: pointer;
+}
+
+.colorPicker {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.codeArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+  position: relative;
+}
+
+.copyBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.codeBlock {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #c9d1d9;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}

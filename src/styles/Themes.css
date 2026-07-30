@@ -1,0 +1,1879 @@
+/* Theme 1: Ultra Dark Navy (Home Page Base) */
+.theme-navy {
+  --primary-gradient: linear-gradient(135deg, #1B3C53 0%, #456A88 100%);
+  --bg-dark: #050810; /* Ultra Dark Navy/Black */
+  --bg-light: #F8FAFC; 
+  --text-dark: #DBD8E3;
+  --text-light: #1B3C53;
+  --accent-color: #DBD8E3;
+  --glass-bg: rgba(15, 23, 42, 0.6); /* Darker, more opaque glass */
+  --glass-border: rgba(219, 216, 227, 0.08);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0F2540; /* Dimmed blobs */
+  --blob-2: #1B3C53; /* Dimmed blobs */
+}
+/* Theme 2: Purple Slate (Tools List Page) - Replaces old Earthy */
+.theme-purple-slate {
+  --primary-gradient: linear-gradient(135deg, #5C5470 0%, #DBD8E3 100%);
+  --bg-dark: #2A2438;
+  --bg-light: #F8F7FC; 
+  --text-dark: #DBD8E3;
+  --text-light: #2A2438;
+  --accent-color: #DBD8E3;
+  --glass-bg: rgba(53, 47, 68, 0.4); /* #352F44 with opacity */
+  --glass-border: rgba(219, 216, 227, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #352F44;
+  --blob-2: #5C5470;
+}
+/* Theme 4: Dark Teal/Green (Password Generator Page) */
+.theme-green {
+  --primary-gradient: linear-gradient(135deg, #005B41 0%, #008170 100%);
+  --bg-dark: #0F0F0F;
+  --bg-light: #F0F4F3; 
+  --text-dark: #E8F0EE;
+  --text-light: #0F0F0F;
+  --accent-color: #008170;
+  --glass-bg: rgba(35, 45, 63, 0.35);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight-top: rgba(255, 255, 255, 0.8);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.3);
+  --blob-1: #005B41;
+  --blob-2: #008170;
+}
+
+
+/* Theme 3: Ocean Blue/Yellow (Tool Pages) */
+.theme-blue {
+  /* ... existing code ... */
+}
+
+/*  Example for the future:
+  If you want a specific tool to be Blue, just add this block,
+  and pass "theme-blue" to the Layout!
+*/
+/*
+.theme-blue {
+  --primary-gradient: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%);
+  --bg-dark: #111827;
+  --accent-color: #4F46E5;
+  --glass-bg: rgba(31, 45, 63, 0.4);
+  --blob-1: #2563EB;
+  --blob-2: #4F46E5;
+}
+*/
+/* Theme 3: Ocean Blue/Yellow (Word Counter & Tool Pages) */
+.theme-blue {
+  --primary-gradient: linear-gradient(135deg, #29A0B1 0%, #F9E8A2 100%);
+  --bg-dark: #1C6E8D;
+  --bg-light: #B4E1EB; 
+  --text-dark: #B4E1EB;
+  --text-light: #1C6E8D;
+  --accent-color: #F9E8A2;
+  --glass-bg: rgba(41, 160, 177, 0.25);
+  --glass-border: rgba(180, 225, 235, 0.15);
+  --glass-highlight-top: rgba(249, 232, 162, 0.2);
+  --glass-highlight-bottom: rgba(28, 110, 141, 0.6);
+  --blob-1: #29A0B1;
+  --blob-2: #F9E8A2;
+}
+/* Theme 5: Deep Violet (Color Picker Page) */
+.theme-violet {
+  --primary-gradient: linear-gradient(135deg, #3C096C 0%, #C77DFF 100%);
+  --bg-dark: #10002B;
+  --bg-light: #F3E8FF; 
+  --text-dark: #E0AAFF;
+  --text-light: #10002B;
+  --accent-color: #C77DFF;
+  --glass-bg: rgba(36, 0, 70, 0.4);
+  --glass-border: rgba(199, 125, 255, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.2);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #3C096C;
+  --blob-2: #C77DFF;
+}
+/* Theme 6: Cyber Purple/Pink/Orange (JSON Formatter Page) */
+.theme-cyber {
+  --primary-gradient: linear-gradient(135deg, #443199 0%, #FF483D 100%);
+  --bg-dark: #1A0B2E;
+  --bg-light: #F8F5FF; 
+  --text-dark: #E0AAFF;
+  --text-light: #1A0B2E;
+  --accent-color: #FF483D; /* Orange-Red for high contrast */
+  --glass-bg: rgba(68, 49, 153, 0.2);
+  --glass-border: rgba(255, 72, 61, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #443199;
+  --blob-2: #FF483D;
+}
+/* Theme 7: Navy/Teal/Pink (Base64 Tool Page) */
+.theme-base64 {
+  --primary-gradient: linear-gradient(135deg, #1B98A2 0%, #FDB5CE 100%);
+  --bg-dark: #132440;
+  --bg-light: #F0F8FF; 
+  --text-dark: #FDB5CE;
+  --text-light: #132440;
+  --accent-color: #FDB5CE;
+  --glass-bg: rgba(20, 36, 64, 0.5);
+  --glass-border: rgba(253, 181, 206, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #1B98A2;
+  --blob-2: #FDB5CE;
+}
+/* Theme 8: Teal/Mint (CSS Generator Page) */
+.theme-mint {
+  --primary-gradient: linear-gradient(135deg, #088395 0%, #35D0BA 100%);
+  --bg-dark: #09637E;
+  --bg-light: #F2F7F8; 
+  --text-dark: #F2F7F8;
+  --text-light: #09637E;
+  --accent-color: #35D0BA;
+  --glass-bg: rgba(8, 131, 149, 0.25);
+  --glass-border: rgba(53, 208, 186, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.2);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.3);
+  --blob-1: #088395;
+  --blob-2: #35D0BA;
+}
+/* Theme 9: Vibrant Purple/Pink (PDF Generator Page) */
+.theme-pdf {
+  --primary-gradient: linear-gradient(135deg, #7209B7 0%, #F72585 100%);
+  --bg-dark: #240046;
+  --bg-light: #FFF0F5; 
+  --text-dark: #F5E6FF;
+  --text-light: #240046;
+  --accent-color: #F72585;
+  --glass-bg: rgba(114, 9, 183, 0.2);
+  --glass-border: rgba(247, 37, 133, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.2);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #7209B7;
+  --blob-2: #F72585;
+}
+/* Theme 10: Vibrant Cyan/Pink (Media Enhancer Page) */
+.theme-enhancer {
+  --primary-gradient: linear-gradient(135deg, #00F7FF 0%, #FF5C8A 100%);
+  --bg-dark: #050A10;
+  --bg-light: #F0FFFF; 
+  --text-dark: #B0FFFA;
+  --text-light: #050A10;
+  --accent-color: #00F7FF;
+  --glass-bg: rgba(0, 247, 255, 0.05);
+  --glass-border: rgba(0, 247, 255, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.2);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #00F7FF;
+  --blob-2: #FF5C8A;
+}
+/* Theme 11: Vintage Blue/Orange (Image to Text Page) */
+.theme-ocr {
+  --primary-gradient: linear-gradient(135deg, #767F9E 0%, #DAA464 100%);
+  --bg-dark: #222533;
+  --bg-light: #FEF9E1; 
+  --text-dark: #FEFFD2;
+  --text-light: #222533;
+  --accent-color: #DAA464;
+  --glass-bg: rgba(118, 127, 158, 0.2);
+  --glass-border: rgba(218, 164, 100, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #767F9E;
+  --blob-2: #DAA464;
+}
+/* Theme 12: AI Dark/Electric Blue (Image Describer Page) */
+.theme-ai {
+  --primary-gradient: linear-gradient(135deg, #1A1A1A 0%, #00D9FF 100%);
+  --bg-dark: #09090B;
+  --bg-light: #F0FCFF; 
+  --text-dark: #E0F7FF;
+  --text-light: #09090B;
+  --accent-color: #00D9FF;
+  --glass-bg: rgba(26, 26, 26, 0.4);
+  --glass-border: rgba(0, 217, 255, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1A1A1A;
+  --blob-2: #00D9FF;
+}
+/* Theme 12: Deep Forest Teal (Palette Generator Page) */
+.theme-forest {
+  --primary-gradient: linear-gradient(135deg, #1B3C53 0%, #9EC8B9 100%);
+  --bg-dark: #092635;
+  --bg-light: #F0F7F4; 
+  --text-dark: #9EC8B9;
+  --text-light: #092635;
+  --accent-color: #9EC8B9;
+  --glass-bg: rgba(27, 60, 83, 0.4); /* #1B3C53 with opacity */
+  --glass-border: rgba(158, 200, 185, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1B3C53;
+  --blob-2: #5C8374;
+}
+/* Theme 13: Code Blue/Lime (Markdown Previewer Page) */
+.theme-markdown {
+  --primary-gradient: linear-gradient(135deg, #39B1D1 0%, #D6FB61 100%);
+  --bg-dark: #0C1116;
+  --bg-light: #F0F7FA; 
+  --text-dark: #D6FB61;
+  --text-light: #0C1116;
+  --accent-color: #39B1D1;
+  --glass-bg: rgba(57, 177, 209, 0.15);
+  --glass-border: rgba(214, 251, 97, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #39B1D1;
+  --blob-2: #D6FB61;
+}
+/* Theme 14: Slate/Ocean (QR Generator Page) */
+.theme-qr {
+  --primary-gradient: linear-gradient(135deg, #2C3E50 0%, #4CA1AF 100%);
+  --bg-dark: #1A1B1F;
+  --bg-light: #F0F4F5; 
+  --text-dark: #E0F7FA;
+  --text-light: #1A1B1F;
+  --accent-color: #4CA1AF;
+  --glass-bg: rgba(44, 62, 80, 0.3);
+  --glass-border: rgba(76, 161, 175, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #2C3E50;
+  --blob-2: #4CA1AF;
+}
+/* Theme 15: Sunset Navy/Orange (Case Converter Page) */
+.theme-sunset {
+  --primary-gradient: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 100%);
+  --bg-dark: #16213E;
+  --bg-light: #FFF5F5; 
+  --text-dark: #FFD93D;
+  --text-light: #16213E;
+  --accent-color: #FF6B6B;
+  --glass-bg: rgba(22, 33, 62, 0.4);
+  --glass-border: rgba(255, 107, 107, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #FF6B6B;
+  --blob-2: #FFD93D;
+}
+/* Theme 15: Pastel Slate (Image Converter Page) */
+.theme-pastel {
+  --primary-gradient: linear-gradient(135deg, #8696AF 0%, #8EC4CD 100%);
+  --bg-dark: #2B2D42;
+  --bg-light: #F8F9FA; 
+  --text-dark: #E0E6F0;
+  --text-light: #2B2D42;
+  --accent-color: #8EC4CD;
+  --glass-bg: rgba(134, 150, 175, 0.2);
+  --glass-border: rgba(185, 213, 213, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #8696AF;
+  --blob-2: #8EC4CD;
+}
+/* Theme 16: Soft Pink/Cream (Image Resizer Page) */
+.theme-resize {
+  --primary-gradient: linear-gradient(135deg, #FFCACA 0%, #FFF2EB 100%);
+  --bg-dark: #1A1A1A;
+  --bg-light: #FFF7F5; 
+  --text-dark: #FFF2EB;
+  --text-light: #1A1A1A;
+  --accent-color: #FFCACA;
+  --glass-bg: rgba(255, 202, 202, 0.1);
+  --glass-border: rgba(255, 242, 235, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #FFCACA;
+  --blob-2: #FFDCDC;
+}
+/* Theme 17: Earthy Green (Image Compressor Page) */
+.theme-green-compress {
+  --primary-gradient: linear-gradient(135deg, #609966 0%, #9DC08B 100%);
+  --bg-dark: #40513B;
+  --bg-light: #EDF1D6; 
+  --text-dark: #EDF1D6;
+  --text-light: #40513B;
+  --accent-color: #9DC08B;
+  --glass-bg: rgba(64, 81, 59, 0.4);
+  --glass-border: rgba(237, 241, 214, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #609966;
+  --blob-2: #9DC08B;
+}
+/* Theme 18: Cyber Punk Black/Pink/Yellow (GIF Maker Page) */
+.theme-gif {
+  --primary-gradient: linear-gradient(135deg, #9929EA 0%, #FF5FCF 100%);
+  --bg-dark: #000000;
+  --bg-light: #FAEB92; 
+  --text-dark: #FAEB92;
+  --text-light: #000000;
+  --accent-color: #FF5FCF;
+  --glass-bg: rgba(0, 0, 0, 0.6);
+  --glass-border: rgba(255, 95, 207, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #9929EA;
+  --blob-2: #FF5FCF;
+}
+/* Theme 19: Navy/Teal/Pink (Background Remover Page) */
+.theme-remover {
+  --primary-gradient: linear-gradient(135deg, #1B98A2 0%, #FDB5CE 100%);
+  --bg-dark: #132440;
+  --bg-light: #F0F8FF; 
+  --text-dark: #FDB5CE;
+  --text-light: #132440;
+  --accent-color: #FDB5CE;
+  --glass-bg: rgba(20, 36, 64, 0.5);
+  --glass-border: rgba(253, 181, 206, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #1B98A2;
+  --blob-2: #FDB5CE;
+}
+/* Theme 20: Navy/Wine (Image Rotator Page) */
+.theme-rotate {
+  --primary-gradient: linear-gradient(135deg, #800000 0%, #FF0000 100%);
+  --bg-dark: #000080; /* Navy Blue background */
+  --bg-light: #F0F0FF; 
+  --text-dark: #FF0000; /* Red accent text */
+  --text-light: #000080;
+  --accent-color: #FF0000;
+  --glass-bg: rgba(0, 0, 128, 0.4);
+  --glass-border: rgba(255, 0, 0, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #800000;
+  --blob-2: #FF0000;
+}
+/* Theme 21: Teal/Cyan (Watermark Adder Page) */
+.theme-watermark {
+  --primary-gradient: linear-gradient(135deg, #0F828C 0%, #78B9B5 100%);
+  --bg-dark: #1B3C53;
+  --bg-light: #F0F7F9; 
+  --text-dark: #78B9B5;
+  --text-light: #1B3C53;
+  --accent-color: #78B9B5;
+  --glass-bg: rgba(27, 60, 83, 0.4);
+  --glass-border: rgba(120, 185, 181, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #0F828C;
+  --blob-2: #78B9B5;
+}
+/* Theme 22: Purple/Pink (Brightness Adjuster Page) */
+.theme-brightness {
+  --primary-gradient: linear-gradient(135deg, #4B4376 0%, #E93B81 100%);
+  --bg-dark: #432E54;
+  --bg-light: #FFF0F5; 
+  --text-dark: #FFB6B9;
+  --text-light: #432E54;
+  --accent-color: #E93B81;
+  --glass-bg: rgba(75, 67, 118, 0.4);
+  --glass-border: rgba(255, 182, 185, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #4B4376;
+  --blob-2: #E93B81;
+}
+/* Theme 23: Slate/Amber (Metadata Viewer Page) */
+.theme-metadata {
+  --primary-gradient: linear-gradient(135deg, #334155 0%, #F59E0B 100%);
+  --bg-dark: #0F172A;
+  --bg-light: #F8FAFC; 
+  --text-dark: #F1F5F9;
+  --text-light: #0F172A;
+  --accent-color: #F59E0B; /* Amber */
+  --glass-bg: rgba(51, 65, 85, 0.4);
+  --glass-border: rgba(245, 158, 11, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #334155;
+  --blob-2: #F59E0B;
+}
+/* Theme 24: Slate Blue (Scientific Calculator Page) */
+.theme-slate-blue {
+  --primary-gradient: linear-gradient(135deg, #474E68 0%, #6B7AA1 100%);
+  --bg-dark: #2A2D3E;
+  --bg-light: #F0F2F8; 
+  --text-dark: #6B7AA1;
+  --text-light: #2A2D3E;
+  --accent-color: #6B7AA1;
+  --glass-bg: rgba(64, 66, 88, 0.4);
+  --glass-border: rgba(107, 122, 161, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #474E68;
+  --blob-2: #6B7AA1;
+}
+/* Theme 25: Pastel Purple/Blue (Image Blur Page) */
+.theme-blur {
+  --primary-gradient: linear-gradient(135deg, #7C83FD 0%, #A3F7BF 100%);
+  --bg-dark: #1E1E2E;
+  --bg-light: #F0F8FF; 
+  --text-dark: #96BAFF;
+  --text-light: #1E1E2E;
+  --accent-color: #96BAFF;
+  --glass-bg: rgba(124, 131, 253, 0.15);
+  --glass-border: rgba(150, 186, 255, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #7C83FD;
+  --blob-2: #A3F7BF;
+}
+/* Theme 26: Earthy Green/Pink (UUID Generator Page) */
+.theme-uuid {
+  --primary-gradient: linear-gradient(135deg, #86A788 0%, #FFCFCF 100%);
+  --bg-dark: #1A2A1B; /* Very dark green */
+  --bg-light: #FFFDEC; 
+  --text-dark: #FFFDEC; /* Light yellow text */
+  --text-light: #1A2A1B;
+  --accent-color: #FFCFCF; /* Pale pink accent */
+  --glass-bg: rgba(134, 167, 136, 0.15);
+  --glass-border: rgba(255, 207, 207, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #86A788;
+  --blob-2: #FFCFCF;
+}
+/* Theme 27: Earthy Brown/Cream (Voice Tools Page) */
+.theme-speech {
+  --primary-gradient: linear-gradient(135deg, #A98B76 0%, #C5DCA0 100%);
+  --bg-dark: #3B3128; /* Dark brown background */
+  --bg-light: #F2E2C9; 
+  --text-dark: #F2E2C9; /* Cream text */
+  --text-light: #3B3128;
+  --accent-color: #C5DCA0; /* Light green accent */
+  --glass-bg: rgba(169, 139, 118, 0.2);
+  --glass-border: rgba(242, 226, 201, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #A98B76;
+  --blob-2: #C5DCA0;
+}
+/* Theme 28: Wine/Pink (Image Sharpener Page) */
+.theme-sharpen {
+  --primary-gradient: linear-gradient(135deg, #670D2F 0%, #FF8FA3 100%);
+  --bg-dark: #3A0519;
+  --bg-light: #FFF5F5; 
+  --text-dark: #FDF0F0; /* Light pink text */
+  --text-light: #3A0519;
+  --accent-color: #FF8FA3; /* Brighter pink for contrast */
+  --glass-bg: rgba(103, 13, 47, 0.4);
+  --glass-border: rgba(253, 240, 240, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #670D2F;
+  --blob-2: #8E0E4E;
+}
+/* Theme 29: Dark Gray/Cream (Icon Converter Page) */
+.theme-ico {
+  --primary-gradient: linear-gradient(135deg, #393E46 0%, #DFD0B8 100%);
+  --bg-dark: #222831;
+  --bg-light: #F8F8F8; 
+  --text-dark: #DFD0B8; /* Cream text */
+  --text-light: #222831;
+  --accent-color: #DFD0B8;
+  --glass-bg: rgba(57, 62, 70, 0.4);
+  --glass-border: rgba(223, 208, 184, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #393E46;
+  --blob-2: #948979;
+}
+/* Theme 30: Blue/Pink (Collage Maker Page) */
+.theme-collage {
+  --primary-gradient: linear-gradient(135deg, #5C8374 0%, #FFDCDC 100%);
+  --bg-dark: #1B3C53;
+  --bg-light: #F0F4F5; 
+  --text-dark: #FFDCDC; /* Light pink text */
+  --text-light: #1B3C53;
+  --accent-color: #FFDCDC;
+  --glass-bg: rgba(27, 60, 83, 0.4);
+  --glass-border: rgba(255, 220, 220, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #5C8374;
+  --blob-2: #FFDCDC;
+}
+/* Theme 31: Blue/Yellow (Pomodoro Timer Page) */
+.theme-pomodoro {
+  --primary-gradient: linear-gradient(135deg, #3338A0 0%, #FCC61D 100%);
+  --bg-dark: #12157A; /* Deep Blue */
+  --bg-light: #F9F9F9; 
+  --text-dark: #FCC61D; /* Bright Yellow text */
+  --text-light: #12157A;
+  --accent-color: #FCC61D;
+  --glass-bg: rgba(51, 56, 160, 0.3);
+  --glass-border: rgba(252, 198, 29, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #3338A0;
+  --blob-2: #FCC61D;
+}
+/* Theme 32: YouTube Blue/Yellow */
+.theme-youtube {
+  --primary-gradient: linear-gradient(135deg, #FFC857 0%, #3066BE 100%);
+  --bg-dark: #102A43;
+  --bg-light: #F0F4F8; 
+  --text-dark: #FFC857;
+  --text-light: #102A43;
+  --accent-color: #FFC857;
+  --glass-bg: rgba(16, 42, 67, 0.4);
+  --glass-border: rgba(255, 200, 87, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #3066BE;
+  --blob-2: #FFC857;
+}
+/* Theme 33: Earthy Green/Cream (Instagram Downloader) */
+.theme-insta {
+  --primary-gradient: linear-gradient(135deg, #99AD7A 0%, #F4E9D4 100%);
+  --bg-dark: #546B41; /* Deep Green */
+  --bg-light: #F4E9D4; 
+  --text-dark: #F4E9D4; /* Cream text */
+  --text-light: #546B41;
+  --accent-color: #F4E9D4;
+  --glass-bg: rgba(84, 107, 65, 0.4);
+  --glass-border: rgba(244, 233, 212, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.15);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #546B41;
+  --blob-2: #99AD7A;
+}
+/* Theme 34: Pastel Pink/Mint (Twitter Downloader) */
+.theme-twitter-dl {
+  --primary-gradient: linear-gradient(135deg, #FF9D9D 0%, #BBF1D2 100%);
+  --bg-dark: #25141A; /* Dark Maroon */
+  --bg-light: #FFF0F0; 
+  --text-dark: #FFC5AA; /* Peach text */
+  --text-light: #25141A;
+  --accent-color: #BBF1D2; /* Mint accent */
+  --glass-bg: rgba(255, 157, 157, 0.15);
+  --glass-border: rgba(187, 241, 210, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #FF9D9D;
+  --blob-2: #BBF1D2;
+}
+/* Theme 35: Periwinkle/Green (Facebook Downloader) */
+.theme-facebook {
+  --primary-gradient: linear-gradient(135deg, #285A48 0%, #408A71 100%);
+  --bg-dark: #091413; /* Deep Black-Green Background */
+  --bg-light: #F0FFF8; 
+  --text-dark: #E8F0EE; /* Clean White/Gray text for readability */
+  --text-light: #091413;
+  --accent-color: #B0E4CC; /* Mint Green for accents/buttons */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(176, 228, 204, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #285A48;
+  --blob-2: #408A71;
+}
+/* Theme 36: Deep Blue/Green/Cream (TikTok Downloader) */
+.theme-tiktok {
+  --primary-gradient: linear-gradient(135deg, #1B3C53 0%, #5C8374 100%);
+  --bg-dark: #0B132B; /* Deep dark blue/black background */
+  --bg-light: #F0F4F5; 
+  --text-dark: #D2C1B6; /* Light Cream text */
+  --text-light: #1B3C53;
+  --accent-color: #9EC8B9; /* Light Green accent for buttons */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(158, 200, 185, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1B3C53;
+  --blob-2: #5C8374;
+}
+/* Theme 37: Blue/Yellow (YouTube Tags Extractor) */
+.theme-yt-tags {
+  --primary-gradient: linear-gradient(135deg, #8CA9FF 0%, #FFF2C6 100%);
+  --bg-dark: #1A2536; /* Deep Navy */
+  --bg-light: #F8FAFC; 
+  --text-dark: #FFF8DE; /* Pale Yellow text */
+  --text-light: #1A2536;
+  --accent-color: #8CA9FF; /* Blue accent */
+  --glass-bg: rgba(140, 169, 255, 0.15);
+  --glass-border: rgba(255, 248, 222, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #8CA9FF;
+  --blob-2: #FFF2C6;
+}
+/* Theme 38: Deep Blue/Yellow (PDF to Word) */
+.theme-pdf-word {
+  --primary-gradient: linear-gradient(135deg, #294669 0%, #E4D329 100%);
+  --bg-dark: #0D0B61; /* Deep Blue */
+  --bg-light: #F8F9FA; 
+  --text-dark: #E4D329; /* Bright Yellow text */
+  --text-light: #0D0B61;
+  --accent-color: #E4D329; 
+  --glass-bg: rgba(41, 70, 105, 0.4);
+  --glass-border: rgba(228, 211, 41, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #294669;
+  --blob-2: #478B8D;
+}
+/* Theme 39: Red/Yellow (Images to PDF) */
+.theme-img-pdf {
+  --primary-gradient: linear-gradient(135deg, #FA5C5C 0%, #FBEF76 100%);
+  --bg-dark: #2B0F0F; /* Dark Red */
+  --bg-light: #FFF9F9; 
+  --text-dark: #FEC288; /* Light Orange text */
+  --text-light: #2B0F0F;
+  --accent-color: #FBEF76; /* Yellow accent */
+  --glass-bg: rgba(250, 92, 92, 0.15);
+  --glass-border: rgba(254, 194, 136, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #FA5C5C;
+  --blob-2: #FBEF76;
+}
+/* Theme 40: Royal Indigo/Gold (Word to PDF) */
+.theme-word-pdf {
+  --primary-gradient: linear-gradient(135deg, #3949AB 0%, #FFD700 100%);
+  --bg-dark: #1A237E; /* Deep Indigo */
+  --bg-light: #F8F9FA; 
+  --text-dark: #FFD700; /* Gold text */
+  --text-light: #1A237E;
+  --accent-color: #FFD700; 
+  --glass-bg: rgba(57, 73, 171, 0.4);
+  --glass-border: rgba(255, 215, 0, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #3949AB;
+  --blob-2: #FFD700;
+}
+/* Theme 42: Cyber Security Green/Black (Base64 Tool) */
+.theme-base64-sec {
+  --primary-gradient: linear-gradient(135deg, #003B00 0%, #00FF00 100%);
+  --bg-dark: #001500; /* Deep Black-Green */
+  --bg-light: #F0FFF0; 
+  --text-dark: #00FF00; /* Neon Green text */
+  --text-light: #001500;
+  --accent-color: #00FF00; 
+  --glass-bg: rgba(0, 59, 0, 0.4);
+  --glass-border: rgba(0, 255, 0, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #003B00;
+  --blob-2: #00FF00;
+}
+/* Theme 43: Deep Purple/Pink (Image to JPG) */
+.theme-img-jpg {
+  --primary-gradient: linear-gradient(135deg, #7209B7 0%, #F72585 100%);
+  --bg-dark: #4C3A51; /* Deep Purple */
+  --bg-light: #FFF0F5; 
+  --text-dark: #F72585; /* Pink text */
+  --text-light: #4C3A51;
+  --accent-color: #F72585; 
+  --glass-bg: rgba(76, 58, 81, 0.4);
+  --glass-border: rgba(247, 37, 133, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #7209B7;
+  --blob-2: #F72585;
+}
+/* Theme 44: Teal/Green (Hashtag Generator) */
+.theme-hashtag {
+  --primary-gradient: linear-gradient(135deg, #0F828C 0%, #78B9B5 100%);
+  --bg-dark: #1B3C53; /* Deep Blue background */
+  --bg-light: #F0F7F9; 
+  --text-dark: #78B9B5; /* Light Green text */
+  --text-light: #1B3C53;
+  --accent-color: #78B9B5; 
+  --glass-bg: rgba(15, 130, 140, 0.15);
+  --glass-border: rgba(120, 185, 181, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #1B3C53;
+  --blob-2: #0F828C;
+}
+/* Theme 45: Black/Brown/Cream (Post Generator) */
+.theme-post-gen {
+  --primary-gradient: linear-gradient(135deg, #412D15 0%, #E1DCC9 100%);
+  --bg-dark: #1F150C; /* Dark Brown */
+  --bg-light: #F8F5F0; 
+  --text-dark: #E1DCC9; /* Light Cream text */
+  --text-light: #1F150C;
+  --accent-color: #E1DCC9; 
+  --glass-bg: rgba(31, 21, 12, 0.6);
+  --glass-border: rgba(225, 220, 201, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #412D15;
+  --blob-2: #1F150C;
+}
+/* Theme: Dark Forest Green/Teal (Tools Page) */
+.theme-tools-green {
+  --primary-gradient: linear-gradient(135deg, #285A48 0%, #35D0BA 100%);
+  --bg-dark: #091413; /* Deep Black-Green Background */
+  --bg-light: #F0FFF8; 
+  --text-dark: #E2E8F0; /* Clean White/Gray text for readability */
+  --text-light: #091413;
+  --accent-color: #35D0BA; /* Mint Green ONLY for accents/icons/buttons */
+  --glass-bg: rgba(15, 23, 42, 0.6); /* Dark glass background so cards aren't bright green */
+  --glass-border: rgba(53, 208, 186, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #285A48;
+  --blob-2: #3F9B81;
+}
+/* Theme 46: Deep Indigo/Cyan (Tool Comparison) */
+.theme-compare {
+  --primary-gradient: linear-gradient(135deg, #4361EE 0%, #4CC9F0 100%);
+  --bg-dark: #0B132B; /* Deep Indigo */
+  --bg-light: #F0F4F8; 
+  --text-dark: #E8F0F0;
+  --text-light: #0B132B;
+  --accent-color: #4CC9F0;
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(76, 201, 240, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #4361EE;
+  --blob-2: #4CC9F0;
+}
+/* Theme 47: Deep Brown/Cream (Hashtag Generator) */
+.theme-hashtag {
+  --primary-gradient: linear-gradient(135deg, #503C3C 0%, #E0C097 100%);
+  --bg-dark: #3E3232; /* Deep Brown Background */
+  --bg-light: #F8F5F0; 
+  --text-dark: #E0C097; /* Light Cream text */
+  --text-light: #3E3232;
+  --accent-color: #E0C097;
+  --glass-bg: rgba(80, 60, 60, 0.4);
+  --glass-border: rgba(224, 192, 151, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #503C3C;
+  --blob-2: #735D5D;
+}
+/* Theme 48: Deep Olive/Sage (Emoji Keyboard) */
+.theme-emoji {
+  --primary-gradient: linear-gradient(135deg, #7D8D86 0%, #E3E0C2 100%);
+  --bg-dark: #3E3F29; /* Deep Olive Background */
+  --bg-light: #F8F9F6; 
+  --text-dark: #E3E0C2; /* Cream text */
+  --text-light: #3E3F29;
+  --accent-color: #9BA78F; /* Light Sage accent */
+  --glass-bg: rgba(62, 63, 41, 0.5);
+  --glass-border: rgba(227, 224, 194, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #3E3F29;
+  --blob-2: #7D8D86;
+}
+/* Theme 49: Cream/Orange/Red (Twitter Character Counter) */
+.theme-twitter-counter {
+  --primary-gradient: linear-gradient(135deg, #FFAF38 0%, #FF3232 100%);
+  --bg-dark: #1A0D0D; /* Deep Dark Red/Brown Background */
+  --bg-light: #FFFAF3; 
+  --text-dark: #FFFAF3; /* Cream text */
+  --text-light: #1A0D0D;
+  --accent-color: #FFAF38; /* Vibrant Orange accent */
+  --glass-bg: rgba(26, 13, 13, 0.6);
+  --glass-border: rgba(255, 175, 56, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #FF3232;
+  --blob-2: #FFAF38;
+}
+/* Theme 50: Sage/Beige (IG Story Maker) */
+.theme-ig-story {
+  --primary-gradient: linear-gradient(135deg, #8FA28A 0%, #D8C3A5 100%);
+  --bg-dark: #1C2620; /* Deep Dark Green Background */
+  --bg-light: #F5F5F0; 
+  --text-dark: #F5F5F0; /* Off-white text */
+  --text-light: #1C2620;
+  --accent-color: #D8C3A5; /* Light Brown/Beige accent */
+  --glass-bg: rgba(28, 38, 32, 0.6);
+  --glass-border: rgba(143, 162, 138, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #8FA28A;
+  --blob-2: #D8C3A5;
+}
+/* Theme 51: Navy/Orange (FB Cover Resizer) */
+.theme-fb-cover {
+  --primary-gradient: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+  --bg-dark: #0F172A; /* Deep Navy */
+  --bg-light: #FFF7ED; 
+  --text-dark: #F97316; /* Fiery Orange text */
+  --text-light: #0F172A;
+  --accent-color: #F97316;
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(249, 115, 22, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #F97316;
+  --blob-2: #EA580C;
+}
+/* Theme 52: LinkedIn Blue/Navy (LI Scheduler) */
+.theme-li-scheduler {
+  --primary-gradient: linear-gradient(135deg, #0A66C2 0%, #8ECDF6 100%);
+  --bg-dark: #0E1A2B; /* Deep Professional Navy */
+  --bg-light: #F3F9FF; 
+  --text-dark: #8ECDF6; /* Light Blue text */
+  --text-light: #0E1A2B;
+  --accent-color: #0A66C2; /* LinkedIn Blue */
+  --glass-bg: rgba(14, 26, 43, 0.6);
+  --glass-border: rgba(10, 102, 194, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #0A66C2;
+  --blob-2: #8ECDF6;
+}
+/* Theme 53: Pinterest Red/Dark (Pinterest Downloader) */
+.theme-pinterest {
+  --primary-gradient: linear-gradient(135deg, #E60023 0%, #FF4D4D 100%);
+  --bg-dark: #0F0F0F; /* Ultra Dark Background */
+  --bg-light: #FFF0F0;
+  --text-dark: #FFFFFF; /* Clean White text */
+  --text-light: #0F0F0F;
+  --accent-color: #E60023; /* Pinterest Red */
+  --glass-bg: rgba(20, 20, 20, 0.6); /* Dark glass background */
+  --glass-border: rgba(230, 0, 35, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #E60023;
+  --blob-2: #2B0F0F;
+}
+/* Theme 54: Midnight Aurora (My Downloads Dashboard) */
+.theme-downloads {
+  --primary-gradient: linear-gradient(135deg, #0F2027 0%, #203A43 50%, #2C5364 100%);
+  --bg-dark: #080A0E; /* Deep Space Black */
+  --bg-light: #F0F4F8;
+  --text-dark: #E0F7FA; /* Ice White text */
+  --text-light: #080A0E;
+  --accent-color: #00FFAB; /* Neon Mint accent */
+  --glass-bg: rgba(12, 18, 24, 0.6);
+  --glass-border: rgba(0, 255, 171, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #2C5364;
+  --blob-2: #00FFAB;
+}
+/* Theme 55: Cyber Analytics (Social Media Analytics) */
+.theme-analytics {
+  --primary-gradient: linear-gradient(135deg, #06B6D4 0%, #8B5CF6 50%, #EC4899 100%);
+  --bg-dark: #0F172A; /* Dark Slate */
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9; /* Light Slate text */
+  --text-light: #0F172A;
+  --accent-color: #06B6D4; /* Cyan accent */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(6, 182, 212, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #8B5CF6;
+  --blob-2: #06B6D4;
+}
+/* Theme 56: Spreadsheet Sage (Excel to PDF) */
+.theme-excel-pdf {
+  --primary-gradient: linear-gradient(135deg, #2E7D32 0%, #A5D6A7 100%);
+  --bg-dark: #1B2B1F; /* Dark Forest Green */
+  --bg-light: #F1F8E9;
+  --text-dark: #A5D6A7; /* Sage text */
+  --text-light: #1B2B1F;
+  --accent-color: #2E7D32; /* Excel Green */
+  --glass-bg: rgba(27, 43, 31, 0.6);
+  --glass-border: rgba(165, 214, 167, 0.15);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #2E7D32;
+  --blob-2: #A5D6A7;
+}
+/* Theme 57: Sunset Amber (PDF to Excel) */
+.theme-pdf-excel {
+  --primary-gradient: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  --bg-dark: #1C1917; /* Dark Charcoal */
+  --bg-light: #FFF7ED;
+  --text-dark: #FBBF24; /* Amber text */
+  --text-light: #1C1917;
+  --accent-color: #F59E0B; /* Amber accent */
+  --glass-bg: rgba(28, 25, 23, 0.6);
+  --glass-border: rgba(245, 158, 11, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #D97706;
+  --blob-2: #F59E0B;
+}
+/* Theme 58: Pastel Pop (PowerPoint to PDF) */
+.theme-pptx-pdf {
+  --primary-gradient: linear-gradient(135deg, #F9B2D7 0%, #CFECF3 50%, #DAF9DE 100%);
+  --bg-dark: #1A1A1D; /* Dark Charcoal to make pastels pop */
+  --bg-light: #F6FFDC; /* Light Yellow */
+  --text-dark: #F9B2D7; /* Pastel Pink text */
+  --text-light: #1A1A1D;
+  --accent-color: #CFECF3; /* Light Blue accent */
+  --glass-bg: rgba(26, 26, 29, 0.6);
+  --glass-border: rgba(249, 178, 215, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #DAF9DE; /* Light Green */
+  --blob-2: #F9B2D7; /* Pink */
+}
+/* Theme 59: Aqua Mint (PDF to PowerPoint) */
+.theme-pdf-pptx {
+  --primary-gradient: linear-gradient(135deg, #FDF4AF 0%, #69CFC8 50%, #0F7B75 100%);
+  --bg-dark: #052E2B; /* Deep Dark Teal */
+  --bg-light: #FDF4AF; /* Light Yellow */
+  --text-dark: #E0F2F1; /* Clean Light text */
+  --text-light: #052E2B;
+  --accent-color: #69CFC8; /* Cyan Green for buttons */
+  --glass-bg: rgba(5, 46, 43, 0.6);
+  --glass-border: rgba(105, 207, 200, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0F7B75; /* Dark Green */
+  --blob-2: #69CFC8; /* Cyan Green */
+}
+/* Theme 60: Document Navy (Merge PDF) */
+.theme-pdf-merge {
+  --primary-gradient: linear-gradient(135deg, #0A2947 0%, #8FB9A8 100%);
+  --bg-dark: #050C16; /* Ultra Dark Navy */
+  --bg-light: #E2E8F0;
+  --text-dark: #E2E8F0; /* Clean Light text */
+  --text-light: #0A2947;
+  --accent-color: #8FB9A8; /* Light Green/Beige for accents */
+  --glass-bg: rgba(10, 41, 71, 0.5);
+  --glass-border: rgba(143, 185, 168, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0A2947; /* Deep Blue */
+  --blob-2: #8B7355; /* Brown */
+}
+/* Theme 61: Data Matrix (PDF to CSV) */
+.theme-pdf-csv {
+  --primary-gradient: linear-gradient(135deg, #00FFAB 0%, #008B8B 100%);
+  --bg-dark: #0A0A0A; /* Pitch Black */
+  --bg-light: #E0F7FA;
+  --text-dark: #E0F7FA; /* Clean Light text */
+  --text-light: #0A0A0A;
+  --accent-color: #00FFAB; /* Neon Mint accent */
+  --glass-bg: rgba(10, 10, 10, 0.6);
+  --glass-border: rgba(0, 255, 171, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #008B8B; /* Dark Cyan */
+  --blob-2: #00FFAB; /* Neon Mint */
+}
+/* Theme 62: Cyber Network (IP Lookup) */
+.theme-ip-lookup {
+  --primary-gradient: linear-gradient(135deg, #00F260 0%, #0575E6 100%);
+  --bg-dark: #050A10; /* Deep Space Black */
+  --bg-light: #E0F7FA;
+  --text-dark: #E0F7FA; /* Clean Light text */
+  --text-light: #050A10;
+  --accent-color: #0575E6; /* Neon Blue for accents */
+  --glass-bg: rgba(5, 10, 16, 0.6);
+  --glass-border: rgba(0, 242, 96, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0575E6; /* Blue */
+  --blob-2: #00F260; /* Neon Green */
+}
+/* Theme 63: Diff Inspector (Compare PDF) */
+.theme-compare-pdf {
+  --primary-gradient: linear-gradient(135deg, #F44336 0%, #4CAF50 100%);
+  --bg-dark: #14171A; /* Dark Slate */
+  --bg-light: #ECEFF1;
+  --text-dark: #ECEFF1; /* Clean Light text */
+  --text-light: #14171A;
+  --accent-color: #4CAF50; /* Green for accents/buttons */
+  --glass-bg: rgba(20, 23, 26, 0.6);
+  --glass-border: rgba(76, 175, 80, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #F44336; /* Red */
+  --blob-2: #4CAF50; /* Green */
+}
+/* Theme 64: Split Indigo (Split PDF) */
+.theme-pdf-split {
+  --primary-gradient: linear-gradient(135deg, #4F46E5 0%, #A855F7 100%);
+  --bg-dark: #111827; /* Dark Gray/Indigo */
+  --bg-light: #F3F4F6;
+  --text-dark: #E5E7EB; /* Clean Light text */
+  --text-light: #111827;
+  --accent-color: #4F46E5; /* Indigo for accents */
+  --glass-bg: rgba(17, 24, 39, 0.6);
+  --glass-border: rgba(168, 85, 247, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #4F46E5;
+  --blob-2: #A855F7;
+}
+/* Theme 65: Compress Slate (Compress PDF) */
+.theme-compress-pdf {
+  --primary-gradient: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+  --bg-dark: #1E293B; /* Dark Slate */
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9; /* Clean Light text */
+  --text-light: #1E293B;
+  --accent-color: #F97316; /* Orange for accents */
+  --glass-bg: rgba(30, 41, 59, 0.6);
+  --glass-border: rgba(249, 115, 22, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #F97316;
+  --blob-2: #475569;
+}
+/* Theme 66: Chat Navy (Live Discussion) */
+.theme-chat {
+  --primary-gradient: linear-gradient(135deg, #1B3C53 0%, #456A88 100%);
+  --bg-dark: #0A1828; /* Deeper Navy */
+  --bg-light: #F0F4F8;
+  --text-dark: #F9E8A2; /* Light Yellow text for contrast */
+  --text-light: #0A1828;
+  --accent-color: #456A88; /* Medium Blue for accents/buttons */
+  --glass-bg: rgba(10, 24, 40, 0.6);
+  --glass-border: rgba(69, 106, 136, 0.3);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1B3C53;
+  --blob-2: #456A88;
+}
+/* Theme 67: Emoji Pop (Emoji Mixer) */
+.theme-emoji-mixer {
+  --primary-gradient: linear-gradient(135deg, #F50057 0%, #D500F9 50%, #2979FF 100%);
+  --bg-dark: #1A1A1D; /* Dark Charcoal */
+  --bg-light: #F3F4F6;
+  --text-dark: #F3F4F6; /* Clean Light text */
+  --text-light: #1A1A1D;
+  --accent-color: #D500F9; /* Purple/Pink for accents */
+  --glass-bg: rgba(26, 26, 29, 0.6);
+  --glass-border: rgba(245, 0, 87, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #2979FF; /* Blue */
+  --blob-2: #F50057; /* Pink */
+}
+/* Theme 68: Rotate Cyan (Rotate PDF) */
+.theme-rotate-pdf {
+  --primary-gradient: linear-gradient(135deg, #00E5FF 0%, #2979FF 100%);
+  --bg-dark: #0A1929; /* Dark Navy */
+  --bg-light: #E0F7FA;
+  --text-dark: #E0F7FA; /* Clean Light text */
+  --text-light: #0A1929;
+  --accent-color: #00E5FF; /* Cyan for accents */
+  --glass-bg: rgba(10, 25, 41, 0.6);
+  --glass-border: rgba(0, 229, 255, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #2979FF;
+  --blob-2: #00E5FF;
+}
+/* Theme 69: Organizer Violet (Rearrange & Delete PDF) */
+.theme-rearrange-pdf {
+  --primary-gradient: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+  --bg-dark: #14141B; /* Dark Slate */
+  --bg-light: #F3F4F6;
+  --text-dark: #E5E7EB; /* Clean Light text */
+  --text-light: #14141B;
+  --accent-color: #8B5CF6; /* Violet for accents */
+  --glass-bg: rgba(20, 20, 27, 0.6);
+  --glass-border: rgba(236, 72, 153, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #8B5CF6;
+  --blob-2: #EC4899;
+}
+/* Theme 70: Insert Gold (Add Pages to PDF) */
+.theme-add-pages-pdf {
+  --primary-gradient: linear-gradient(135deg, #FFD700 0%, #14B8A6 100%);
+  --bg-dark: #141D26; /* Dark Slate */
+  --bg-light: #F7FAFC;
+  --text-dark: #E2E8F0; /* Clean Light text */
+  --text-light: #141D26;
+  --accent-color: #FFD700; /* Gold for accents */
+  --glass-bg: rgba(20, 29, 38, 0.6);
+  --glass-border: rgba(255, 215, 0, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #14B8A6; /* Teal */
+  --blob-2: #FFD700; /* Gold */
+}
+/* Theme 71: Tweet Slate (Twitter Thread Gen) */
+.theme-twitter-thread {
+  --primary-gradient: linear-gradient(135deg, #1DA1F2 0%, #0A1929 100%);
+  --bg-dark: #0A1929; /* Deep Dark Slate */
+  --bg-light: #F7FAFC;
+  --text-dark: #E2E8F0; /* Clean Light text */
+  --text-light: #0A1929;
+  --accent-color: #1DA1F2; /* Twitter Blue for accents */
+  --glass-bg: rgba(10, 25, 41, 0.6);
+  --glass-border: rgba(29, 161, 242, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1DA1F2;
+  --blob-2: #0A1929;
+}
+/* Theme 72: Watermark Aqua (PDF Watermark Tool) */
+.theme-pdf-watermark {
+  --primary-gradient: linear-gradient(135deg, #00E5FF 0%, #2979FF 100%);
+  --bg-dark: #0A1929; /* Deep Navy */
+  --bg-light: #E0F7FA;
+  --text-dark: #E0F7FA; /* Clean Light text */
+  --text-light: #0A1929;
+  --accent-color: #00E5FF; /* Aqua for accents */
+  --glass-bg: rgba(10, 25, 41, 0.6);
+  --glass-border: rgba(0, 229, 255, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #2979FF;
+  --blob-2: #00E5FF;
+}
+/* Theme 73: Neon Stylish (Fancy Text Generator) */
+.theme-fancy-text {
+  --primary-gradient: linear-gradient(135deg, #FF00FF 0%, #00FFFF 100%);
+  --bg-dark: #13002A; /* Dark Purple */
+  --bg-light: #F3F4F6;
+  --text-dark: #F3F4F6; /* Clean Light text */
+  --text-light: #13002A;
+  --accent-color: #FF00FF; /* Neon Pink for accents */
+  --glass-bg: rgba(19, 0, 42, 0.6);
+  --glass-border: rgba(0, 255, 255, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #00FFFF; /* Cyan */
+  --blob-2: #FF00FF; /* Pink */
+}
+/* Theme 74: Reddit Orange (Reddit Downloader) */
+.theme-reddit {
+  --primary-gradient: linear-gradient(135deg, #FF4500 0%, #FF5700 100%);
+  --bg-dark: #1A1A1B; /* Reddit Dark Gray */
+  --bg-light: #F6F7F8;
+  --text-dark: #D7DADC; /* Clean Light text */
+  --text-light: #1A1A1B;
+  --accent-color: #FF4500; /* Reddit Orange */
+  --glass-bg: rgba(26, 26, 27, 0.6);
+  --glass-border: rgba(255, 69, 0, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #FF4500;
+  --blob-2: #1A1A1B;
+}
+/* Theme 75: YouTube Banner Maker */
+.theme-yt-banner {
+  --primary-gradient: linear-gradient(135deg, #FF0000 0%, #282828 100%);
+  --bg-dark: #0F0F0F; /* YouTube Dark */
+  --bg-light: #F9F9F9;
+  --text-dark: #F1F1F1; /* Clean Light text */
+  --text-light: #0F0F0F;
+  --accent-color: #FF0000; /* YouTube Red */
+  --glass-bg: rgba(15, 15, 15, 0.6);
+  --glass-border: rgba(255, 0, 0, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #FF0000;
+  --blob-2: #282828;
+}
+/* Theme 76: Security Slate (PDF Security Tool) */
+.theme-pdf-security {
+  --primary-gradient: linear-gradient(135deg, #00FF00 0%, #10B981 100%);
+  --bg-dark: #0F172A; /* Dark Slate */
+  --bg-light: #F0FDF4;
+  --text-dark: #E2E8F0; /* Clean Light text */
+  --text-light: #0F172A;
+  --accent-color: #10B981; /* Emerald Green for accents */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(16, 185, 129, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #10B981;
+  --blob-2: #00FF00;
+}
+/* Theme 77: Fuel Flame (Live Fuel Prices) */
+.theme-fuel {
+  --primary-gradient: linear-gradient(135deg, #FF5722 0%, #FFC107 100%);
+  --bg-dark: #1A1A1D; /* Dark Charcoal */
+  --bg-light: #FFF8E1;
+  --text-dark: #FFECB3; /* Light Amber text */
+  --text-light: #1A1A1D;
+  --accent-color: #FF5722; /* Deep Orange */
+  --glass-bg: rgba(26, 26, 29, 0.6);
+  --glass-border: rgba(255, 87, 34, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #FF5722;
+  --blob-2: #FFC107;
+}
+/* Theme 78: Silver Spectrum (Silver Price Checker) */
+.theme-silver {
+  --primary-gradient: linear-gradient(135deg, #8E2DE2 0%, #00C9FF 100%);
+  --bg-dark: #120024; /* Deep Violet */
+  --bg-light: #F3F4F6;
+  --text-dark: #E0F7FA; /* Ice White text */
+  --text-light: #120024;
+  --accent-color: #00C9FF; /* Bright Cyan */
+  --glass-bg: rgba(18, 0, 36, 0.6);
+  --glass-border: rgba(142, 45, 226, 0.3);
+  --glass-highlight-top: rgba(255, 255, 255, 0.1);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.4);
+  --blob-1: #8E2DE2;
+  --blob-2: #00C9FF;
+}
+/* Theme 79: Academic Blue (Plagiarism Checker) */
+.theme-plagiarism {
+  --primary-gradient: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);
+  --bg-dark: #0F172A; /* Deep Navy */
+  --bg-light: #F0F9FF;
+  --text-dark: #E2E8F0; /* Clean Light text */
+  --text-light: #0F172A;
+  --accent-color: #38BDF8; /* Sky Blue */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(56, 189, 248, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #2563EB;
+  --blob-2: #38BDF8;
+}
+/* Theme 80: Finance Gold (EMI Calculator) */
+.theme-emi {
+  --primary-gradient: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  --bg-dark: #0F172A; /* Deep Navy */
+  --bg-light: #FFF8DC;
+  --text-dark: #F1F5F9; /* Clean Light text */
+  --text-light: #0F172A;
+  --accent-color: #FFD700; /* Gold */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255, 215, 0, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #FFD700;
+  --blob-2: #0F172A;
+}
+/* Theme 81: Typewriter Slate (Lorem Ipsum) */
+.theme-lorem {
+  --primary-gradient: linear-gradient(135deg, #6B7280 0%, #E5E7EB 100%);
+  --bg-dark: #1F2937; /* Dark Gray */
+  --bg-light: #F9FAFB;
+  --text-dark: #F3F4F6; /* Clean Light text */
+  --text-light: #1F2937;
+  --accent-color: #FFFFFF; /* White for accents */
+  --glass-bg: rgba(31, 41, 55, 0.6);
+  --glass-border: rgba(229, 231, 235, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #6B7280;
+  --blob-2: #1F2937;
+}
+/* Theme 82: Health Mint (BMI Calculator) */
+.theme-bmi {
+  --primary-gradient: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+  --bg-dark: #0F172A; /* Deep Navy */
+  --bg-light: #ECFDF5;
+  --text-dark: #E2E8F0; /* Clean Light text */
+  --text-light: #0F172A;
+  --accent-color: #10B981; /* Emerald Green */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(16, 185, 129, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #10B981;
+  --blob-2: #0F172A;
+}
+/* Theme 83: Cyber Security (Password Strength Checker) */
+.theme-password-checker {
+  --primary-gradient: linear-gradient(135deg, #00FF00 0%, #10B981 100%);
+  --bg-dark: #0F172A; /* Dark Slate */
+  --bg-light: #F0FDF4;
+  --text-dark: #E2E8F0; /* Clean Light text */
+  --text-light: #0F172A;
+  --accent-color: #00FF00; /* Neon Green */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(0, 255, 0, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #00FF00;
+  --blob-2: #0F172A;
+}
+/* Theme 84: Cosmic Blue (World Clock) */
+.theme-world-clock {
+  --primary-gradient: linear-gradient(135deg, #0EA5E9 0%, #6366F1 100%);
+  --bg-dark: #0B1120; /* Deep Space Navy */
+  --bg-light: #F0F9FF;
+  --text-dark: #E2E8F0; /* Clean Light text */
+  --text-light: #0B1120;
+  --accent-color: #0EA5E9; /* Sky Blue */
+  --glass-bg: rgba(11, 17, 32, 0.6);
+  --glass-border: rgba(14, 165, 233, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #6366F1;
+  --blob-2: #0EA5E9;
+}
+/* Theme 85: Math Slate (Percentage Calculator) */
+.theme-percentage {
+  --primary-gradient: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+  --bg-dark: #1E293B; /* Dark Slate */
+  --bg-light: #FFF7ED;
+  --text-dark: #F1F5F9; /* Clean Light text */
+  --text-light: #1E293B;
+  --accent-color: #F97316; /* Orange */
+  --glass-bg: rgba(30, 41, 59, 0.6);
+  --glass-border: rgba(249, 115, 22, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #F97316;
+  --blob-2: #1E293B;
+}
+/* Theme 86: Life Violet (Age Calculator) */
+.theme-age-calculator {
+  --primary-gradient: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+  --bg-dark: #1E1B2E; /* Deep Purple */
+  --bg-light: #FDF4FF;
+  --text-dark: #F3E8FF; /* Clean Light text */
+  --text-light: #1E1B2E;
+  --accent-color: #EC4899; /* Pink */
+  --glass-bg: rgba(30, 27, 46, 0.6);
+  --glass-border: rgba(236, 72, 153, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #7C3AED;
+  --blob-2: #EC4899;
+}
+/* Theme 87: Trading Black (Currency Converter) */
+.theme-currency {
+  --primary-gradient: linear-gradient(135deg, #00B8D4 0%, #00E676 100%);
+  --bg-dark: #0A0E15; /* Pitch Black */
+  --bg-light: #E0F7FA;
+  --text-dark: #ECEFF1; /* Clean Light text */
+  --text-light: #0A0E15;
+  --accent-color: #00B8D4; /* Cyan */
+  --glass-bg: rgba(10, 14, 21, 0.8);
+  --glass-border: rgba(0, 184, 212, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.05);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #00E676;
+  --blob-2: #00B8D4;
+}
+/* Theme 88: Scanner Red (Barcode Generator) */
+.theme-barcode {
+  --primary-gradient: linear-gradient(135deg, #EF4444 0%, #B91C1C 100%);
+  --bg-dark: #111827; /* Dark Charcoal */
+  --bg-light: #F3F4F6;
+  --text-dark: #F3F4F6; /* Clean Light text */
+  --text-light: #111827;
+  --accent-color: #EF4444; /* Red */
+  --glass-bg: rgba(17, 24, 39, 0.6);
+  --glass-border: rgba(239, 68, 68, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #EF4444;
+  --blob-2: #111827;
+}
+/* Theme 89: Gold Dark (Gold Price Checker) */
+.theme-gold {
+  --primary-gradient: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+  --bg-dark: #1A1A1D; /* Dark Charcoal */
+  --bg-light: #FFF8DC;
+  --text-dark: #FFF8DC; /* Cream text */
+  --text-light: #1A1A1D;
+  --accent-color: #FFD700; /* Gold */
+  --glass-bg: rgba(26, 26, 29, 0.6);
+  --glass-border: rgba(255, 215, 0, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #FFD700;
+  --blob-2: #B8860B;
+}
+/* Theme 90: Cyber Blue (HTTP Headers) */
+.theme-http {
+  --primary-gradient: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+  --bg-dark: #0F172A; /* Deep Navy */
+  --bg-light: #EFF6FF;
+  --text-dark: #F1F5F9; /* Clean Light text */
+  --text-light: #0F172A;
+  --accent-color: #3B82F6; /* Cyber Blue */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(59, 130, 246, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #3B82F6;
+  --blob-2: #0F172A;
+}
+/* Theme 91: Dailymotion Blue/Pink */
+.theme-dailymotion {
+  --primary-gradient: linear-gradient(135deg, #0066DC 0%, #FF0033 100%);
+  --bg-dark: #0A0B0D;
+  --bg-light: #F0F4F8;
+  --text-dark: #F1F5F9;
+  --text-light: #0A0B0D;
+  --accent-color: #0066DC; /* Dailymotion Blue */
+  --glass-bg: rgba(0, 102, 220, 0.2);
+  --glass-border: rgba(255, 0, 51, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0066DC;
+  --blob-2: #FF0033;
+}
+/* Theme 92: Stadium Night (Cricket) */
+.theme-cricket {
+  --primary-gradient: linear-gradient(135deg, #004d40 0%, #ffeb3b 100%);
+  --bg-dark: #0a1a14;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #0a1a14;
+  --accent-color: #ffeb3b; /* Stadium Yellow */
+  --glass-bg: rgba(0, 77, 64, 0.4);
+  --glass-border: rgba(255, 235, 59, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #004d40;
+  --blob-2: #1b5e20;
+}
+/* Theme 93: Cyber API Viewer */
+.theme-api-viewer {
+  --primary-gradient: linear-gradient(135deg, #0d1117 0%, #00D9FF 100%);
+  --bg-dark: #050810;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #050810;
+  --accent-color: #00D9FF; /* Neon Cyan */
+  --glass-bg: rgba(13, 17, 23, 0.6);
+  --glass-border: rgba(0, 217, 255, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0d1117;
+  --blob-2: #00D9FF;
+}
+/* Theme 94: School Notebook (Handwriting) */
+.theme-handwriting {
+  --primary-gradient: linear-gradient(135deg, #1e293b 0%, #fbbf24 100%);
+  --bg-dark: #0f172a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0f172a;
+  --accent-color: #fbbf24; /* Pencil Yellow */
+  --glass-bg: rgba(30, 41, 59, 0.4);
+  --glass-border: rgba(251, 191, 36, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1e293b;
+  --blob-2: #fbbf24;
+}
+
+/* Theme 95: Data Indigo (Fake Data) */
+.theme-fake-data {
+  --primary-gradient: linear-gradient(135deg, #312e81 0%, #06b6d4 100%);
+  --bg-dark: #0f0f1a;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #0f0f1a;
+  --accent-color: #06b6d4; /* Data Cyan */
+  --glass-bg: rgba(49, 46, 129, 0.3);
+  --glass-border: rgba(6, 182, 212, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #312e81;
+  --blob-2: #06b6d4;
+}
+/* Theme 96: Cyber Security (Hash) */
+.theme-hash {
+  --primary-gradient: linear-gradient(135deg, #0f172a 0%, #10b981 100%);
+  --bg-dark: #050810;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #050810;
+  --accent-color: #10b981; /* Emerald Green */
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(16, 185, 129, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0f172a;
+  --blob-2: #10b981;
+}
+
+/* Theme 97: SEO Orange (Meta Tag) */
+.theme-meta-tag {
+  --primary-gradient: linear-gradient(135deg, #1a1a1a 0%, #f97316 100%);
+  --bg-dark: #0f0f0f;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0f0f0f;
+  --accent-color: #f97316; /* SEO Orange */
+  --glass-bg: rgba(26, 26, 26, 0.5);
+  --glass-border: rgba(249, 115, 22, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1a1a1a;
+  --blob-2: #f97316;
+}
+/* Theme 98: Wi-Fi Signal Blue */
+.theme-wifi {
+  --primary-gradient: linear-gradient(135deg, #0f172a 0%, #3b82f6 100%);
+  --bg-dark: #050810;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #050810;
+  --accent-color: #3b82f6; /* Wi-Fi Blue */
+  --glass-bg: rgba(15, 23, 42, 0.5);
+  --glass-border: rgba(59, 130, 246, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0f172a;
+  --blob-2: #3b82f6;
+}
+
+/* Theme 99: High Contrast Accessible */
+.theme-contrast {
+  --primary-gradient: linear-gradient(135deg, #000000 0%, #facc15 100%);
+  --bg-dark: #0a0a0a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0a0a0a;
+  --accent-color: #facc15; /* High-vis Yellow */
+  --glass-bg: rgba(10, 10, 10, 0.6);
+  --glass-border: rgba(250, 204, 21, 0.3);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #000000;
+  --blob-2: #facc15;
+}
+/* Theme 100: Privacy Slate (EXIF Remover) */
+.theme-exif {
+  --primary-gradient: linear-gradient(135deg, #1e293b 0%, #10b981 100%);
+  --bg-dark: #0f172a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0f172a;
+  --accent-color: #10b981; /* Security Green */
+  --glass-bg: rgba(30, 41, 59, 0.5);
+  --glass-border: rgba(16, 185, 129, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1e293b;
+  --blob-2: #10b981;
+}
+
+/* Theme 101: Regex Purple/Yellow */
+.theme-regex {
+  --primary-gradient: linear-gradient(135deg, #4c1d95 0%, #eab308 100%);
+  --bg-dark: #11052c;
+  --bg-light: #F8FAFC;
+  --text-dark: #E2E8F0;
+  --text-light: #11052c;
+  --accent-color: #eab308; /* Regex Yellow */
+  --glass-bg: rgba(76, 29, 149, 0.3);
+  --glass-border: rgba(234, 179, 8, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #4c1d95;
+  --blob-2: #eab308;
+}
+/* Theme 102: Palette Extractor Pink */
+.theme-palette-extractor {
+  --primary-gradient: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  --bg-dark: #0f0f1a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0f0f1a;
+  --accent-color: #ec4899; /* Pink */
+  --glass-bg: rgba(236, 72, 153, 0.1);
+  --glass-border: rgba(139, 92, 246, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #ec4899;
+  --blob-2: #8b5cf6;
+}
+
+/* Theme 103: Hearing Test Cyan */
+.theme-hearing {
+  --primary-gradient: linear-gradient(135deg, #0f172a 0%, #06b6d4 100%);
+  --bg-dark: #050810;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #050810;
+  --accent-color: #06b6d4; /* Audio Cyan */
+  --glass-bg: rgba(6, 182, 212, 0.1);
+  --glass-border: rgba(6, 182, 212, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0f172a;
+  --blob-2: #06b6d4;
+}
+
+/* Theme 104: JSON/CSV Green */
+.theme-json-csv {
+  --primary-gradient: linear-gradient(135deg, #1e293b 0%, #10b981 100%);
+  --bg-dark: #0a0a0a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0a0a0a;
+  --accent-color: #10b981; /* Data Green */
+  --glass-bg: rgba(30, 41, 59, 0.4);
+  --glass-border: rgba(16, 185, 129, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1e293b;
+  --blob-2: #10b981;
+}
+
+/* Theme 105: Invoice Blue */
+.theme-invoice {
+  --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  --bg-dark: #0f172a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0f172a;
+  --accent-color: #3b82f6; /* Corporate Blue */
+  --glass-bg: rgba(30, 58, 138, 0.3);
+  --glass-border: rgba(59, 130, 246, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1e3a8a;
+  --blob-2: #3b82f6;
+}
+/* Theme 106: Git Diff (Green/Red) */
+.theme-diff {
+  --primary-gradient: linear-gradient(135deg, #1a1a1a 0%, #00FFAB 100%);
+  --bg-dark: #0a0a0a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0a0a0a;
+  --accent-color: #00FFAB; /* Diff Green */
+  --glass-bg: rgba(26, 26, 26, 0.5);
+  --glass-border: rgba(0, 255, 171, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1a1a1a;
+  --blob-2: #00FFAB;
+}
+
+/* Theme 107: Base64 Developer Blue */
+.theme-img-base64 {
+  --primary-gradient: linear-gradient(135deg, #0f172a 0%, #3b82f6 100%);
+  --bg-dark: #050810;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #050810;
+  --accent-color: #3b82f6; /* Dev Blue */
+  --glass-bg: rgba(15, 23, 42, 0.5);
+  --glass-border: rgba(59, 130, 246, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0f172a;
+  --blob-2: #3b82f6;
+}
+/* Theme 108: Retro Game */
+.theme-game {
+  --primary-gradient: linear-gradient(135deg, #2c3e50 0%, #fd79a8 100%);
+  --bg-dark: #0f0f1a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0f0f1a;
+  --accent-color: #fd79a8; /* Retro Pink */
+  --glass-bg: rgba(44, 62, 80, 0.4);
+  --glass-border: rgba(253, 121, 168, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #2c3e50;
+  --blob-2: #fd79a8;
+}
+/* Theme 109: Lab Playground */
+.theme-playground {
+  --primary-gradient: linear-gradient(135deg, #1e1b4b 0%, #06b6d4 100%);
+  --bg-dark: #0a0a12;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0a0a12;
+  --accent-color: #06b6d4; /* Cyan */
+  --glass-bg: rgba(30, 27, 75, 0.4);
+  --glass-border: rgba(6, 182, 212, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1e1b4b;
+  --blob-2: #06b6d4;
+}
+/* Theme 110: Heatmap Green */
+.theme-heatmap {
+  --primary-gradient: linear-gradient(135deg, #0f172a 0%, #00FFAB 100%);
+  --bg-dark: #050810;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #050810;
+  --accent-color: #00FFAB; /* Neon Heatmap Green */
+  --glass-bg: rgba(15, 23, 42, 0.5);
+  --glass-border: rgba(0, 255, 171, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #0f172a;
+  --blob-2: #00FFAB;
+}
+/* Theme 112: Legal Slate */
+.theme-legal {
+  --primary-gradient: linear-gradient(135deg, #1e293b 0%, #d4af37 100%);
+  --bg-dark: #0f172a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0f172a;
+  --accent-color: #d4af37; /* Professional Gold */
+  --glass-bg: rgba(30, 41, 59, 0.5);
+  --glass-border: rgba(212, 175, 55, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1e293b;
+  --blob-2: #d4af37;
+}
+/* Theme 113: Marketing Orange (UTM Builder) */
+.theme-utm {
+  --primary-gradient: linear-gradient(135deg, #1a1a1a 0%, #f97316 100%);
+  --bg-dark: #0f0f0f;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0f0f0f;
+  --accent-color: #f97316; /* Marketing Orange */
+  --glass-bg: rgba(26, 26, 26, 0.5);
+  --glass-border: rgba(249, 115, 22, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1a1a1a;
+  --blob-2: #f97316;
+}
+
+/* Theme 114: Eyedropper Rainbow */
+.theme-eyedropper {
+  --primary-gradient: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #06b6d4 100%);
+  --bg-dark: #0f0f1a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0f0f1a;
+  --accent-color: #8b5cf6; /* Designer Purple */
+  --glass-bg: rgba(15, 15, 26, 0.5);
+  --glass-border: rgba(139, 92, 246, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #ec4899;
+  --blob-2: #06b6d4;
+}
+/* Theme 115: Material Blue Gradient (From Screenshot) */
+.theme-blue-gradient {
+  --primary-gradient: linear-gradient(135deg, #1E88E5 0%, #E3F2FD 100%);
+  --bg-dark: #0A1929;
+  --bg-light: #F0F4F8;
+  --text-dark: #E3F2FD;
+  --text-light: #0A1929;
+  --accent-color: #42A5F5; /* Material Blue 400 */
+  --glass-bg: rgba(30, 136, 229, 0.15);
+  --glass-border: rgba(144, 202, 249, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1565C0;
+  --blob-2: #42A5F5;
+}
+
+/* Theme 116: Material Green Gradient (From Screenshot) */
+.theme-green-gradient {
+  --primary-gradient: linear-gradient(135deg, #43A047 0%, #E8F5E9 100%);
+  --bg-dark: #0A1F0A;
+  --bg-light: #F0F8F0;
+  --text-dark: #E8F5E9;
+  --text-light: #0A1F0A;
+  --accent-color: #66BB6A; /* Material Green 400 */
+  --glass-bg: rgba(67, 160, 71, 0.15);
+  --glass-border: rgba(165, 214, 167, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #2E7D32;
+  --blob-2: #66BB6A;
+}
+/* Theme 117: Pastel Pink/Orange/Mint (From Screenshot 1) */
+.theme-pastel-pink {
+  --primary-gradient: linear-gradient(135deg, #FF9D9D 0%, #FFC8A2 50%, #B5EAD7 100%);
+  --bg-dark: #1a1a1a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #1a1a1a;
+  --accent-color: #FF9D9D; /* Pastel Pink */
+  --glass-bg: rgba(255, 157, 157, 0.15);
+  --glass-border: rgba(255, 200, 162, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #FF9D9D;
+  --blob-2: #B5EAD7;
+}
+
+/* Theme 118: Purple/Lavender/Blue (From Screenshot 2) */
+.theme-lavender {
+  --primary-gradient: linear-gradient(135deg, #9FA1FF 0%, #B5BAFF 50%, #D1D8FF 100%);
+  --bg-dark: #0f0f1a;
+  --bg-light: #F8FAFC;
+  --text-dark: #E2E8F0;
+  --text-light: #0f0f1a;
+  --accent-color: #9FA1FF; /* Soft Purple */
+  --glass-bg: rgba(159, 161, 255, 0.15);
+  --glass-border: rgba(181, 186, 255, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #9FA1FF;
+  --blob-2: #D1D8FF;
+}
+/* Theme 119: Grid Blue/Orange (From Screenshot 2) */
+.theme-grid {
+  --primary-gradient: linear-gradient(135deg, #39B1D1 0%, #CDE95B 50%, #F89A36 100%);
+  --bg-dark: #0A1929;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #0A1929;
+  --accent-color: #39B1D1; /* Blue */
+  --glass-bg: rgba(57, 177, 209, 0.15);
+  --glass-border: rgba(205, 233, 91, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #39B1D1;
+  --blob-2: #F89A36;
+}
+
+/* Theme 120: Bezier Green/Pink (From Screenshot 1) */
+.theme-bezier {
+  --primary-gradient: linear-gradient(135deg, #86A788 0%, #D9E3A6 50%, #C77777 100%);
+  --bg-dark: #0A1F0A;
+  --bg-light: #F0F8F0;
+  --text-dark: #D9E3A6;
+  --text-light: #0A1F0A;
+  --accent-color: #C77777; /* Soft Pink/Red */
+  --glass-bg: rgba(134, 167, 136, 0.15);
+  --glass-border: rgba(217, 227, 166, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #86A788;
+  --blob-2: #C77777;
+}
+
+/* Theme 121: Pulse Neon (From Screenshot 3) */
+.theme-pulse {
+  --primary-gradient: linear-gradient(135deg, #00F7FF 0%, #B0FFFA 50%, #FF0087 100%);
+  --bg-dark: #050A10;
+  --bg-light: #F0F4F8;
+  --text-dark: #B0FFFA;
+  --text-light: #050A10;
+  --accent-color: #FF0087; /* Magenta */
+  --glass-bg: rgba(0, 247, 255, 0.1);
+  --glass-border: rgba(255, 0, 135, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #00F7FF;
+  --blob-2: #FF0087;
+}
+/* Theme 122: Power Math Purple/Blue */
+.theme-power-math {
+  --primary-gradient: linear-gradient(135deg, #6d28d9 0%, #2563eb 100%);
+  --bg-dark: #0f0a1a;
+  --bg-light: #F8FAFC;
+  --text-dark: #E2E8F0;
+  --text-light: #0f0a1a;
+  --accent-color: #a78bfa; /* Soft Math Purple */
+  --glass-bg: rgba(109, 40, 217, 0.15);
+  --glass-border: rgba(167, 139, 250, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #6d28d9;
+  --blob-2: #2563eb;
+}

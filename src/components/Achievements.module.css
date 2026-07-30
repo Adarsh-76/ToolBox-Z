@@ -1,0 +1,149 @@
+.section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+.progressWrapper {
+  max-width: 500px;
+  margin: 0 auto 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progressBar {
+  width: 100%;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--primary-gradient);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.progressText {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.7;
+  color: var(--accent-color);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.card {
+  position: relative;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.iconWrapper {
+  font-size: 3rem;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(50, 50, 60, 0.8), rgba(10, 10, 15, 0.9));
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.5), -3px -3px 8px rgba(255, 255, 255, 0.02), inset 3px 3px 6px rgba(255, 255, 255, 0.1), inset -3px -3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.badgeName {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.badgeDesc {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+/* Unlocked Styles */
+.unlocked {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 15px var(--glass-bg), inset 0 1px 1px 0 var(--glass-highlight-top);
+}
+
+.unlockedBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+}
+
+/* Locked Styles */
+.locked {
+  opacity: 0.6;
+  filter: grayscale(0.8);
+}
+
+.lockOverlay {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.7;
+  background: rgba(0,0,0,0.4);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+  .title { font-size: 2rem; }
+}

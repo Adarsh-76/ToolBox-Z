@@ -1,0 +1,46 @@
+.wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  margin-top: -2rem; /* Pull it up slightly closer to the stats */
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 10;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--accent-color);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+.icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.text {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+  }
+  .card {
+    flex-direction: row;
+    padding: 1rem;
+  }
+  .text {
+    font-size: 0.85rem;
+  }
+}

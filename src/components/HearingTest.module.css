@@ -1,0 +1,115 @@
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.testArea, .resultArea {
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.testArea h3 {
+  font-size: 1.8rem;
+  color: var(--accent-color);
+  margin: 0;
+}
+
+.testArea p {
+  margin: 0;
+  opacity: 0.7;
+}
+
+.playBtn {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.instruction {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.buttonRow {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.yesBtn, .noBtn {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  color: var(--bg-dark);
+}
+
+.yesBtn {
+  background: #00FFAB;
+}
+
+.noBtn {
+  background: #ff4d4d;
+  color: white;
+}
+
+.yesBtn:disabled, .noBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.warning {
+  margin-top: 1rem;
+  color: #ff4d4d;
+  font-size: 0.8rem;
+}
+
+.resultArea h2 {
+  color: var(--accent-color);
+  margin: 0;
+}
+
+.resultStats {
+  background: rgba(0,0,0,0.2);
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.resultStats p {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+}
+
+.ageText {
+  color: var(--accent-color);
+  font-size: 1.3rem;
+}
+
+.restartBtn {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1rem;
+}

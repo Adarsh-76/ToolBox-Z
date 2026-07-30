@@ -1,0 +1,63 @@
+.installBtn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 1rem;
+}
+
+.installBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.installedBox {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid #00FFAB;
+  color: #00FFAB;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.iosBox {
+  width: 100%;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.iosBox h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-dark);
+}
+
+.iosBox p {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  color: var(--text-dark);
+}
+
+.iosBox ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  color: var(--text-dark);
+}
+
+.iosBox li {
+  margin-bottom: 0.3rem;
+}

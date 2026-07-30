@@ -1,0 +1,44 @@
+.customizeWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  margin-top: 80px; /* Pushes the button below the sticky Navbar */
+  margin-bottom: 1rem;
+}
+
+.customizeBtn {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.customizeBtn:hover {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border-color: transparent;
+}
+
+/* New container to ensure sections don't overlap */
+.sectionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* Adds consistent vertical spacing between all sections */
+  padding-bottom: 3rem;
+}
+
+/* Wrapper for the InstallPWA button to constrain its width */
+.installWrapper {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

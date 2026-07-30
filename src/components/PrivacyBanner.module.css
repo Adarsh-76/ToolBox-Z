@@ -1,0 +1,80 @@
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(0, 255, 171, 0.2);
+  background: rgba(0, 255, 171, 0.05);
+  flex-wrap: wrap;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon {
+  font-size: 1.8rem;
+  background: rgba(0, 255, 171, 0.1);
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #00FFAB;
+}
+
+.desc {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  color: var(--text-dark);
+}
+
+.desc strong {
+  color: #00FFAB;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.deleteBtn:hover {
+  background: #ff4d4d;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .banner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .deleteBtn {
+    width: 100%;
+  }
+}

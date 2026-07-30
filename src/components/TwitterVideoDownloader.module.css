@@ -1,0 +1,131 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.inputArea {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 16px;
+  flex-wrap: wrap;
+}
+
+.urlInput {
+  flex: 1;
+  min-width: 250px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1rem;
+  color: var(--text-dark);
+  font-size: 1rem;
+  outline: none;
+}
+
+.urlInput::placeholder { color: var(--text-dark); opacity: 0.4; }
+
+.fetchBtn {
+  background: var(--primary-gradient);
+  color: #25141A;
+  border: none;
+  padding: 0 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.fetchBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+.fetchBtn:not(:disabled):hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+.clearBtn {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.clearBtn:hover { background: rgba(255, 0, 0, 0.1); color: #ff4d4d; border-color: #ff4d4d; }
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: #ff4d4d;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.resultArea {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.resultTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.previewWrapper {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--glass-border);
+}
+
+.videoPreview {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.downloadHeader {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 1rem;
+}
+
+.downloadGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.downloadBtn {
+  background: var(--accent-color);
+  color: #25141A;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 200px;
+}
+
+.downloadBtn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+@media (max-width: 768px) {
+  .inputArea { flex-direction: column; }
+  .fetchBtn, .clearBtn { width: 100%; padding: 1rem; }
+}

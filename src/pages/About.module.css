@@ -1,0 +1,160 @@
+.aboutPage {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #FFFFFF;
+}
+
+.title span {
+  color: #4CA1AF; /* Ocean Blue */
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #A0A0A0; /* Grey */
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Section Headers */
+.sectionHeader {
+  text-align: center;
+  margin: 4rem 0 2rem 0;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.sectionTitle span {
+  color: #4CA1AF;
+}
+
+/* TRUE CLAYMORPHISM CARDS */
+.clayCard {
+  background: #E0E5EC; /* Light Grey Clay */
+  border-radius: 32px; /* Heavily rounded */
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease;
+  /* Thick 3D Clay Shadows */
+  box-shadow: 
+    12px 12px 24px rgba(0, 0, 0, 0.6), 
+    -12px -12px 24px rgba(255, 255, 255, 0.03);
+}
+
+.clayCard:hover {
+  transform: translateY(-5px);
+}
+
+.clayIcon {
+  font-size: 2.5rem;
+  background: #FFFFFF; /* White Clay */
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  box-shadow: 
+    inset 6px 6px 12px rgba(0, 0, 0, 0.1), /* Inner shadow for puffy look */
+    inset -6px -6px 12px rgba(255, 255, 255, 0.8);
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: #1A1B1F; /* Dark Grey/Black text on light clay */
+}
+
+.cardText {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #555555; /* Medium grey text */
+}
+
+/* Mission Card Sizing */
+.missionCard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+.missionCard .cardTitle {
+  font-size: 2rem;
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+/* Stats Card */
+.statsCard {
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 3rem 2rem;
+  background: #1A1B1F; /* Dark clay for contrast */
+  box-shadow: 
+    12px 12px 24px rgba(0, 0, 0, 0.8), 
+    -12px -12px 24px rgba(255, 255, 255, 0.02),
+    inset 4px 4px 8px rgba(255, 255, 255, 0.05),
+    inset -4px -4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statValue {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #4CA1AF; /* Ocean Blue */
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #E0E0E0; /* White/Grey */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .statsCard {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+}

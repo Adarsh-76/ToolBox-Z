@@ -1,0 +1,109 @@
+.layoutWrapper {
+  position: relative;
+  z-index: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: transparent !important;
+  color: var(--text-dark);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  box-shadow: inset 0 0 150px 50px rgba(0, 0, 0, 0.4);
+  
+  /* NEW: Center the entire app on large screens */
+  width: 100%;
+  max-width: 1440px; /* Prevents it from stretching endlessly on desktop */
+  margin: 0 auto;
+}
+
+.bgBlob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.4;
+  transition: background-color 0.5s ease;
+}
+
+.blob1 {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  left: -200px;
+  background: var(--blob-1);
+  animation: float 8s ease-in-out infinite;
+}
+
+.blob2 {
+  width: 700px;
+  height: 700px;                                                         
+  bottom: -250px;
+  right: -250px;
+  background: var(--blob-2);
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+.mainContent {
+  flex: 1;                                                                
+  display: flex;
+  flex-direction: column;                                                 
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  
+  /* NEW: Cap content width and add horizontal padding */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem; /* Added 1.5rem left/right padding */
+  box-sizing: border-box;
+}
+
+/* Back to Home Button Styles */                                        
+.backBtnContainer {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.backHomeBtn {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;                                                        
+  font-weight: 600;
+  font-size: 0.9rem;                                                      
+  margin-bottom: 2rem;
+  transition: var(--transition);                                          
+  display: inline-block;
+}                                                                       
+.backHomeBtn:hover {                                                      
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(-3px);
+}
+
+/* ========================================================
+   SOFT NAVBAR BACKGROUND GLOW
+   ======================================================== */
+.navbarGlow {
+  position: fixed;
+  top: -60px;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.12), transparent 40%), 
+    radial-gradient(ellipse at 80% 50%, rgba(147, 51, 234, 0.12), transparent 40%);
+  filter: blur(40px);
+  z-index: 99;
+  pointer-events: none;
+}                                                                       
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, 30px); }                             
+}

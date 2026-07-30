@@ -1,0 +1,122 @@
+.container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.inputArea label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 1rem;
+  color: var(--text-dark);
+  font-size: 1.2rem;
+  outline: none;
+  font-family: monospace;
+}
+
+.clearBtn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.resultsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.card, .customCard {
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.card h3, .customCard h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-dark);
+  opacity: 0.8;
+}
+
+.card h3 em, .customCard h3 em {
+  color: var(--accent-color);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.value {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  word-break: break-all;
+  font-family: monospace;
+}
+
+.customGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.customInputRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.smallInput {
+  width: 80px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.5rem;
+  color: var(--text-dark);
+  outline: none;
+  text-align: center;
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+@media (max-width: 500px) {
+  .resultsGrid, .customGrid {
+    grid-template-columns: 1fr;
+  }
+  .value {
+    font-size: 1.5rem;
+  }
+}

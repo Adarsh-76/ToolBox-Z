@@ -1,0 +1,136 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.controlsArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.colorPicker {
+  width: 80px;
+  height: 80px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+}
+
+.colorPicker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.colorPicker::-webkit-color-swatch {
+  border: 2px solid var(--glass-border);
+  border-radius: 12px;
+}
+
+.hexCode {
+  font-family: monospace;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.previewArea {
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.previewArea h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.previewArea p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.resultsArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+}
+
+.ratioDisplay {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.ratioValue {
+  font-weight: 800;
+  color: var(--accent-color);
+  font-size: 1.4rem;
+}
+
+.wcagGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.wcagBadge {
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid;
+}
+
+.wcagBadge h4 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1rem;
+}
+
+.wcagBadge p {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.pass {
+  background: rgba(0, 255, 171, 0.1);
+  border-color: #00FFAB;
+  color: #00FFAB;
+}
+
+.fail {
+  background: rgba(255, 77, 77, 0.1);
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+}
+
+@media (max-width: 600px) {
+  .wcagGrid {
+    grid-template-columns: 1fr;
+  }
+  .controlsArea {
+    flex-direction: column;
+    align-items: center;
+  }
+}

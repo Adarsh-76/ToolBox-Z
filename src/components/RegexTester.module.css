@@ -1,0 +1,137 @@
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.regexRow {
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.slash {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  font-weight: bold;
+  padding: 0 0.5rem;
+}
+
+.patternInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-dark);
+  font-size: 1.1rem;
+  outline: none;
+  font-family: monospace;
+}
+
+.flagsInput {
+  width: 50px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-left: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  font-size: 1rem;
+  outline: none;
+  font-family: monospace;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.textInput {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.8rem;
+  color: var(--text-dark);
+  font-size: 1rem;
+  outline: none;
+  resize: vertical;
+  font-family: monospace;
+}
+
+.clearBtn {
+  align-self: flex-start;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.statsBar {
+  background: rgba(0, 255, 171, 0.1);
+  border: 1px solid #00FFAB;
+  color: #00FFAB;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.stat strong {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.resultArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+}
+
+.resultArea h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-dark);
+  font-size: 1.1rem;
+}
+
+.highlightedText {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 1.5rem;
+  font-family: monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #c9d1d9;
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 100px;
+}
+
+.highlight {
+  background: rgba(255, 235, 59, 0.3);
+  color: #ffeb3b;
+  border-radius: 4px;
+  padding: 2px 0;
+  font-weight: bold;
+}

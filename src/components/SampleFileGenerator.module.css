@@ -1,0 +1,98 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.infoBanner {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--glass-border);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.infoBanner strong {
+  color: var(--accent-color);
+}
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.cardIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-dark);
+}
+
+.cardDesc {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.sizeTag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  background: rgba(255,255,255,0.05);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.generateBtn {
+  width: 100%;
+  padding: 0.8rem;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.generateBtn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.generateBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

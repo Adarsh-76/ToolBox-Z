@@ -1,0 +1,249 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  margin: 0.5rem 0 0 0;
+  opacity: 0.7;
+  font-size: 1.1rem;
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 255, 171, 0.1);
+  border: 1px solid #00FFAB;
+  color: #00FFAB;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+  background: #00FFAB;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.statCard {
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statIcon {
+  font-size: 2rem;
+}
+
+.statCard h3 {
+  font-size: 2.2rem;
+  margin: 0;
+  color: var(--accent-color);
+}
+
+.statCard p {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+/* Main Layout Grid */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.panel {
+  padding: 1.5rem;
+  border-radius: 16px;
+}
+
+.sidePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.panelTitle {
+  margin: 0 0 1rem 0;
+  color: var(--text-dark);
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 0.5rem;
+}
+
+/* Activity List */
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.activityItem:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.activityIcon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+}
+
+.activityInfo {
+  flex: 1;
+}
+
+.activityInfo h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.activityInfo p {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.activityArrow {
+  opacity: 0.3;
+  font-size: 1.2rem;
+}
+
+.emptyText {
+  opacity: 0.5;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* Quick Actions */
+.quickActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.actionBtn {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.actionBtn:hover {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border-color: transparent;
+}
+
+/* System Status */
+.statusList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.statusItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.online {
+  background: #00FFAB;
+  box-shadow: 0 0 5px #00FFAB;
+}
+
+.clearCacheBtn {
+  width: 100%;
+  margin-top: 1.5rem;
+  background: transparent;
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+  .title {
+    font-size: 2rem;
+  }
+}

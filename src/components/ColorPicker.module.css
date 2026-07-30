@@ -1,0 +1,76 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.previewArea {
+  width: 100%;
+  height: 200px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: background 0.3s ease;
+  border: 1px solid var(--glass-border);
+}
+
+.nativePicker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  border: none;
+}
+
+.formatsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.formatCard {
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.formatCard:hover {
+  transform: translateY(-3px);
+}
+
+.formatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.formatLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.copyIcon {
+  font-size: 1rem;
+}
+
+.formatValue {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  word-break: break-all;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .formatsGrid {
+    grid-template-columns: 1fr;
+  }
+}

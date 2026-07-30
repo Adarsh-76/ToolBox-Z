@@ -1,0 +1,213 @@
+import ToolBuilder from '../components/ToolBuilder';
+import ToolRunner from '../components/ToolRunner';
+import styles from './MyCustomTools.module.css';
+
+const MyCustomTools = () => {
+  const [tools, setTools] = useState([]);
+  const [showBuilder, setShowBuilder] = useState(false);
+  const [runningTool, setRunningTool] = useState(null);
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem('customTools') || '[]');
+    setTools(saved);
+  }, []);
+
+  const handleSaveTool = (newTool) => {
+    const updatedTools = [...tools, { ...newTool, id: `custom-${Date.now()}` }];
+    setTools(updatedTools);
+    localStorage.setItem('customTools', JSON.stringify(updatedTools));
+    setShowBuilder(false);
+  };
+
+  const handleDeleteTool = (id) => {
+    const updatedTools = tools.filter(t => t.id !== id);
+    setTools(updatedTools);
+    localStorage.setItem('customTools', JSON.stringify(updatedTools));
+  };
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>🛠️ My Custom Tools</h1>
+        <p className={styles.subtitle}>Build your own mini-tools by chaining inputs, formatters, and outputs.</p>
+        <button className={styles.createBtn} onClick={() => setShowBuilder(true)}>+ Create New Tool</button>
+      </div>
+
+      {tools.length === 0 ? (
+        <div className={`liquid-glass ${styles.emptyState}`}>
+          <span className={styles.emptyIcon}>🧩</span>
+          <h2>No Custom Tools Yet</h2>
+          <p>Click "Create New Tool" to build your own personalized pipeline.</p>
+        </div>
+      ) : (
+        <div className={styles.grid}>
+          {tools.map(tool => (
+            <div key={tool.id} className={`liquid-glass ${styles.card}`}>
+              <div className={styles.cardHeader}>
+                <span className={styles.cardIcon}>{tool.icon}</span>
+                <h3 className={styles.cardTitle}>{tool.name}</h3>
+              </div>
+              <p className={styles.cardDesc}>
+                <strong>Steps:</strong> {tool.steps.map(s => s.label).join(' → ')}
+              </p>
+              <div className={styles.cardActions}>
+                <button className={styles.runBtn} onClick={() => setRunningTool(tool)}>▶️ Run Tool</button>
+                <button className={styles.deleteBtn} onClick={() => handleDeleteTool(tool.id)}>🗑️</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {showBuilder && (
+        <ToolBuilder onClose={() => setShowBuilder(false)} onSave={handleSaveTool} />
+      )}
+
+      {runningTool && (
+        <ToolRunner tool={runningTool} onClose={() => setRunningTool(null)} />
+      )}
+    </div>
+  );
+};
+
+export default MyCustomTools;import styles from './EmojiMixer.module.css';
+
+const API_BASE_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:5000' 
+  : 'http://' + window.location.hostname + ':5000';
+
+const EmojiMixer = () => {
+  const [prompt, setPrompt] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const ingredients = [
+    { emoji: '🍕', text: 'pizza' },
+    { emoji: '🔥', text: 'fire' },
+    { emoji: '💀', text: 'skull' },
+    { emoji: '🛹', text: 'skateboard' },
+    { emoji: '🐱', text: 'cat' },
+    { emoji: '🤖', text: 'robot' },
+    { emoji: '👑', text: 'crown' },
+    { emoji: '🌈', text: 'rainbow' },
+    { emoji: '🎮', text: 'gaming' },
+    { emoji: '🦄', text: 'unicorn' },
+    { emoji: '🍔', text: 'burger' },
+    { emoji: '👽', text: 'alien' }
+  ];
+
+  const addIngredient = (text) => {
+    setPrompt(prev => (prev ? prev + ' ' + text : text));
+    setError('');
+  };
+
+  const handleGenerate = async () => {
+    if (!prompt.trim()) {
+      setError('Please enter a description or add ingredients first.');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+    setImageUrl('');
+
+    try {
+      // Call your backend proxy
+      const response = await fetch(`${API_BASE_URL}/api/emoji-gen?prompt=${encodeURIComponent(prompt)}`);
+      
+      if (!response.ok) throw new Error('Generation failed');
+      
+      // Convert response to a blob image URL
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      setImageUrl(url);
+    } catch (err) {
+      console.error(err);
+      setError('Failed to generate emoji. The AI might be busy, please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDownload = () => {
+    if (!imageUrl) return;
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = `ai_emoji_${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleClear = () => {
+    setPrompt('');
+    setImageUrl('');
+    setError('');
+    setIsLoading(false);
+  };
+
+  return (
+    <div className={styles.container}>
+      <div className={`liquid-glass ${styles.inputArea}`}>
+        <h3 className={styles.title}>Describe Your Emoji</h3>
+        <p className={styles.subtitle}>Type anything or tap ingredients below</p>
+        
+        <textarea 
+          className={styles.promptInput}
+          placeholder="e.g., A cat made of fire wearing sunglasses..."
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          rows={3}
+        />
+
+        <div className={styles.ingredientGrid}>
+          {ingredients.map((ing, i) => (
+            <button 
+              key={i} 
+              className={styles.ingredientBtn} 
+              onClick={() => addIngredient(ing.text)}
+              title={`Add ${ing.text}`}
+            >
+              {ing.emoji}
+            </button>
+          ))}
+        </div>
+
+        <div className={styles.actions}>
+          <button className={styles.generateBtn} onClick={handleGenerate} disabled={isLoading}>
+            {isLoading ? '⏳ Generating...' : '✨ Generate AI Emoji'}
+          </button>
+          {prompt && <button className={styles.clearBtn} onClick={handleClear}>✖️ Clear</button>}
+        </div>
+      </div>
+
+      {error && <div className={styles.errorBox}>{error}</div>}
+
+      <div className={`liquid-glass ${styles.resultArea}`}>
+        <h3 className={styles.resultTitle}>Your New Emoji</h3>
+        
+        <div className={styles.emojiDisplay}> {isLoading && ( 
+            <div className={styles.loadingSpinner}></div>
+          )} {imageUrl && !isLoading && ( <img src={imageUrl} 
+              alt="Generated Emoji" 
+              className={styles.generatedImage}
+            /> )} {!imageUrl && !isLoading && ( <div 
+            className={styles.placeholder}>
+              <span className={styles.placeholderIcon}>🎭</span>
+              <p>Your AI-generated emoji will appear here</p>
+            </div>
+          )}
+        </div>
+
+        {imageUrl && !isLoading && (
+          <button className={styles.downloadBtn} onClick={handleDownload}>
+            ⬇️ Download Emoji (PNG)
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default EmojiMixer;

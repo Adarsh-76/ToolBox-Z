@@ -1,0 +1,170 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 4rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 0.8rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.commentForm {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.userBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.8rem;
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+  box-sizing: border-box;
+  min-height: 80px;
+}
+
+.textarea:focus {
+  border-color: var(--accent-color);
+}
+
+.submitBtn {
+  align-self: flex-end;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.submitBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.loginPrompt {
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 12px;
+  color: var(--text-dark);
+  opacity: 0.8;
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loadingText, .emptyText {
+  text-align: center;
+  opacity: 0.6;
+  color: var(--text-dark);
+  padding: 2rem 0;
+}
+
+.commentCard {
+  padding: 1.2rem;
+  border-radius: 12px;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.commentMeta {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.commentAuthor {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+.commentTime {
+  font-size: 0.75rem;
+  color: var(--text-dark);
+  opacity: 0.5;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.deleteBtn:hover {
+  opacity: 1;
+}
+
+.commentText {
+  margin: 0;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

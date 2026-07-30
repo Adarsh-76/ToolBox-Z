@@ -1,0 +1,120 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.uploadArea {
+  padding: 3rem;
+  border: 2px dashed var(--glass-border);
+  border-radius: 16px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.uploadArea:hover { border-color: var(--accent-color); }
+.hiddenInput { display: none; }
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.uploadIcon { font-size: 3rem; }
+
+.fileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fileCard {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.fileIcon { font-size: 2.5rem; }
+
+.fileDetails { flex: 1; }
+
+.fileName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.3rem;
+  word-break: break-all;
+}
+
+.fileSize {
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+.removeBtn {
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff4d4d;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.removeBtn:hover { background: #ff4d4d; color: white; }
+
+.progressContainer {
+  width: 100%;
+  height: 8px;
+  background: var(--glass-bg);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--primary-gradient);
+  transition: width 0.3s ease;
+}
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: #ff4d4d;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.convertBtn {
+  background: var(--primary-gradient);
+  color: #1A237E;
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.convertBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+.convertBtn:not(:disabled):hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+/* Hidden render area for html2canvas */
+.hiddenRender {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  visibility: hidden;
+}

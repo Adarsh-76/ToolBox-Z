@@ -1,0 +1,90 @@
+.container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.uploadArea {
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.uploadLabel {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.uploadLabel:hover {
+  opacity: 0.85;
+}
+
+.resultArea {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.previewWrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.previewImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.paletteGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.colorCard {
+  height: 100px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: transform 0.2s;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.colorCard:hover {
+  transform: translateY(-5px);
+}
+
+.hexCode {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.clearBtn {
+  align-self: center;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}

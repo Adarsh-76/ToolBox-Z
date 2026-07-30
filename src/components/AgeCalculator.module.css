@@ -1,0 +1,257 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputArea {
+  padding: 2rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  color: var(--text-dark);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.inputGroup label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.dateInput {
+  width: 100%;
+  max-width: 300px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  outline: none;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.dateInput:focus {
+  border-color: var(--accent-color);
+}
+
+.dateInput::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.resultArea {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mainResult {
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid var(--accent-color);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(236, 72, 153, 0.1));
+}
+
+.resultLabel {
+  margin: 0 0 1.5rem 0;
+  font-size: 1rem;
+  opacity: 0.7;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ageBreakdown {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.ageUnit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.ageValue {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  line-height: 1;
+}
+
+.ageUnitLabel {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  color: var(--text-dark);
+  text-transform: uppercase;
+}
+
+.ageDivider {
+  font-size: 2rem;
+  opacity: 0.3;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.statCard {
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.statIcon {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.statValue {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.statLabel {
+  margin: 0.2rem 0 0 0;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  color: var(--text-dark);
+}
+
+.birthdayCard {
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(124, 58, 237, 0.15));
+}
+
+.bdayIcon {
+  font-size: 2.5rem;
+}
+
+.bdayTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+}
+
+.bdayText {
+  margin: 0.2rem 0 0 0;
+  font-size: 1rem;
+  color: var(--text-dark);
+  opacity: 0.8;
+}
+
+.bdayText strong {
+  color: var(--accent-color);
+}
+
+@media (max-width: 600px) {
+  .ageValue {
+    font-size: 2.2rem;
+  }
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Add this to the bottom of AgeCalculator.module.css */
+
+/* Exam Eligibility Styles */
+.examSection {
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.examTitle {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.examDisclaimer {
+  margin: 0 0 1.5rem 0;
+  font-size: 0.75rem;
+  opacity: 0.5;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.examGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+}
+
+.examCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+}
+
+.examName {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.examStatus {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid;
+  white-space: nowrap;
+}

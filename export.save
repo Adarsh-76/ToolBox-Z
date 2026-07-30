@@ -1,0 +1,11 @@
+  { id: 'word-counter', icon: '📝', name: 'Word Counter', desc: 'Count words and characters instantly.' },
+  { id: 'password-gen', icon: '🔐', name: 'Password Gen', desc: 'Generate strong, secure passwords.' },
+  { id: 'color-picker', icon: '🎨', name: 'Color Picker', desc: 'Find and convert color codes easily.' },
+  { id: 'json-formatter', icon: '📊', name: 'JSON Formatter', desc: 'Beautify and validate JSON data.' },
+  { id: 'base64-encode', icon: '🧮', name: 'Base64 Encode', desc: 'Encode or decode Base64 strings.' },
+  { id: 'css-generator', icon: '📐', name: 'CSS Generator', desc: 'Create CSS gradients and shadows.' },
+  { id: 'pdf-generator', icon: '📄', name: 'PDF Generator', desc: 'Convert multiple images into an HD PDF.' },
+  { id: 'media-enhancer', icon: '✨', name: 'Media Enhancer', desc: 'Upscale and enhance photos up to 2K HD.' },
+  { id: 'image-to-text', icon: '🔍', name: 'Image to Text', desc: 'Extract text from images instantly (OCR).' },
+  { id: 'image-describer', icon: '🧠', name: 'Image Describer', desc: 'AI-powered image analysis and tagging.' }
+];

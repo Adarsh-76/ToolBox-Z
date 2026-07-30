@@ -1,0 +1,161 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputArea {
+  padding: 2rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.inputGroup label {
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+}
+
+.typeSelector {
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+
+.typeBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-dark);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.typeActive {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+}
+
+.numberInput {
+  width: 80px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.5rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+  outline: none;
+}
+
+.numberInput:focus {
+  border-color: var(--accent-color);
+}
+
+.generateBtn {
+  padding: 1rem;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.generateBtn:hover {
+  opacity: 0.9;
+}
+
+.resultArea {
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.resultHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1rem;
+}
+
+.resultTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+
+.copyBtn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copyBtn:hover {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border-color: transparent;
+}
+
+.outputBox {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.outputText {
+  margin: 0;
+  color: var(--text-dark);
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+}
+
+@media (max-width: 600px) {
+  .inputGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .typeSelector {
+    justify-content: center;
+  }
+  .typeBtn {
+    flex: 1;
+  }
+}

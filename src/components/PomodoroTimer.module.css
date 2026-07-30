@@ -1,0 +1,123 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.phaseTabs {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--glass-bg);
+  padding: 0.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.tabBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-dark);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.tabBtn:hover { background: rgba(255, 255, 255, 0.05); }
+.tabActive { background: var(--accent-color); color: var(--bg-dark); }
+
+.timerWrapper {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  transform: rotate(0deg);
+}
+
+.track {
+  fill: transparent;
+  stroke: var(--glass-bg);
+  strokeWidth: 12;
+}
+
+.progress {
+  fill: transparent;
+  stroke: var(--accent-color);
+  strokeWidth: 12;
+  strokeLinecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.timeDisplay {
+  position: absolute;
+  text-align: center;
+}
+
+.timeDisplay h2 {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: 2px;
+}
+
+.timeDisplay p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+}
+
+.cycleCount {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.5;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.playBtn {
+  background: var(--primary-gradient);
+  color: #12157A;
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.playBtn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+.resetBtn, .skipBtn {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.resetBtn:hover, .skipBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}

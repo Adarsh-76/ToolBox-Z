@@ -1,0 +1,115 @@
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.inputGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.textarea {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.8rem;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  outline: none;
+  resize: vertical;
+  font-family: monospace;
+  min-height: 200px;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.compareBtn {
+  flex: 1;
+  padding: 0.8rem;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.clearBtn {
+  padding: 0.8rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.resultArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+}
+
+.resultArea h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-dark);
+  font-size: 1.1rem;
+}
+
+.diffOutput {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 1.5rem;
+  font-family: monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #c9d1d9;
+}
+
+.diffPart {
+  display: inline-block;
+  width: 100%;
+}
+
+.added {
+  background: rgba(0, 255, 171, 0.15);
+  color: #00FFAB;
+}
+
+.removed {
+  background: rgba(255, 77, 77, 0.15);
+  color: #ff4d4d;
+  text-decoration: line-through;
+}
+
+.unchanged {
+  color: #c9d1d9;
+}
+
+@media (max-width: 600px) {
+  .inputGrid {
+    grid-template-columns: 1fr;
+  }
+}
