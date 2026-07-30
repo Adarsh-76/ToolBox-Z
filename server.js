@@ -588,36 +588,33 @@ io.on('connection', async (socket) => {
 // API ROUTES (TOOLS)
 // ==========================================
 
-
-// ==========================================
 // 1. YOUTUBE DOWNLOADER (Cobalt API Method - Bypasses All Blocks)
-// ==========================================
 app.get('/api/youtube-download', async (req, res) => {
   const url = req.query.url;
+  const isAudio = req.query.audio === 'true';
   if (!url) return res.status(400).json({ success: false, error: 'Invalid URL' });
 
   try {
-    // Use Cobalt API to fetch video info and direct links
-    const cobaltResponse = await axios.post('https://api.cobalt.tools/api/json', {
+    const payload = {
       url: url,
       vCodec: 'h264',
       vQuality: '1080',
       aFormat: 'mp3',
-      isAudioOnly: false
-    }, {
+      isAudioOnly: isAudio
+    };
+
+    const cobaltResponse = await axios.post('https://api.cobalt.tools/api/json', payload, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'User-Agent': 'ToolBoxZ/1.0' // Cobalt requires a custom User-Agent
+        'User-Agent': 'ToolBoxZ/1.0'
       }
     });
 
     const cobaltData = cobaltResponse.data;
 
-    // If Cobalt returns a direct stream URL
     if (cobaltData.status === 'stream' || cobaltData.status === 'redirect') {
       
-      // We don't get rich metadata from Cobalt, so we fetch basic info safely using oEmbed (doesn't get blocked)
       let videoInfo = { title: 'YouTube Video', thumbnail: '', authorName: 'YouTube' };
       try {
         const videoIdMatch = url.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
@@ -628,9 +625,7 @@ app.get('/api/youtube-download', async (req, res) => {
           videoInfo.title = oembedRes.data.title || 'YouTube Video';
           videoInfo.authorName = oembedRes.data.author_name || 'Unknown';
         }
-      } catch (e) {
-        // If oembed fails, just use defaults
-      }
+      } catch (e) {}
 
       return res.json({
         success: true,
@@ -644,13 +639,11 @@ app.get('/api/youtube-download', async (req, res) => {
           likes: 0,
           description: 'Click Download to save this video. (Processed via Cobalt API)'
         },
-        // We pass the direct Cobalt URL back to the frontend
-        videoVariants: [{ quality: '1080p (Best)', url: cobaltData.url, hasAudio: true }],
-        audioVariants: [] // Cobalt handles audio extraction on the fly, so we provide a separate button in frontend
+        videoVariants: [{ quality: isAudio ? 'Audio' : '1080p (Best)', url: cobaltData.url, hasAudio: true }],
+        audioVariants: []
       });
 
     } else if (cobaltData.status === 'picker') {
-      // Sometimes Cobalt returns a picker (e.g., for images), not needed for standard videos
       return res.status(400).json({ success: false, error: 'This video type is not supported.' });
     } else {
       return res.status(400).json({ success: false, error: cobaltData.text || 'Cobalt API failed to process the video.' });
@@ -662,9 +655,7 @@ app.get('/api/youtube-download', async (req, res) => {
   }
 });
 
-// ==========================================
 // YOUTUBE PROXY STREAM (Downloads direct Cobalt URLs)
-// ==========================================
 app.get('/api/youtube-proxy', async (req, res) => {
   const { url, filename } = req.query;
   if (!url) return res.status(400).json({ error: 'Missing URL' });
@@ -686,8 +677,7 @@ app.get('/api/youtube-proxy', async (req, res) => {
   }
 });
 
-
-2. Social Media Analytics
+// 2. Social Media Analytics
 app.get('/api/social-analytics', async (req, res) => {
   const { platform, query } = req.query;
   if (platform !== 'YouTube') return res.json({ success: false, error: 'Live data unavailable.' });
