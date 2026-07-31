@@ -71,14 +71,19 @@ const GlobalChat = () => {
     setText('');
   };
 
-  return (
+     return (
     <div className={styles.container}>
       <div className={styles.header}>
+        {/* 3. Add the Back Button here */}
+        <button className={styles.backBtn} onClick={() => navigate('/')}>
+          ← Back
+        </button>
         <h1 className={styles.title}>💬 Global Chat</h1>
         <div className={`${styles.statusBadge} ${isConnected ? styles.online : styles.offline}`}>
           {isConnected ? '🟢 Connected' : '🔴 Disconnected'}
         </div>
       </div>
+
 
       {error && <div className={styles.errorBox}>{error}</div>}
 
