@@ -628,54 +628,72 @@ app.get('/api/youtube-download', async (req, res) => {
 });
 
 
-// YouTube Stream (Download, Merge & Stream using yt-dlp + ffmpeg)
+// YouTube Proxy Stream (Piped API Method - No yt-dlp/ffmpeg needed)
 app.get('/api/youtube-stream', async (req, res) => {
-  const { url, height, type, filename } = req.query;
+  const { url, type, filename } = req.query;
   if (!url) return res.status(400).json({ error: 'Invalid URL' });
 
-  const tempFile = path.join(os.tmpdir(), 'yt_' + Date.now() + (type === 'audio' ? '.mp3' : '.mp4'));
-  let args = [];
-  if (type === 'audio') {
-    args = ['-x', '--audio-format', 'mp3', '-o', tempFile, url];
-  } else {
-    const formatStr = height 
-      ? `bestvideo[ext=mp4][height<=${height}]+bestaudio[ext=m4a]/best[ext=mp4][height<=${height}]/best`
-      : 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best';
-    args = ['-f', formatStr, '--merge-output-format', 'mp4', '-o', tempFile, url];
+  // Extract Video ID
+  let videoId = '';
+  const match = url.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  if (match && match[1]) videoId = match[1];
+  else return res.status(400).json({ error: 'Invalid YouTube URL' });
+
+  // Try Piped API instances to get the direct stream URL
+  const pipedInstances = [
+    'https://pipedapi.kavin.rocks',
+    'https://pipedapi.leptons.xyz',
+    'https://pipedapi.r4fo.com',
+    'https://pipedapi.adminforge.de'
+  ];
+
+  let streamUrl = null;
+
+  for (const instance of pipedInstances) {
+    try {
+      const apiUrl = `${instance}/streams/${videoId}`;
+      const response = await axios.get(apiUrl, { timeout: 6000 });
+      
+      if (response.data) {
+        if (type === 'audio' && response.data.audioStreams && response.data.audioStreams.length > 0) {
+          streamUrl = response.data.audioStreams[0].url; // Get best audio
+        } else if (response.data.videoStreams && response.data.videoStreams.length > 0) {
+          // Get a pre-merged video stream (videoOnly: false)
+          const mp4Stream = response.data.videoStreams.find(f => f.mimeType.includes('mp4') && f.videoOnly === false);
+          if (mp4Stream) {
+            streamUrl = mp4Stream.url;
+          }
+        }
+        
+        if (streamUrl) break; // Found a URL, stop looking
+      }
+    } catch (err) {
+      // Silently fail and try next instance
+    }
   }
 
-  // Bypass YouTube bot block for streaming too
-  args.push('--extractor-args', 'youtube:player_client=android,ios', '--force-ipv6');
+  if (!streamUrl) {
+    return res.status(500).json({ error: 'Failed to get stream URL. YouTube may be blocking all servers.' });
+  }
 
-  const ytdlp = spawn('yt-dlp', args);
+  // Proxy the stream directly to the user
+  try {
+    const response = await axios.get(streamUrl, {
+      responseType: 'stream',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Referer': 'https://www.youtube.com/'
+      }
+    });
 
-  ytdlp.stderr.on('data', (data) => {
-    console.error(`yt-dlp stderr: ${data}`);
-  });
+    res.setHeader('Content-Disposition', `attachment; filename="${filename || 'download.mp4'}"`);
+    res.setHeader('Content-Type', response.headers['content-type'] || 'application/octet-stream');
+    response.data.pipe(res);
 
-  ytdlp.on('close', (code) => {
-    if (code === 0 && fs.existsSync(tempFile)) {
-      res.setHeader('Content-Disposition', `attachment; filename="${filename || 'download.mp4'}"`);
-      res.setHeader('Content-Type', type === 'audio' ? 'audio/mpeg' : 'video/mp4');
-      const stream = fs.createReadStream(tempFile);
-      stream.pipe(res);
-      stream.on('end', () => { fs.unlink(tempFile, (err) => { if (err) console.error('Error deleting temp file: ' + err.message); }); });
-      stream.on('error', () => {
-        fs.unlink(tempFile, (err) => { if (err) console.error('Error deleting temp file: ' + err.message); });
-        if (!res.headersSent) res.status(500).json({ error: 'Failed to stream file.' });
-      });
-    } else {
-      console.error('yt-dlp exited with code ' + code);
-      if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-      if (!res.headersSent) res.status(500).json({ error: 'Failed to download YouTube media. Check if ffmpeg is installed.' });
-    }
-  });
-
-  ytdlp.on('error', (err) => {
-    console.error('Spawn Error:', err.message);
-    if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-    if (!res.headersSent) res.status(500).json({ error: 'Failed to start yt-dlp.' });
-  });
+  } catch (error) {
+    console.error('Proxy Stream Error:', error.message);
+    res.status(500).json({ error: 'Failed to download file from YouTube.' });
+  }
 });
 
 
