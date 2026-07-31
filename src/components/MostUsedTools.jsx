@@ -4,12 +4,12 @@ import styles from './MostUsedTools.module.css';
 
 // The 6 official "Most Used" tools.
 const staticTools = [
-  { id: 'youtube-downloader', icon: '📺', name: 'YouTube Video Downloader', desc: 'Download videos in MP4 format or convert to high-quality MP3 audio.' },
   { id: 'instagram-downloader', icon: '📸', name: 'Instagram Downloader', desc: 'Download high-quality photos, stories, and posts from Instagram.' },
   { id: 'pinterest-downloader', icon: '📌', name: 'Pinterest Image Downloader', desc: 'Download high-quality images from Pinterest boards and pins.' },
   { id: 'tiktok-downloader', icon: '🎵', name: 'TikTok Downloader', desc: 'Download TikTok videos without watermark or extract MP3 audio.' },
   { id: 'dailymotion-downloader', icon: '📹', name: 'Dailymotion Downloader', desc: 'Download high-quality videos from Dailymotion in MP4 format instantly.' },
-  { id: 'image-converter', icon: '🖼️', name: 'Image Converter', desc: 'Convert, enhance, and download images in any format.' }
+  { id: 'image-converter', icon: '🖼️', name: 'Image Converter', desc: 'Convert, enhance, and download images in any format.' },
+  { id: 'qr-generator', icon: '📱', name: 'QR Code Gen', desc: 'Generate scannable QR codes from text or URLs instantly.' }
 ];
 
 const MostUsedTools = () => {
