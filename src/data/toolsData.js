@@ -89,7 +89,7 @@ const rawToolsList = [
   { id: 'youtube-banner', icon: '🖼️', name: 'YouTube Banner Maker', desc: 'Create perfectly sized YouTube channel art with safe zone guides.', category: 'Social Media Tools', rating: '4.8', users: '14.5k' },
   { id: 'text-to-handwriting', icon: '✍️', name: 'Text to Handwriting', desc: 'Convert typed text into realistic handwriting and download as an image.', category: 'Generators', rating: '4.8', users: '14.2k', },
   { id: 'fake-data-generator', icon: '🧾', name: 'Fake Data Generator', desc: 'Generate realistic fake user data in JSON or CSV format for testing.', category: 'Developer Tools', rating: '4.7', users: '9.8k', },
-  { id: 'youtube-downloader', icon: '📺', name: 'YouTube Video Downloader', desc: 'Download YouTube videos in MP4 format or convert to high-quality MP3 audio.', category: 'Social Media Tools', rating: '4.9', users: '55.2k', isnew : true },
+  { id: 'youtube-downloader', icon: '📺', name: 'YouTube Video Downloader', desc: 'Download YouTube videos in MP4 format or convert to high-quality MP3 audio.', category: 'Social Media Tools', rating: '4.9', users: '55.2k', isHidden: true },
   { id: 'youtube-tags-extractor', icon: '🏷️', name: 'YouTube Tags Extractor', desc: 'Extract tags and keywords from YouTube videos for SEO optimization.', category: 'Social Media Tools', rating: '4.6', users: '7.5k' },
   { id: 'youtube-thumbnail', icon: '📺', name: 'YouTube Thumbnail', desc: 'Download high-quality thumbnails from any YouTube video.', category: 'Social Media Tools', rating: '4.7', users: '14.2k' },
   { id: 'wifi-qr-generator', icon: '📶', name: 'Wi-Fi QR Code Generator', desc: 'Generate scannable QR codes for instant Wi-Fi connections.', category: 'Generators', rating: '4.8', users: '8.5k',  },
