@@ -628,7 +628,7 @@ app.get('/api/youtube-download', async (req, res) => {
 });
 
 
-// YouTube Proxy Stream (Piped API Method - No yt-dlp/ffmpeg needed)
+// YouTube Proxy Stream (Dynamic Piped API Method)
 app.get('/api/youtube-stream', async (req, res) => {
   const { url, type, filename } = req.query;
   if (!url) return res.status(400).json({ error: 'Invalid URL' });
@@ -639,33 +639,36 @@ app.get('/api/youtube-stream', async (req, res) => {
   if (match && match[1]) videoId = match[1];
   else return res.status(400).json({ error: 'Invalid YouTube URL' });
 
-  // Try Piped API instances to get the direct stream URL
-  const pipedInstances = [
-    'https://pipedapi.kavin.rocks',
-    'https://pipedapi.leptons.xyz',
-    'https://pipedapi.r4fo.com',
-    'https://pipedapi.adminforge.de'
-  ];
+  // 1. Fetch a live list of Piped instances
+  let liveInstances = [];
+  try {
+    const instancesRes = await axios.get('https://piped-instances.kavin.rocks/', { timeout: 5000 });
+    liveInstances = instancesRes.data.map(i => i.api_url);
+  } catch (err) {
+    // Fallback to hardcoded if the list API is down
+    liveInstances = [
+      'https://pipedapi.kavin.rocks',
+      'https://pipedapi.leptons.xyz',
+      'https://pipedapi.r4fo.com'
+    ];
+  }
 
   let streamUrl = null;
 
-  for (const instance of pipedInstances) {
+  // 2. Try each live instance until we find a stream URL
+  for (const instance of liveInstances) {
     try {
       const apiUrl = `${instance}/streams/${videoId}`;
       const response = await axios.get(apiUrl, { timeout: 6000 });
       
       if (response.data) {
         if (type === 'audio' && response.data.audioStreams && response.data.audioStreams.length > 0) {
-          streamUrl = response.data.audioStreams[0].url; // Get best audio
+          streamUrl = response.data.audioStreams[0].url; 
         } else if (response.data.videoStreams && response.data.videoStreams.length > 0) {
-          // Get a pre-merged video stream (videoOnly: false)
           const mp4Stream = response.data.videoStreams.find(f => f.mimeType.includes('mp4') && f.videoOnly === false);
-          if (mp4Stream) {
-            streamUrl = mp4Stream.url;
-          }
+          if (mp4Stream) streamUrl = mp4Stream.url;
         }
-        
-        if (streamUrl) break; // Found a URL, stop looking
+        if (streamUrl) break; 
       }
     } catch (err) {
       // Silently fail and try next instance
@@ -673,15 +676,15 @@ app.get('/api/youtube-stream', async (req, res) => {
   }
 
   if (!streamUrl) {
-    return res.status(500).json({ error: 'Failed to get stream URL. YouTube may be blocking all servers.' });
+    return res.status(500).json({ error: 'All Piped servers are currently blocked by YouTube. Try again later.' });
   }
 
-  // Proxy the stream directly to the user
+  // 3. Proxy the stream directly to the user
   try {
     const response = await axios.get(streamUrl, {
       responseType: 'stream',
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
         'Referer': 'https://www.youtube.com/'
       }
     });
