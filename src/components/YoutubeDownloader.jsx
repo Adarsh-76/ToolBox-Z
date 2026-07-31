@@ -30,47 +30,37 @@ const YoutubeDownloader = () => {
       const response = await fetch(`${API_BASE_URL}/api/youtube-download?url=${encodeURIComponent(url)}`);
       const data = await response.json();
 
-      if (data.success) {
+      if (data.success && data.details) {
         setVideoData(data);
       } else {
         setError(data.error || 'Failed to fetch video.');
       }
     } catch (err) {
       console.error(err);
-      setError('Failed to fetch video. Is the backend server running?');
+      setError('Failed to connect to backend. Is the server running?');
     } finally {
       setIsLoading(false);
     }
   };
 
-   const handleDownload = async (directUrl, quality, type) => {
-    const safeTitle = (videoData?.details.title || 'youtube_video').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
+  const handleDownload = async (directUrl, quality, type) => {
+    if (!directUrl) {
+      alert('No download link available for this quality.');
+      return;
+    }
+
+    const safeTitle = (videoData?.details?.title || 'youtube_video').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
     const ext = type === 'audio' ? 'mp3' : 'mp4';
     const fileName = `${safeTitle}_${quality}.${ext}`;
 
-    // If it's an audio request, we need to ask Cobalt for an audio-only stream
-    if (type === 'audio') {
-      try {
-        const cobaltRes = await fetch(`${API_BASE_URL}/api/youtube-download?url=${encodeURIComponent(url)}&audio=true`);
-        const cobaltData = await cobaltRes.json();
-        if (cobaltData.success && cobaltData.videoVariants.length > 0) {
-          const audioUrl = cobaltData.videoVariants[0].url;
-          const proxyUrl = `${API_BASE_URL}/api/youtube-proxy?url=${encodeURIComponent(audioUrl)}&filename=${fileName}`;
-          window.open(proxyUrl, '_blank');
-          return;
-        } else {
-          alert('Failed to extract audio for this video.');
-          return;
-        }
-      } catch (err) {
-        alert('Error fetching audio.');
-        return;
-      }
-    }
-
-    // For video, just proxy the URL we already have
     const proxyUrl = `${API_BASE_URL}/api/youtube-proxy?url=${encodeURIComponent(directUrl)}&filename=${fileName}`;
     window.open(proxyUrl, '_blank');
+  };
+
+  const handleClear = () => {
+    setUrl('');
+    setVideoData(null);
+    setError('');
   };
 
   return (
@@ -93,11 +83,13 @@ const YoutubeDownloader = () => {
 
       {error && <div className={styles.errorBox}>{error}</div>}
 
-      {videoData && (
+      {videoData && videoData.details && (
         <div className={`liquid-glass ${styles.resultArea}`}>
           <div className={styles.postHeader}>
             <div className={styles.previewWrapper}>
-              <img src={videoData.details.thumbnail} alt="YouTube Thumbnail" className={styles.videoPreview} />
+              {videoData.details.thumbnail && (
+                <img src={videoData.details.thumbnail} alt="YouTube Thumbnail" className={styles.videoPreview} />
+              )}
             </div>
             <div className={styles.postInfo}>
               <h3 className={styles.resultTitle}>{videoData.details.title}</h3>
@@ -129,24 +121,31 @@ const YoutubeDownloader = () => {
           </div>
 
           <div className={styles.downloadGrid}>
-            {videoData.videoVariants.map((variant, i) => (
-              <button
-                key={i}
-                className={`${styles.downloadBtn} ${styles.videoBtn}`}
-                onClick={() => handleDownload(variant.url, variant.quality, 'video')}
-              >
-                ⬇️ Download {variant.quality} {!variant.hasAudio && <span className={styles.tag}>(Video Only)</span>}
-              </button>
-            ))}
-            {videoData.audioVariants.map((variant, i) => (
-              <button
-                key={i}
-                className={`${styles.downloadBtn} ${styles.audioBtn}`}
-                onClick={() => handleDownload(variant.url, 'High', 'audio')}
-              >
-                🎵 Extract Audio (MP3)
-              </button>
-            ))}
+            {videoData.videoVariants && videoData.videoVariants.length > 0 ? (
+              videoData.videoVariants.map((variant, i) => (
+                <button
+                  key={i}
+                  className={`${styles.downloadBtn} ${styles.videoBtn}`}
+                  onClick={() => handleDownload(variant.url, variant.quality, 'video')}
+                >
+                  ⬇️ Download {variant.quality} {!variant.hasAudio && <span className={styles.tag}>(Video Only)</span>}
+                </button>
+              ))
+            ) : (
+              <p>No video formats available.</p>
+            )}
+
+            {videoData.audioVariants && videoData.audioVariants.length > 0 && (
+              videoData.audioVariants.map((variant, i) => (
+                <button
+                  key={i}
+                  className={`${styles.downloadBtn} ${styles.audioBtn}`}
+                  onClick={() => handleDownload(variant.url, 'High', 'audio')}
+                >
+                  🎵 Extract Audio (MP3)
+                </button>
+              ))
+            )}
           </div>
         </div>
       )}
