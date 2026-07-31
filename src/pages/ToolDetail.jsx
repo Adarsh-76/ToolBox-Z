@@ -204,8 +204,6 @@ const ToolDetail = () => {
       <div 
         className={`liquid-glass ${styles.toolWorkspace}`}
         onClick={handleWorkspaceInteraction}
-        onChange={handleWorkspaceInteraction}
-        onDrop={handleWorkspaceDrop}
       >
         <Suspense fallback={<LoadingFallback />}>
           {ToolComponent ? <ToolComponent key={resetKey} /> : (
