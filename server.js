@@ -596,7 +596,7 @@ app.get('/api/youtube-download', async (req, res) => {
   if (!url || !ytdl.validateURL(url)) return res.status(400).json({ success: false, error: 'Invalid YouTube URL' });
 
   // Use yt-dlp -J with mobile client bypass to get info safely
-  execFile('yt-dlp', ['-J', '--no-warnings', '--skip-download', '--extractor-args', 'youtube:player_client=android,ios', url], async (error, stdout, stderr) => {
+   execFile('yt-dlp', ['-J', '--no-warnings', '--skip-download', '--force-ipv6', '--extractor-args', 'youtube:player_client=android,ios', url], async (error, stdout, stderr) => {
     if (error) {
       console.error('yt-dlp Info Error: ' + stderr);
       return res.status(500).json({ success: false, error: 'YouTube blocked the server from fetching video data.' });
@@ -672,7 +672,7 @@ app.get('/api/youtube-stream', async (req, res) => {
   }
 
   // Bypass YouTube bot block for streaming too
-  args.push('--extractor-args', 'youtube:player_client=android,ios');
+  args.push('--extractor-args', 'youtube:player_client=android,ios', '--force-ipv6');
 
   const ytdlp = spawn('yt-dlp', args);
 
