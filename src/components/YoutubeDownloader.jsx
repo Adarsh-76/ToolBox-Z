@@ -3,6 +3,11 @@ import styles from './YoutubeDownloader.module.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+const formatNumber = (num) => {
+  if (!num) return '0';
+  return parseInt(num).toLocaleString();
+};
+
 const YoutubeDownloader = () => {
   const [url, setUrl] = useState('');
   const [videoData, setVideoData] = useState(null);
@@ -14,6 +19,11 @@ const YoutubeDownloader = () => {
       setError('');
       setVideoData(null);
       if (!url) return;
+
+      if (!url.includes('youtube.com/watch?v=') && !url.includes('youtu.be/') && !url.includes('youtube.com/shorts/')) {
+        setError('Please enter a valid YouTube URL.');
+        return;
+      }
 
       setIsLoading(true);
       const response = await fetch(`${API_BASE_URL}/api/youtube-download?url=${encodeURIComponent(url)}`);
@@ -31,28 +41,34 @@ const YoutubeDownloader = () => {
     }
   };
 
-  const handleDownload = (directUrl, quality) => {
-    if (!directUrl) return;
-    const fileName = `youtube_${quality}.mp4`;
-    const proxyUrl = `${API_BASE_URL}/api/youtube-proxy?url=${encodeURIComponent(directUrl)}&filename=${fileName}`;
-    window.open(proxyUrl, '_blank');
+  const handleDownload = (height, quality, type) => {
+    const safeTitle = (videoData?.details?.title || 'youtube_video').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
+    const ext = type === 'audio' ? 'mp3' : 'mp4';
+    const fileName = `${safeTitle}_${quality}.${ext}`;
+
+    const streamUrl = `${API_BASE_URL}/api/youtube-stream?url=${encodeURIComponent(url)}&height=${height || ''}&type=${type}&filename=${fileName}`;
+    window.open(streamUrl, '_blank');
   };
 
   return (
     <div className={styles.container}>
       <div className={`liquid-glass ${styles.inputArea}`}>
-        <div className={styles.inputRow}>
-          <input
-            type="text"
-            placeholder="Paste YouTube URL..."
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            className={styles.urlInput}
-          />
-          <button className={styles.fetchBtn} onClick={handleFetch} disabled={isLoading}>
-            {isLoading ? '⏳' : '🔍'}
-          </button>
-        </div>
+        <input
+          type="text"
+          placeholder="Paste YouTube URL..."
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          className={styles.urlInput}
+        />
+        {/* Extract button is now directly under the input */}
+        <button 
+          className={styles.fetchBtn} 
+          onClick={handleFetch} 
+          disabled={isLoading}
+          style={{ width: '100%', marginTop: '1rem' }}
+        >
+          {isLoading ? '⏳ Extracting...' : '🔍 Extract Video'}
+        </button>
       </div>
 
       {error && <div className={styles.errorBox}>{error}</div>}
@@ -60,7 +76,9 @@ const YoutubeDownloader = () => {
       {videoData && videoData.details && (
         <div className={`liquid-glass ${styles.resultArea}`}>
           <h3>{videoData.details.title}</h3>
-          <img src={videoData.details.thumbnail} alt="Thumbnail" style={{ width: '100%', borderRadius: '8px', marginBottom: '1rem' }} />
+          {videoData.details.thumbnail && (
+            <img src={videoData.details.thumbnail} alt="Thumbnail" style={{ width: '100%', borderRadius: '8px', marginBottom: '1rem' }} />
+          )}
           
           <div className={styles.downloadGrid}>
             {videoData.videoVariants && videoData.videoVariants.length > 0 ? (
@@ -68,13 +86,25 @@ const YoutubeDownloader = () => {
                 <button
                   key={i}
                   className={`${styles.downloadBtn} ${styles.videoBtn}`}
-                  onClick={() => handleDownload(variant.url, variant.quality)}
+                  onClick={() => handleDownload(variant.height, variant.quality, 'video')}
                 >
-                  ⬇️ Download {variant.quality}
+                  ⬇️ Download {variant.quality} {!variant.hasAudio && <span className={styles.tag}>(Video Only)</span>}
                 </button>
               ))
             ) : (
-              <p>No formats available.</p>
+              <p>No video formats available.</p>
+            )}
+
+            {videoData.audioVariants && videoData.audioVariants.length > 0 && (
+              videoData.audioVariants.map((variant, i) => (
+                <button
+                  key={i}
+                  className={`${styles.downloadBtn} ${styles.audioBtn}`}
+                  onClick={() => handleDownload(null, 'High', 'audio')}
+                >
+                  🎵 Extract Audio (MP3)
+                </button>
+              ))
             )}
           </div>
         </div>
