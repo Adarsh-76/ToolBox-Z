@@ -1907,3 +1907,18 @@
   --blob-1: #1e3a8a;
   --blob-2: #3b82f6;
 }
+/* Theme 124: TypeScript Blue */
+.theme-ts-blue {
+  --primary-gradient: linear-gradient(135deg, #3178c6 0%, #235a97 100%);
+  --bg-dark: #0d1117;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #0d1117;
+  --accent-color: #3178c6; /* TS Blue */
+  --glass-bg: rgba(49, 120, 198, 0.15);
+  --glass-border: rgba(49, 120, 198, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #3178c6;
+  --blob-2: #235a97;
+}

@@ -92,6 +92,7 @@ function AnimatedRoutes() {
       case 'case-converter': return 'theme-sunset';
       case 'image-converter': return 'theme-pastel';
       case 'image-resizer': return 'theme-resize';
+      case 'json-to-ts': return 'theme-ts-blue';
       case 'image-compressor': return 'theme-green-compress';
       case 'gif-maker': return 'theme-gif';
       case 'image-cropper': return 'theme-blue';

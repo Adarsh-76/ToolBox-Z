@@ -243,6 +243,8 @@ const PdfSigner = React.lazy(() => import('./components/PdfSigner'));
 const PdfSignerInfo = React.lazy(() => import('./components/PdfSignerInfo'));
 const PdfToText = React.lazy(() => import('./components/PdfToText'));
 const PdfToTextInfo = React.lazy(() => import('./components/PdfToTextInfo'));
+const JsonToTs = React.lazy(() => import('./components/JsonToTs'));
+const JsonToTsInfo = React.lazy(() => import('./components/JsonToTsInfo'));
 
 // Other dynamic imports
 const Recommendations = React.lazy(() => import('./components/Recommendations'));
@@ -266,6 +268,7 @@ export const toolsRegistry = {
   'pdf-to-pptx': { Tool: PdfToPptConverter, Info: PdfToPptConverterInfo },
   'merge-pdf': { Tool: MergePdf, Info: MergePdfInfo },
   'pdf-to-csv': { Tool: PdfToCsvConverter, Info: PdfToCsvConverterInfo },
+  'json-to-ts': { Tool: JsonToTs, Info: JsonToTsInfo },
   'ip-lookup': { Tool: IpLookup, Info: IpLookupInfo },
   'compare-pdf': { Tool: ComparePdf, Info: ComparePdfInfo },
   'split-pdf': { Tool: SplitPdf, Info: SplitPdfInfo },

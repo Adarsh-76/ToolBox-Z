@@ -119,6 +119,7 @@ const rawToolsList = [
   { id: 'power-calculator', icon: '🚀', name: 'Power & Root Calculator', desc: 'Calculate squares, cubes, square roots, and custom exponents instantly.', category: 'Math & Calculators', rating: '4.8', users: '5.4k', },
   { id: 'pdf-signer', icon: '✍️', name: 'Digital PDF Signer', desc: 'Draw your signature, embed it in a PDF, and get a tamper-detection hash.', category: 'PDF Tools', rating: '4.9', users: '14.5k', },
   { id: 'pdf-to-text', icon: '📄', name: 'PDF Text Extractor', desc: 'Extract and copy plain text from PDF documents instantly.', category: 'PDF Tools', rating: '4.7', users: '10.2k', isNew: true },
+  { id: 'json-to-ts', icon: '🦾', name: 'JSON to TypeScript', desc: 'Convert any JSON object into TypeScript interfaces instantly.', category: 'Developer Tools', rating: '4.8', users: '5.1k', isNew: true },
   { id: 'ip-lookup', icon: '🌐', name: 'IP & DNS Lookup', desc: 'Lookup IP geolocation data and perform DNS record lookups instantly.', category: 'Developer Tools', rating: '4.8', users: '8.9k' }
 
 ];
