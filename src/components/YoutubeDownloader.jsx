@@ -62,7 +62,6 @@ const YoutubeDownloader = () => {
           className={styles.urlInput}
         />
         
-        {/* Extract and Clear buttons directly under the input */}
         <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', width: '100%' }}>
           <button 
             className={styles.fetchBtn} 
@@ -101,7 +100,7 @@ const YoutubeDownloader = () => {
                   className={`${styles.downloadBtn} ${styles.videoBtn}`}
                   onClick={() => handleDownload(variant.height, variant.quality, 'video')}
                 >
-                  ⬇️ Download {variant.quality} {!variant.hasAudio && <span className={styles.tag}>(Video Only)</span>}
+                  ⬇️ Download {variant.quality}
                 </button>
               ))
             ) : (

@@ -588,15 +588,16 @@ io.on('connection', async (socket) => {
 // API ROUTES (TOOLS)
 // ==========================================
 
+
 // ==========================================
-// 1. YOUTUBE DOWNLOADER (oEmbed Method - Never Blocked)
+// 1. YOUTUBE DOWNLOADER (oEmbed + Pre-merged Fast Download)
 // ==========================================
 app.get('/api/youtube-download', async (req, res) => {
   const url = req.query.url;
   if (!url) return res.status(400).json({ success: false, error: 'Invalid URL' });
 
   try {
-    // Use YouTube's official oEmbed API. It is never blocked and gives us title/thumbnail.
+    // Use YouTube's official oEmbed API. It is never blocked.
     const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
     const oembedRes = await axios.get(oembedUrl);
     
@@ -604,17 +605,15 @@ app.get('/api/youtube-download', async (req, res) => {
       title: oembedRes.data.title || 'YouTube Video',
       thumbnail: oembedRes.data.thumbnail_url || '',
       authorName: oembedRes.data.author_name || 'Unknown',
-      views: 0, // We skip views/likes to avoid the bot check
+      views: 0, 
       uploadDate: 'Recently',
       likes: 0,
       description: 'Click a download button below to start the download.'
     };
 
-    // We hardcode the download variants. When the user clicks one, it goes to /api/youtube-stream
+    // We only provide 1 video button and 1 audio button to speed up rendering
     const videoVariants = [
-      { quality: '1080p', height: 1080, hasAudio: true },
-      { quality: '720p', height: 720, hasAudio: true },
-      { quality: '480p', height: 480, hasAudio: true }
+      { quality: 'Best MP4', height: 720, hasAudio: true }
     ];
     
     const audioVariants = [
