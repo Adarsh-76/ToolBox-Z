@@ -678,29 +678,6 @@ app.get('/api/youtube-download', async (req, res) => {
   res.json({ success: true, details, videoVariants, audioVariants });
 });
 
-
-// YOUTUBE PROXY STREAM (Downloads direct Cobalt URLs)
-app.get('/api/youtube-proxy', async (req, res) => {
-  const { url, filename } = req.query;
-  if (!url) return res.status(400).json({ error: 'Missing URL' });
-
-  try {
-    const response = await axios.get(url, {
-      responseType: 'stream',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Referer': 'https://www.youtube.com/'
-      }
-    });
-    res.setHeader('Content-Disposition', `attachment; filename="${filename || 'download.mp4'}"`);
-    res.setHeader('Content-Type', response.headers['content-type'] || 'application/octet-stream');
-    response.data.pipe(res);
-  } catch (error) {
-    console.error('Proxy Error:', error.message);
-    res.status(500).json({ error: 'Failed to download file.' });
-  }
-});
-
 // 2. Social Media Analytics
 app.get('/api/social-analytics', async (req, res) => {
   const { platform, query } = req.query;
