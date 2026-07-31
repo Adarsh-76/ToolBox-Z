@@ -590,14 +590,13 @@ io.on('connection', async (socket) => {
 
 
 // ==========================================
-// 1. YOUTUBE DOWNLOADER (oEmbed + Pre-merged Fast Download)
+// 1. YOUTUBE DOWNLOADER (oEmbed Info - Never Blocked)
 // ==========================================
 app.get('/api/youtube-download', async (req, res) => {
   const url = req.query.url;
   if (!url) return res.status(400).json({ success: false, error: 'Invalid URL' });
 
   try {
-    // Use YouTube's official oEmbed API. It is never blocked.
     const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
     const oembedRes = await axios.get(oembedUrl);
     
@@ -611,14 +610,8 @@ app.get('/api/youtube-download', async (req, res) => {
       description: 'Click a download button below to start the download.'
     };
 
-    // We only provide 1 video button and 1 audio button to speed up rendering
-    const videoVariants = [
-      { quality: 'Best MP4', height: 720, hasAudio: true }
-    ];
-    
-    const audioVariants = [
-      { quality: 'High Quality Audio' }
-    ];
+    const videoVariants = [{ quality: 'Best MP4', height: 720, hasAudio: true }];
+    const audioVariants = [{ quality: 'High Quality Audio' }];
 
     res.json({ success: true, details, videoVariants, audioVariants });
   } catch (error) {
@@ -627,78 +620,121 @@ app.get('/api/youtube-download', async (req, res) => {
   }
 });
 
-
-// YouTube Proxy Stream (Dynamic Piped API Method)
+// ==========================================
+// YOUTUBE STREAM (Ultimate 4-Tier Fallback System)
+// ==========================================
 app.get('/api/youtube-stream', async (req, res) => {
   const { url, type, filename } = req.query;
   if (!url) return res.status(400).json({ error: 'Invalid URL' });
 
-  // Extract Video ID
   let videoId = '';
   const match = url.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
   if (match && match[1]) videoId = match[1];
   else return res.status(400).json({ error: 'Invalid YouTube URL' });
 
-  // 1. Fetch a live list of Piped instances
-  let liveInstances = [];
-  try {
-    const instancesRes = await axios.get('https://piped-instances.kavin.rocks/', { timeout: 5000 });
-    liveInstances = instancesRes.data.map(i => i.api_url);
-  } catch (err) {
-    // Fallback to hardcoded if the list API is down
-    liveInstances = [
-      'https://pipedapi.kavin.rocks',
-      'https://pipedapi.leptons.xyz',
-      'https://pipedapi.r4fo.com'
-    ];
+  let directUrl = null;
+
+  // TIER 1: Cobalt API (Try 2 instances)
+  const cobaltInstances = ['https://api.cobalt.tools/api/json', 'https://co.wuk.sh/api/json'];
+  for (const instance of cobaltInstances) {
+    try {
+      const cobaltRes = await axios.post(instance, {
+        url: url, vCodec: 'h264', vQuality: '720', aFormat: 'mp3', isAudioOnly: type === 'audio'
+      }, { headers: { 'User-Agent': 'ToolBoxZ/1.0', 'Content-Type': 'application/json' }, timeout: 8000 });
+      
+      if (cobaltRes.data && (cobaltRes.data.status === 'stream' || cobaltRes.data.status === 'redirect')) {
+        directUrl = cobaltRes.data.url;
+        break;
+      }
+    } catch (e) {}
   }
 
-  let streamUrl = null;
-
-  // 2. Try each live instance until we find a stream URL
-  for (const instance of liveInstances) {
+  // TIER 2: Piped API (Fetch 10+ live instances dynamically)
+  if (!directUrl) {
     try {
-      const apiUrl = `${instance}/streams/${videoId}`;
-      const response = await axios.get(apiUrl, { timeout: 6000 });
+      const instancesRes = await axios.get('https://piped-instances.kavin.rocks/', { timeout: 5000 });
+      const liveInstances = instancesRes.data.map(i => i.api_url);
       
-      if (response.data) {
-        if (type === 'audio' && response.data.audioStreams && response.data.audioStreams.length > 0) {
-          streamUrl = response.data.audioStreams[0].url; 
-        } else if (response.data.videoStreams && response.data.videoStreams.length > 0) {
-          const mp4Stream = response.data.videoStreams.find(f => f.mimeType.includes('mp4') && f.videoOnly === false);
-          if (mp4Stream) streamUrl = mp4Stream.url;
-        }
-        if (streamUrl) break; 
+      for (const instance of liveInstances) {
+        try {
+          const apiUrl = `${instance}/streams/${videoId}`;
+          const response = await axios.get(apiUrl, { timeout: 5000 });
+          if (response.data) {
+            if (type === 'audio' && response.data.audioStreams?.length > 0) {
+              directUrl = response.data.audioStreams[0].url;
+              break;
+            } else if (response.data.videoStreams?.length > 0) {
+              const mp4 = response.data.videoStreams.find(f => f.mimeType.includes('mp4') && !f.videoOnly);
+              if (mp4) { directUrl = mp4.url; break; }
+            }
+          }
+        } catch (e) {}
       }
-    } catch (err) {
-      // Silently fail and try next instance
+    } catch (e) {}
+  }
+
+  // TIER 3: Invidious API (Try 3 instances)
+  if (!directUrl) {
+    const invidiousInstances = ['https://inv.nadeko.net', 'https://invidious.nerdvpn.de', 'https://invidious.jing.rocks'];
+    for (const instance of invidiousInstances) {
+      try {
+        const apiUrl = `${instance}/api/v1/videos/${videoId}`;
+        const response = await axios.get(apiUrl, { timeout: 5000 });
+        if (response.data) {
+          if (type === 'audio' && response.data.adaptiveFormats) {
+            const audio = response.data.adaptiveFormats.find(f => f.type.includes('audio/mp4'));
+            if (audio) { directUrl = audio.url; break; }
+          } else if (response.data.formatStreams) {
+            const mp4 = response.data.formatStreams.find(f => f.type.includes('mp4'));
+            if (mp4) { directUrl = mp4.url; break; }
+          }
+        }
+      } catch (e) {}
     }
   }
 
-  if (!streamUrl) {
-    return res.status(500).json({ error: 'All Piped servers are currently blocked by YouTube. Try again later.' });
+  // If any API succeeded, stream the file to the user
+  if (directUrl) {
+    try {
+      const response = await axios.get(directUrl, {
+        responseType: 'stream',
+        headers: { 'User-Agent': 'Mozilla/5.0', 'Referer': 'https://www.youtube.com/' }
+      });
+      res.setHeader('Content-Disposition', `attachment; filename="${filename || 'download.mp4'}"`);
+      res.setHeader('Content-Type', response.headers['content-type'] || 'application/octet-stream');
+      return response.data.pipe(res);
+    } catch (e) {
+      console.error('Proxy failed after getting URL. Falling back to yt-dlp.');
+    }
   }
 
-  // 3. Proxy the stream directly to the user
-  try {
-    const response = await axios.get(streamUrl, {
-      responseType: 'stream',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Referer': 'https://www.youtube.com/'
-      }
-    });
-
-    res.setHeader('Content-Disposition', `attachment; filename="${filename || 'download.mp4'}"`);
-    res.setHeader('Content-Type', response.headers['content-type'] || 'application/octet-stream');
-    response.data.pipe(res);
-
-  } catch (error) {
-    console.error('Proxy Stream Error:', error.message);
-    res.status(500).json({ error: 'Failed to download file from YouTube.' });
+  // TIER 4: yt-dlp Direct Fallback (Render local with bypasses)
+  const tempFile = path.join(os.tmpdir(), 'yt_' + Date.now() + (type === 'audio' ? '.mp3' : '.mp4'));
+  let args = [];
+  if (type === 'audio') {
+    args = ['-x', '--audio-format', 'mp3', '-o', tempFile, url];
+  } else {
+    args = ['-f', 'best[ext=mp4]/best', '-o', tempFile, url]; // Pre-merged to beat timeout
   }
+  args.push('--extractor-args', 'youtube:player_client=android,ios', '--force-ipv6');
+
+  const ytdlp = spawn('yt-dlp', args);
+  ytdlp.on('close', (code) => {
+    if (code === 0 && fs.existsSync(tempFile)) {
+      res.setHeader('Content-Disposition', `attachment; filename="${filename || 'download.mp4'}"`);
+      res.setHeader('Content-Type', type === 'audio' ? 'audio/mpeg' : 'video/mp4');
+      const stream = fs.createReadStream(tempFile);
+      stream.pipe(res);
+      stream.on('end', () => fs.unlink(tempFile, () => {}));
+    } else {
+      if (!res.headersSent) res.status(500).json({ error: 'All methods failed. YouTube is completely blocking the server.' });
+      if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
+    }
+  });
+  ytdlp.on('error', () => {
+    if (!res.headersSent) res.status(500).json({ error: 'Failed to start yt-dlp.' });
+  });
 });
-
 
 
 // 2. Social Media Analytics
