@@ -589,69 +589,43 @@ io.on('connection', async (socket) => {
 // ==========================================
 
 // ==========================================
-// 1. YOUTUBE DOWNLOADER (Direct yt-dlp Method)
+// 1. YOUTUBE DOWNLOADER (oEmbed Method - Never Blocked)
 // ==========================================
 app.get('/api/youtube-download', async (req, res) => {
   const url = req.query.url;
-  if (!url || !ytdl.validateURL(url)) return res.status(400).json({ success: false, error: 'Invalid YouTube URL' });
+  if (!url) return res.status(400).json({ success: false, error: 'Invalid URL' });
 
-  // Use yt-dlp -J with mobile client bypass to get info safely
-   execFile('yt-dlp', ['-J', '--no-warnings', '--skip-download', '--force-ipv6', '--extractor-args', 'youtube:player_client=android,ios', url], async (error, stdout, stderr) => {
-    if (error) {
-      console.error('yt-dlp Info Error: ' + stderr);
-      return res.status(500).json({ success: false, error: 'YouTube blocked the server from fetching video data.' });
-    }
+  try {
+    // Use YouTube's official oEmbed API. It is never blocked and gives us title/thumbnail.
+    const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
+    const oembedRes = await axios.get(oembedUrl);
+    
+    const details = {
+      title: oembedRes.data.title || 'YouTube Video',
+      thumbnail: oembedRes.data.thumbnail_url || '',
+      authorName: oembedRes.data.author_name || 'Unknown',
+      views: 0, // We skip views/likes to avoid the bot check
+      uploadDate: 'Recently',
+      likes: 0,
+      description: 'Click a download button below to start the download.'
+    };
 
-    try {
-      const info = JSON.parse(stdout);
-      
-      const details = {
-        title: info.title || 'YouTube Video',
-        thumbnail: info.thumbnail || '',
-        authorName: info.uploader || info.channel || 'Unknown Channel',
-        authorAvatar: info.channel_thumbnail || '',
-        views: info.view_count || 0,
-        uploadDate: info.upload_date || 'Recently',
-        likes: info.like_count || 0,
-        description: info.description || 'No description available.'
-      };
+    // We hardcode the download variants. When the user clicks one, it goes to /api/youtube-stream
+    const videoVariants = [
+      { quality: '1080p', height: 1080, hasAudio: true },
+      { quality: '720p', height: 720, hasAudio: true },
+      { quality: '480p', height: 480, hasAudio: true }
+    ];
+    
+    const audioVariants = [
+      { quality: 'High Quality Audio' }
+    ];
 
-      const videoVariants = [];
-      const audioVariants = [];
-      const seenResolutions = new Set();
-
-      const videoFormats = info.formats.filter((f) => f.vcodec !== 'none' && f.ext === 'mp4');
-      videoFormats.sort((a, b) => (b.height || 0) - (a.height || 0));
-
-      videoFormats.forEach((f) => {
-        const height = f.height;
-        if (height && !seenResolutions.has(height)) {
-          videoVariants.push({
-            quality: `${height}p`,
-            height: height,
-            itag: f.format_id,
-            size: f.filesize ? formatBytes(f.filesize) : 'Unknown',
-            hasAudio: f.acodec !== 'none'
-          });
-          seenResolutions.add(height);
-        }
-      });
-
-      const bestAudio = info.formats.filter((f) => f.vcodec === 'none' && f.acodec !== 'none').sort((a, b) => b.bitrate - a.bitrate)[0];
-      if (bestAudio) {
-        audioVariants.push({
-          quality: 'High Quality Audio',
-          itag: bestAudio.format_id,
-          size: bestAudio.filesize ? formatBytes(bestAudio.filesize) : 'Unknown'
-        });
-      }
-
-      res.json({ success: true, details, videoVariants, audioVariants });
-    } catch (parseError) {
-      console.error('YouTube Parse Error:', parseError.message);
-      res.status(500).json({ success: false, error: 'Failed to parse YouTube data.' });
-    }
-  });
+    res.json({ success: true, details, videoVariants, audioVariants });
+  } catch (error) {
+    console.error('oEmbed Error:', error.message);
+    res.status(500).json({ success: false, error: 'Failed to fetch video. Invalid URL or YouTube is down.' });
+  }
 });
 
 
