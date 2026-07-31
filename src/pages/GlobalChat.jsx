@@ -1,144 +1,121 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
-import { useNavigate } from 'react-router-dom';
 import styles from './GlobalChat.module.css';
 
-// Automatically detect IP for local network testing
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const GlobalChat = () => {
   const [messages, setMessages] = useState([]);
-  const [inputText, setInputText] = useState('');
+  const [text, setText] = useState('');
   const [isConnected, setIsConnected] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [error, setError] = useState('');
   const socketRef = useRef(null);
-  const messagesContainerRef = useRef(null); // Changed to container ref
-  const navigate = useNavigate();
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const userStr = localStorage.getItem('user');
-    
-    if (!token || !userStr) {
-      setIsLoggedIn(false);
+    if (!token) {
+      setError('You must be logged in to view and send messages.');
       return;
     }
-    
-    setIsLoggedIn(true);
-    const user = JSON.parse(userStr);
-    setCurrentUser(user);
 
-    // Connect to Socket.io server with auth token
+    // Connect to the backend Socket.io server
     socketRef.current = io(API_BASE_URL, {
       auth: { token }
     });
 
     socketRef.current.on('connect', () => {
       setIsConnected(true);
+      setError('');
     });
 
     socketRef.current.on('connect_error', (err) => {
-      console.error('Socket connection error:', err.message);
+      setError('Failed to connect to chat server. The backend might be sleeping. Please wait 60 seconds and refresh.');
       setIsConnected(false);
     });
 
-    // Receive chat history
     socketRef.current.on('chatHistory', (history) => {
-      setMessages(history);
+      if (Array.isArray(history)) {
+        setMessages(history);
+      }
     });
 
-    // Receive new messages
-    socketRef.current.on('newMessage', (message) => {
-      setMessages(prev => [...prev, message]);
+    socketRef.current.on('newMessage', (msg) => {
+      if (msg) {
+        setMessages((prev) => [...prev, msg]);
+      }
     });
 
     socketRef.current.on('disconnect', () => {
       setIsConnected(false);
     });
 
+    // Cleanup on unmount
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
       }
     };
-  }, [navigate]);
+  }, []);
 
-  // Auto-scroll to bottom on new messages (Without scrolling the whole page!)
   useEffect(() => {
-    if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
-    }
+    // Scroll to bottom when new messages arrive
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const handleSend = (e) => {
     e.preventDefault();
-    if (!inputText.trim() || !socketRef.current) return;
-    
-    socketRef.current.emit('sendMessage', inputText.trim());
-    setInputText('');
+    if (!text.trim() || !socketRef.current || !isConnected) return;
+
+    socketRef.current.emit('sendMessage', text);
+    setText('');
   };
 
-  if (!isLoggedIn) {
-    return (
-      <div className={`liquid-glass ${styles.authBox}`}>
-        <h2>🔒 Authentication Required</h2>
-        <p>You need to be logged in to join the live discussion.</p>
-        <button className={styles.authBtn} onClick={() => navigate('/auth')}>Go to Login</button>
-      </div>
-    );
-  }
-
   return (
-    <div className={styles.chatContainer}>
+    <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>💬 Live Discussion</h1>
-        <div className={styles.statusBadge}>
-          <span className={`${styles.statusDot} ${isConnected ? styles.online : styles.offline}`}></span>
-          {isConnected ? 'Connected' : 'Connecting...'}
+        <h1 className={styles.title}>💬 Global Chat</h1>
+        <div className={`${styles.statusBadge} ${isConnected ? styles.online : styles.offline}`}>
+          {isConnected ? '🟢 Connected' : '🔴 Disconnected'}
         </div>
       </div>
 
+      {error && <div className={styles.errorBox}>{error}</div>}
+
       <div className={`liquid-glass ${styles.chatWindow}`}>
-        <div className={styles.messagesList} ref={messagesContainerRef}>
-          {messages.map((msg, i) => (
-            <div 
-              key={i} 
-              className={`${styles.messageWrapper} ${currentUser && msg.senderId === currentUser.id ? styles.myMessage : ''}`}
-            >
-              {currentUser && msg.senderId !== currentUser.id && (
-                <div className={styles.avatar}>
-                  {msg.senderName.charAt(0).toUpperCase()}
+        <div className={styles.messagesList}>
+          {messages.length === 0 && !error ? (
+            <p className={styles.emptyText}>No messages yet. Be the first to say hello!</p>
+          ) : (
+            messages.map((msg, i) => {
+              // Safely parse sender name and time
+              const senderName = msg?.senderName || 'Anonymous';
+              const time = msg?.createdAt ? new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+              return (
+                <div key={i} className={styles.messageCard}>
+                  <div className={styles.messageHeader}>
+                    <span className={styles.avatar}>{senderName.charAt(0).toUpperCase()}</span>
+                    <span className={styles.senderName}>{senderName}</span>
+                    <span className={styles.time}>{time}</span>
+                  </div>
+                  <p className={styles.messageText}>{msg?.text || ''}</p>
                 </div>
-              )}
-              <div className={styles.messageContent}>
-                {currentUser && msg.senderId !== currentUser.id && (
-                  <span className={styles.senderName}>{msg.senderName}</span>
-                )}
-                <div className={styles.messageBubble}>
-                  {msg.text}
-                </div>
-                <span className={styles.timestamp}>
-                  {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </span>
-              </div>
-            </div>
-          ))}
+              );
+            })
+          )}
+          <div ref={messagesEndRef} />
         </div>
 
         <form className={styles.inputArea} onSubmit={handleSend}>
           <input
             type="text"
-            placeholder="Type your message..."
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
+            placeholder={isConnected ? "Type a message..." : "Connecting..."}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
             className={styles.input}
             disabled={!isConnected}
           />
-          <button 
-            type="submit" 
-            className={styles.sendBtn} 
-            disabled={!isConnected || !inputText.trim()}
-          >
+          <button type="submit" className={styles.sendBtn} disabled={!isConnected || !text.trim()}>
             ➤
           </button>
         </form>
