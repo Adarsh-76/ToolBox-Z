@@ -3,11 +3,6 @@ import styles from './YoutubeDownloader.module.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-const formatNumber = (num) => {
-  if (!num) return '0';
-  return parseInt(num).toLocaleString();
-};
-
 const YoutubeDownloader = () => {
   const [url, setUrl] = useState('');
   const [videoData, setVideoData] = useState(null);
@@ -50,6 +45,12 @@ const YoutubeDownloader = () => {
     window.open(streamUrl, '_blank');
   };
 
+  const handleClear = () => {
+    setUrl('');
+    setVideoData(null);
+    setError('');
+  };
+
   return (
     <div className={styles.container}>
       <div className={`liquid-glass ${styles.inputArea}`}>
@@ -60,15 +61,27 @@ const YoutubeDownloader = () => {
           onChange={(e) => setUrl(e.target.value)}
           className={styles.urlInput}
         />
-        {/* Extract button is now directly under the input */}
-        <button 
-          className={styles.fetchBtn} 
-          onClick={handleFetch} 
-          disabled={isLoading}
-          style={{ width: '100%', marginTop: '1rem' }}
-        >
-          {isLoading ? '⏳ Extracting...' : '🔍 Extract Video'}
-        </button>
+        
+        {/* Extract and Clear buttons directly under the input */}
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', width: '100%' }}>
+          <button 
+            className={styles.fetchBtn} 
+            onClick={handleFetch} 
+            disabled={isLoading}
+            style={{ flex: 1 }}
+          >
+            {isLoading ? '⏳ Extracting...' : '🔍 Extract'}
+          </button>
+          {url && (
+            <button 
+              className={styles.clearBtn} 
+              onClick={handleClear}
+              style={{ width: '100px' }}
+            >
+              ✖️ Clear
+            </button>
+          )}
+        </div>
       </div>
 
       {error && <div className={styles.errorBox}>{error}</div>}
