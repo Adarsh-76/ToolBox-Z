@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styles from './InstallPWA.module.css';
 
+// Global variable to catch the prompt the millisecond the page loads,
+// even before React fully mounts!
+let globalDeferredPrompt = null;
+
 const InstallPWA = () => {
   const [supportsPWA, setSupportsPWA] = useState(false);
-  const [promptInstall, setPromptInstall] = useState(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
 
   useEffect(() => {
-    // 1. Check if running on iOS (which doesn't support beforeinstallprompt)
     const isIos = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     
@@ -21,39 +23,46 @@ const InstallPWA = () => {
       return;
     }
 
-    // 2. Listen for the automatic Android/Desktop prompt
+    // If we already caught the prompt globally, enable the button
+    if (globalDeferredPrompt) {
+      setSupportsPWA(true);
+    }
+
     const handler = (e) => {
       e.preventDefault();
-      setSupportsPWA(true);
-      setPromptInstall(e);
+      globalDeferredPrompt = e; // Save it to our global variable
+      setSupportsPWA(true);     // Enable the button
     };
 
     window.addEventListener('beforeinstallprompt', handler);
+
     window.addEventListener('appinstalled', () => {
       setIsInstalled(true);
       setSupportsPWA(false);
       setIsIOS(false);
+      globalDeferredPrompt = null;
     });
 
     return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
   const handleInstallClick = async () => {
-    if (!promptInstall) {
-      // Fallback if the prompt isn't ready yet
-      alert('To install: Open your browser menu (⋮) and select "Add to Home screen" or "Install App".');
+    if (!globalDeferredPrompt) {
+      // Fallback if browser still refuses to show the prompt
+      alert('To install: Open your browser menu (⋮) and select "Install App" or "Add to Home screen".');
       return;
     }
-    promptInstall.prompt();
-    const { outcome } = await promptInstall.userChoice;
+    
+    // Trigger the native Android/Chrome install popup
+    globalDeferredPrompt.prompt();
+    const { outcome } = await globalDeferredPrompt.userChoice;
     if (outcome === 'accepted') {
       setIsInstalled(true);
     }
-    setPromptInstall(null);
+    globalDeferredPrompt = null;
     setSupportsPWA(false);
   };
 
-  // If already installed, show success message
   if (isInstalled) {
     return (
       <div className={styles.installedBox}>
@@ -62,7 +71,6 @@ const InstallPWA = () => {
     );
   }
 
-  // If on iOS, show manual instructions
   if (isIOS) {
     return (
       <div className={styles.iosBox}>
