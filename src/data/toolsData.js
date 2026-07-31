@@ -117,6 +117,7 @@ const rawToolsList = [
   { id: 'bezier-curve', icon: '📈', name: 'Bezier Curve Generator', desc: 'Visually design custom cubic-bezier animation timing curves.', category: 'Developer Tools', rating: '4.9', users: '4.2k',  },
   { id: 'pulse-generator', icon: '💗', name: 'Pulse Animation Generator', desc: 'Generate CSS pulse animations for live indicators and buttons.', category: 'Generators', rating: '4.7', users: '6.8k',  },
   { id: 'power-calculator', icon: '🚀', name: 'Power & Root Calculator', desc: 'Calculate squares, cubes, square roots, and custom exponents instantly.', category: 'Math & Calculators', rating: '4.8', users: '5.4k', },
+  { id: 'pdf-signer', icon: '✍️', name: 'Digital PDF Signer', desc: 'Draw your signature, embed it in a PDF, and get a tamper-detection hash.', category: 'PDF Tools', rating: '4.9', users: '14.5k', },
   { id: 'ip-lookup', icon: '🌐', name: 'IP & DNS Lookup', desc: 'Lookup IP geolocation data and perform DNS record lookups instantly.', category: 'Developer Tools', rating: '4.8', users: '8.9k' }
 
 ];

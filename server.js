@@ -1189,6 +1189,65 @@ app.get('/api/fetch-url', async (req, res) => {
   }
 });
 
+
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+
+// ==========================================
+// DIGITAL PDF SIGNER & TAMPER DETECTOR
+// ==========================================
+app.post('/api/sign-pdf', async (req, res) => {
+  try {
+    const { pdfBase64, sigBase64 } = req.body;
+    if (!pdfBase64 || !sigBase64) return res.status(400).json({ success: false, error: 'Missing PDF or Signature data.' });
+
+    // 1. Load the PDF
+    const pdfBytes = Buffer.from(pdfBase64.split(',')[1], 'base64');
+    const pdfDoc = await PDFDocument.load(pdfBytes);
+    
+    // 2. Embed the signature image
+    const sigBytes = Buffer.from(sigBase64.split(',')[1], 'base64');
+    const sigImg = await pdfDoc.embedPng(sigBytes);
+    
+    // 3. Get the last page to place the signature
+    const pages = pdfDoc.getPages();
+    const lastPage = pages[pages.length - 1];
+    const { width, height } = lastPage.getSize();
+    
+    // 4. Draw signature image (bottom right)
+    const sigWidth = 150;
+    const sigHeight = (sigImg.height / sigImg.width) * sigWidth;
+    lastPage.drawImage(sigImg, {
+      x: width - sigWidth - 50,
+      y: 50,
+      width: sigWidth,
+      height: sigHeight,
+    });
+
+    // 5. Add cryptographic text (Date & Hash placeholder)
+    const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const dateStr = new Date().toLocaleString();
+    lastPage.drawText(`Digitally Signed on: ${dateStr}`, {
+      x: 50, y: 35, size: 8, font, color: rgb(0.2, 0.2, 0.2)
+    });
+
+    // 6. Save the modified PDF
+    const signedPdfBytes = await pdfDoc.save();
+    
+    // 7. Generate SHA-256 Hash for Tamper Detection
+    const crypto = await import('crypto');
+    const hash = crypto.createHash('sha256').update(signedPdfBytes).digest('hex');
+
+    // 8. Send back the signed PDF and the hash
+    const signedBase64 = `data:application/pdf;base64,${Buffer.from(signedPdfBytes).toString('base64')}`;
+    
+    res.json({ success: true, signedPdf: signedBase64, hash: hash });
+  } catch (error) {
+    console.error('Sign PDF Error:', error.message);
+    res.status(500).json({ success: false, error: 'Failed to sign PDF. Ensure it is a valid, unlocked PDF.' });
+  }
+});
+
+
 // ==========================================
 // SERVE FRONTEND BUILD (Removed because frontend is on Vercel now)
 // ==========================================

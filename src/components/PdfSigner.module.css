@@ -1,0 +1,152 @@
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputArea, .signArea, .resultArea {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.fileInput {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.7rem;
+  color: var(--text-dark);
+  outline: none;
+}
+
+.fileName {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.canvas {
+  width: 100%;
+  max-width: 400px;
+  height: 150px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  cursor: crosshair;
+  touch-action: none;
+  align-self: center;
+}
+
+.clearBtn {
+  align-self: center;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.signBtn {
+  flex: 1;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.signBtn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.signBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.resetBtn {
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.errorBox {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.resultArea h3 {
+  margin: 0 0 1rem 0;
+  color: #00FFAB;
+  text-align: center;
+}
+
+.hashLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem 0;
+}
+
+.hashBox {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #c9d1d9;
+  word-break: break-all;
+  margin-bottom: 1rem;
+}
+
+.hint {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  text-align: center;
+  margin: 0 0 1rem 0;
+}
+
+.downloadBtn {
+  width: 100%;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}

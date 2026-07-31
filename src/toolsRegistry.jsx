@@ -239,6 +239,8 @@ const PulseGenerator = React.lazy(() => import('./components/PulseGenerator'));
 const PulseGeneratorInfo = React.lazy(() => import('./components/PulseGeneratorInfo'));
 const PowerCalculator = React.lazy(() => import('./components/PowerCalculator'));
 const PowerCalculatorInfo = React.lazy(() => import('./components/PowerCalculatorInfo'));
+const PdfSigner = React.lazy(() => import('./components/PdfSigner'));
+const PdfSignerInfo = React.lazy(() => import('./components/PdfSignerInfo'));
 
 // Other dynamic imports
 const Recommendations = React.lazy(() => import('./components/Recommendations'));
@@ -365,6 +367,7 @@ export const toolsRegistry = {
   'bezier-curve': { Tool: BezierCurve, Info: BezierCurveInfo },
   'pulse-generator': { Tool: PulseGenerator, Info: PulseGeneratorInfo },
   'power-calculator': { Tool: PowerCalculator, Info: PowerCalculatorInfo },
+  'pdf-signer': { Tool: PdfSigner, Info: PdfSignerInfo },
 
   // Wrapper components
   Recommendations, ToolFeedback, Comments                               
