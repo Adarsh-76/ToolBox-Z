@@ -1892,3 +1892,18 @@
   --blob-1: #0f172a;
   --blob-2: #d4af37;
 }
+/* Theme 123: Document Blue */
+.theme-doc-blue {
+  --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  --bg-dark: #0f172a;
+  --bg-light: #F8FAFC;
+  --text-dark: #F1F5F9;
+  --text-light: #0f172a;
+  --accent-color: #3b82f6; /* Doc Blue */
+  --glass-bg: rgba(30, 58, 138, 0.3);
+  --glass-border: rgba(59, 130, 246, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #1e3a8a;
+  --blob-2: #3b82f6;
+}

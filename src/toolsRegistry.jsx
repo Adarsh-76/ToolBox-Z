@@ -241,6 +241,8 @@ const PowerCalculator = React.lazy(() => import('./components/PowerCalculator'))
 const PowerCalculatorInfo = React.lazy(() => import('./components/PowerCalculatorInfo'));
 const PdfSigner = React.lazy(() => import('./components/PdfSigner'));
 const PdfSignerInfo = React.lazy(() => import('./components/PdfSignerInfo'));
+const PdfToText = React.lazy(() => import('./components/PdfToText'));
+const PdfToTextInfo = React.lazy(() => import('./components/PdfToTextInfo'));
 
 // Other dynamic imports
 const Recommendations = React.lazy(() => import('./components/Recommendations'));
@@ -312,6 +314,7 @@ export const toolsRegistry = {
   'scientific-calculator': { Tool: ScientificCalculator, Info: ScientificCalculatorInfo },
   'image-blur': { Tool: ImageBlur, Info: ImageBlurInfo },
   'uuid-generator': { Tool: UuidGenerator, Info: UuidGeneratorInfo },     
+  'pdf-to-text': { Tool: PdfToText, Info: PdfToTextInfo },
   'speech-tool': { Tool: SpeechTool, Info: SpeechToolInfo },
   'image-sharpener': { Tool: ImageSharpener, Info: ImageSharpenerInfo },
   'icon-converter': { Tool: IconConverter, Info: IconConverterInfo },

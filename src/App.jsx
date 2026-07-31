@@ -60,6 +60,7 @@ function AnimatedRoutes() {
       case 'split-pdf': return 'theme-pdf-split';
       case 'compress-pdf': return 'theme-compress-pdf';
       case 'rotate-pdf': return 'theme-rotate-pdf';
+      case 'pdf-to-text': return 'theme-doc-blue';
       case 'rearrange-pdf': return 'theme-rearrange-pdf';
       case 'add-pages-pdf': return 'theme-add-pages-pdf';
       case 'twitter-thread': return 'theme-twitter-thread';

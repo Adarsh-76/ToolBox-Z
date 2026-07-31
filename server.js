@@ -1248,6 +1248,36 @@ app.post('/api/sign-pdf', async (req, res) => {
 });
 
 
+import pdfParse from 'pdf-parse';
+
+// ==========================================
+// PDF TEXT EXTRACTOR
+// ==========================================
+app.post('/api/pdf-to-text', async (req, res) => {
+  try {
+    const { pdfBase64 } = req.body;
+    if (!pdfBase64) return res.status(400).json({ success: false, error: 'Missing PDF data.' });
+
+    const pdfBuffer = Buffer.from(pdfBase64.split(',')[1], 'base64');
+    const data = await pdfParse(pdfBuffer);
+
+    if (!data.text || data.text.trim().length === 0) {
+      return res.json({ 
+        success: true, 
+        text: '', 
+        warning: 'No digital text found. This appears to be a scanned PDF (images). Please use the "Image to Text (OCR)" tool for scanned documents.' 
+      });
+    }
+
+    res.json({ success: true, text: data.text, pages: data.numpages });
+  } catch (error) {
+    console.error('PDF to Text Error:', error.message);
+    res.status(500).json({ success: false, error: 'Failed to extract text. The PDF might be corrupted or password protected.' });
+  }
+});
+
+
+
 // ==========================================
 // SERVE FRONTEND BUILD (Removed because frontend is on Vercel now)
 // ==========================================
