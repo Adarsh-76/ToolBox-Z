@@ -1248,11 +1248,14 @@ app.post('/api/sign-pdf', async (req, res) => {
 });
 
 
-import pdfParse from 'pdf-parse';
 
 // ==========================================
 // PDF TEXT EXTRACTOR
 // ==========================================
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const pdfParse = require('pdf-parse');
+
 app.post('/api/pdf-to-text', async (req, res) => {
   try {
     const { pdfBase64 } = req.body;
