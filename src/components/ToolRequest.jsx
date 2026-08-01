@@ -8,8 +8,9 @@ const ToolRequest = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showToast, setShowToast] = useState('');
-  
-  const token = localStorage.getItem('tbz_token');
+
+  // FIX: Changed 'tbz_token' to 'token' to match the Auth.jsx file
+  const token = localStorage.getItem('token');
   const isLoggedIn = token;
 
   const handleSubmit = async (e) => {
@@ -55,18 +56,18 @@ const ToolRequest = () => {
         <div className={styles.modalOverlay} onClick={() => setIsOpen(false)}>
           <div className={`liquid-glass ${styles.modalContent}`} onClick={(e) => e.stopPropagation()}>
             <button className={styles.modalCloseBtn} onClick={() => setIsOpen(false)}>✖️</button>
-            
+
             <h3 className={styles.modalTitle}>✨ Request a Tool</h3>
             <p className={styles.modalDesc}>Tell us what you're looking for!</p>
-            
+
             {isLoggedIn ? (
               <form onSubmit={handleSubmit}>
                 {error && <div className={styles.errorBox}>{error}</div>}
                 <div className={styles.inputGroup}>
                   <label>Tool Name</label>
-                  <input 
-                    type="text" 
-                    required 
+                  <input
+                    type="text"
+                    required
                     value={reqData.toolName}
                     onChange={(e) => setReqData({...reqData, toolName: e.target.value})}
                     className={styles.input}
@@ -75,7 +76,7 @@ const ToolRequest = () => {
                 </div>
                 <div className={styles.inputGroup}>
                   <label>Category</label>
-                  <select 
+                  <select
                     className={styles.select}
                     value={reqData.category}
                     onChange={(e) => setReqData({...reqData, category: e.target.value})}
@@ -89,12 +90,14 @@ const ToolRequest = () => {
                     <option>Security & Encryption</option>
                     <option>Generators</option>
                     <option>Productivity</option>
+                    <option>Finance & Market</option>
+                    <option>Fun & Games</option>
                   </select>
                 </div>
                 <div className={styles.inputGroup}>
                   <label>Description</label>
-                  <textarea 
-                    required 
+                  <textarea
+                    required
                     value={reqData.description}
                     onChange={(e) => setReqData({...reqData, description: e.target.value})}
                     className={styles.textarea}
