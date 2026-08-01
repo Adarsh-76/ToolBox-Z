@@ -38,6 +38,7 @@ function AnimatedRoutes() {
 
   const getToolTheme = (id) => {
     switch (id) {
+      case 'html-to-pdf': return 'theme-html-pdf';
       case 'pdf-signer': return 'theme-pdf-signer';
       case 'word-counter': return 'theme-blue';
       case 'password-gen': return 'theme-green';

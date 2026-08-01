@@ -12,6 +12,7 @@ const rawToolsList = [
   { id: 'compress-pdf', icon: '🗜️', name: 'Compress PDF Files', desc: 'Reduce PDF file size while maintaining quality.', category: 'PDF Tools', rating: '4.8', users: '21.3k' },
   { id: 'css-generator', icon: '📐', name: 'CSS Generator', desc: 'Create CSS gradients and shadows.', category: 'Developer Tools', rating: '4.7', users: '9.8k' },
   { id: 'cricket-scores', icon: '🏏', name: 'Live Cricket Scores', desc: 'Check live cricket scores and real-time match updates instantly.', category: 'Productivity', rating: '4.9', users: '25.1k', },
+  { id: 'html-to-pdf', icon: '📄', name: 'HTML to PDF Converter', desc: 'Convert HTML web pages or raw code into high-quality PDF format instantly.', category: 'PDF Tools', rating: '4.8', users: '12.3k', isNew: true },
   { id: 'currency-converter', icon: '💱', name: 'Currency Converter', desc: 'Convert currencies instantly using live TradingView exchange rates.', category: 'Finance & Market', rating: '4.9', users: '21.4k' },
   { id: 'emi-calculator', icon: '🏦', name: 'Loan EMI Calculator', desc: 'Calculate monthly EMI for Home, Car, Personal, and Education loans.', category: 'Finance & Market', rating: '4.9', users: '24.5k' },
   { id: 'emoji-mixer', icon: '🎭', name: 'Emoji Mixer', desc: 'Mixes two or more than two emojis for text.', category: 'Text Tools', rating: '4.9', users: '14.2k' },

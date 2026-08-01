@@ -245,6 +245,8 @@ const PdfToText = React.lazy(() => import('./components/PdfToText'));
 const PdfToTextInfo = React.lazy(() => import('./components/PdfToTextInfo'));
 const JsonToTs = React.lazy(() => import('./components/JsonToTs'));
 const JsonToTsInfo = React.lazy(() => import('./components/JsonToTsInfo'));
+const HtmlToPdfConverter = React.lazy(() => import('./components/HtmlToPdfConverter'));
+const HtmlToPdfConverterInfo = React.lazy(() => import('./components/HtmlToPdfConverterInfo'));
 
 // Other dynamic imports
 const Recommendations = React.lazy(() => import('./components/Recommendations'));
@@ -296,6 +298,7 @@ export const toolsRegistry = {
   'currency-converter': { Tool: CurrencyConverter, Info: CurrencyConverterInfo },
   'barcode-generator': { Tool: BarcodeGenerator, Info: BarcodeGeneratorInfo },
   'gold-price': { Tool: GoldPriceChecker, Info: GoldPriceCheckerInfo },
+  'html-to-pdf': { Tool: HtmlToPdfConverter, Info: HtmlToPdfConverterInfo },
   'emoji-mixer': { Tool: EmojiMixer, Info: EmojiMixerInfo },             
   'media-enhancer': { Tool: MediaEnhancer, Info: MediaEnhancerInfo },
   'image-to-text': { Tool: ImageToText, Info: ImageToTextInfo },
