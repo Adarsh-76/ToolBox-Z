@@ -1967,3 +1967,18 @@
   --blob-1: #FF9D9D;
   --blob-2: #A8E890;
 }
+/* Theme 128: PDF to Image (Purple/Cyan) */
+.theme-pdf-img {
+  --primary-gradient: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+  --bg-dark: #0f0a1a;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #0f0a1a;
+  --accent-color: #06b6d4; /* Cyan */
+  --glass-bg: rgba(124, 58, 237, 0.15);
+  --glass-border: rgba(6, 182, 212, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #7c3aed;
+  --blob-2: #06b6d4;
+}

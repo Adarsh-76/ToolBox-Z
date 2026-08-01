@@ -1,5 +1,6 @@
 const rawToolsList = [
   { id: 'add-pages-pdf', icon: '➕', name: 'Add Pages to PDF', desc: 'Insert new pages into existing PDF documents.', category: 'PDF Tools', rating: '4.7', users: '8.9k' },
+  { id: 'pdf-to-image', icon: '🖼️', name: 'PDF to Image Converter', desc: 'Convert PDF pages into high-quality PNG or JPEG images instantly.', category: 'PDF Tools', rating: '4.8', users: '15.1k', isNew: true },
   { id: 'age-calculator', icon: '🎂', name: 'Age Calculator', desc: 'Calculate exact age from birth date to current date in years, months, and days.', category: 'Math & Calculators', rating: '4.8', users: '12.4k', },
   { id: 'background-remover', icon: '🪄', name: 'Background Remover', desc: 'Remove backgrounds from images automatically.', category: 'Image & Design', rating: '4.8', users: '15.2k' },
   { id: 'barcode-generator', icon: '📊', name: 'Barcode Generator', desc: 'Generate unlimited custom barcodes instantly and download as PNG.', category: 'Generators', rating: '4.7', users: '9.1k' },

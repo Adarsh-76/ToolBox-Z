@@ -15,6 +15,8 @@ const CssGenerator = React.lazy(() => import('./components/CssGenerator'));
 const CssGeneratorInfo = React.lazy(() => import('./components/CssGeneratorInfo'));
 const PdfGenerator = React.lazy(() => import('./components/PdfGenerator'));
 const PdfGeneratorInfo = React.lazy(() => import('./components/PdfGeneratorInfo'));
+const PdfToImage = React.lazy(() => import('./components/PdfToImage'));
+const PdfToImageInfo = React.lazy(() => import('./components/PdfToImageInfo'));
 const PdfToWordConverter = React.lazy(() => import('./components/PdfToWordConverter'));
 const PdfToWordConverterInfo = React.lazy(() => import('./components/PdfToWordConverterInfo'));
 const ImagesToPdfConverter = React.lazy(() => import('./components/ImagesToPdfConverter'));
@@ -261,6 +263,7 @@ export const toolsRegistry = {
   'word-counter': { Tool: WordCounter, Info: WordCounterInfo },
   'flatten-pdf': { Tool: FlattenPdf, Info: FlattenPdfInfo },
   'password-gen': { Tool: PasswordGenerator, Info: PasswordGeneratorInfo },
+  'pdf-to-image': { Tool: PdfToImage, Info: PdfToImageInfo },
   'color-picker': { Tool: ColorPicker, Info: ColorPickerInfo },           
   'json-formatter': { Tool: JsonFormatter, Info: JsonFormatterInfo },
   'base64-encode': { Tool: Base64Tool, Info: Base64Info },
