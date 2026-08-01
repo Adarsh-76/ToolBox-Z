@@ -1,0 +1,127 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.uploadArea {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border: 2px dashed var(--glass-border);
+}
+
+.label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileLabel {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid var(--glass-border);
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.fileLabel:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.actionBtn {
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  align-self: center;
+}
+
+.actionBtn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.actionBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.status {
+  text-align: center;
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.error {
+  text-align: center;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.downloadBox {
+  padding: 1.5rem;
+  text-align: center;
+  border-left: 4px solid #22c55e;
+}
+
+.downloadBox h4 {
+  color: #22c55e;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.downloadLink {
+  display: inline-block;
+  background: var(--accent-color);
+  color: var(--bg-dark);
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.downloadLink:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.noteBox {
+  padding: 1.5rem;
+  border-left: 4px solid var(--accent-color);
+}
+
+.noteBox h4 {
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.noteBox p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  line-height: 1.5;
+}

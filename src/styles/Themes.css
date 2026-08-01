@@ -1952,3 +1952,18 @@
   --blob-1: #d4a373;
   --blob-2: #a47148;
 }
+/* Theme 127: Flatten PDF (ColorHunt Pink/Mint) */
+.theme-flatten-pdf {
+  --primary-gradient: linear-gradient(135deg, #FF9D9D 0%, #FFD3A5 50%, #A8E890 100%);
+  --bg-dark: #1a1a1a;
+  --bg-light: #F0F4F8;
+  --text-dark: #E2E8F0;
+  --text-light: #1a1a1a;
+  --accent-color: #FF9D9D; /* Soft Pink */
+  --glass-bg: rgba(255, 157, 157, 0.15);
+  --glass-border: rgba(168, 232, 144, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #FF9D9D;
+  --blob-2: #A8E890;
+}

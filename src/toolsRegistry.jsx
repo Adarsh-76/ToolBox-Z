@@ -249,6 +249,8 @@ const HtmlToPdfConverter = React.lazy(() => import('./components/HtmlToPdfConver
 const EpubPdfConverter = React.lazy(() => import('./components/EpubPdfConverter'));
 const EpubPdfConverterInfo = React.lazy(() => import('./components/EpubPdfConverterInfo'));
 const HtmlToPdfConverterInfo = React.lazy(() => import('./components/HtmlToPdfConverterInfo'));
+const FlattenPdf = React.lazy(() => import('./components/FlattenPdf'));
+const FlattenPdfInfo = React.lazy(() => import('./components/FlattenPdfInfo'));
 
 // Other dynamic imports
 const Recommendations = React.lazy(() => import('./components/Recommendations'));
@@ -257,6 +259,7 @@ const Comments = React.lazy(() => import('./components/Comments'));
 
 export const toolsRegistry = {
   'word-counter': { Tool: WordCounter, Info: WordCounterInfo },
+  'flatten-pdf': { Tool: FlattenPdf, Info: FlattenPdfInfo },
   'password-gen': { Tool: PasswordGenerator, Info: PasswordGeneratorInfo },
   'color-picker': { Tool: ColorPicker, Info: ColorPickerInfo },           
   'json-formatter': { Tool: JsonFormatter, Info: JsonFormatterInfo },
