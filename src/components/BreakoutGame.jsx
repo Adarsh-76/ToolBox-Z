@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './BreakoutGame.module.css';
 
 const BreakoutGame = () => {
+  const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
@@ -49,11 +50,37 @@ const BreakoutGame = () => {
       if (e.key === 'ArrowRight') gameState.current.rightPressed = false;
       if (e.key === 'ArrowLeft') gameState.current.leftPressed = false;
     };
+    
+    // Touch move logic for mobile
+    const handleTouchMove = (e) => {
+      e.preventDefault(); // Prevent scrolling
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      // Calculate finger X relative to canvas
+      const touchX = e.touches[0].clientX - rect.left;
+      // Scale to canvas internal width
+      const scaleX = canvas.width / rect.width;
+      const scaledX = touchX * scaleX;
+      
+      gameState.current.paddle.x = scaledX - (gameState.current.paddle.width / 2);
+      
+      // Keep in bounds
+      if (gameState.current.paddle.x < 0) gameState.current.paddle.x = 0;
+      if (gameState.current.paddle.x + gameState.current.paddle.width > canvas.width) {
+        gameState.current.paddle.x = canvas.width - gameState.current.paddle.width;
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
+    const canvas = canvasRef.current;
+    canvas?.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
+      canvas?.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
 
@@ -94,7 +121,7 @@ const BreakoutGame = () => {
         }
       });
 
-      // Move paddle
+      // Move paddle (Keyboard)
       if (gameState.current.rightPressed && paddle.x < canvas.width - paddle.width) paddle.x += 7;
       else if (gameState.current.leftPressed && paddle.x > 0) paddle.x -= 7;
 
@@ -148,22 +175,32 @@ const BreakoutGame = () => {
     return () => cancelAnimationFrame(animationId);
   }, [isRunning]);
 
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      containerRef.current?.requestFullscreen().catch(err => console.log(err));
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={containerRef}>
       <div className={`liquid-glass ${styles.header}`}>
         <span>Score: <strong>{score}</strong></span>
         <span>Lives: <strong>{'❤️'.repeat(lives)}</strong></span>
-        <button className={styles.btn} onClick={startGame}>{gameOver ? '🔄 Restart' : '▶️ Start'}</button>
+        <div className={styles.btnGroup}>
+          <button className={styles.fsBtn} onClick={toggleFullscreen} title="Fullscreen">⛶</button>
+          <button className={styles.btn} onClick={startGame}>{gameOver ? '🔄 Restart' : '▶️ Start'}</button>
+        </div>
       </div>
       <canvas 
         ref={canvasRef} 
         width="400" 
         height="400" 
         className={`liquid-glass ${styles.canvas}`}
-        style={{ border: '2px solid var(--glass-border)' }}
       />
       {gameOver && <h2 className={styles.gameOverText}>{score === 250 ? '🎉 You Won!' : 'Game Over!'}</h2>}
-      <p className={styles.helpText}>Use Arrow Keys to move the paddle.</p>
+      <p className={styles.helpText}>Use Arrow Keys or drag your finger on the screen to move the paddle.</p>
     </div>
   );
 };

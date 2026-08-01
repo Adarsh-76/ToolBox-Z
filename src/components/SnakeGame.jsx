@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './SnakeGame.module.css';
 
 const SnakeGame = () => {
+  const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -11,25 +12,52 @@ const SnakeGame = () => {
   const foodRef = useRef({x: 5, y: 5});
   const dirRef = useRef({x: 0, y: 0});
   const intervalRef = useRef(null);
+  const touchStartRef = useRef({x: 0, y: 0});
 
   const grid = 20; // 20x20 grid
 
   const startGame = () => {
     snakeRef.current = [{x: 10, y: 10}];
     foodRef.current = {x: Math.floor(Math.random() * grid), y: Math.floor(Math.random() * grid)};
-    dirRef.current = {x: 0, y: 0};
+    dirRef.current = {x: 0, y: 0}; // Start with no direction
     setScore(0);
     setGameOver(false);
     setIsRunning(true);
   };
 
-  const handleKeyDown = useCallback((e) => {
+  const handleDirectionChange = useCallback((newDir) => {
     const dir = dirRef.current;
-    if (e.key === 'ArrowUp' && dir.y === 0) dirRef.current = {x: 0, y: -1};
-    if (e.key === 'ArrowDown' && dir.y === 0) dirRef.current = {x: 0, y: 1};
-    if (e.key === 'ArrowLeft' && dir.x === 0) dirRef.current = {x: -1, y: 0};
-    if (e.key === 'ArrowRight' && dir.x === 0) dirRef.current = {x: 1, y: 0};
+    // Prevent reversing directly into itself
+    if (newDir.x !== 0 && dir.x === 0) dirRef.current = newDir;
+    if (newDir.y !== 0 && dir.y === 0) dirRef.current = newDir;
   }, []);
+
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === 'ArrowUp') handleDirectionChange({x: 0, y: -1});
+    if (e.key === 'ArrowDown') handleDirectionChange({x: 0, y: 1});
+    if (e.key === 'ArrowLeft') handleDirectionChange({x: -1, y: 0});
+    if (e.key === 'ArrowRight') handleDirectionChange({x: 1, y: 0});
+  }, [handleDirectionChange]);
+
+  const handleTouchStart = (e) => {
+    touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+
+  const handleTouchEnd = (e) => {
+    const touchEnd = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+    const dx = touchEnd.x - touchStartRef.current.x;
+    const dy = touchEnd.y - touchStartRef.current.y;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      // Horizontal swipe
+      if (dx > 30) handleDirectionChange({x: 1, y: 0}); // Right
+      else if (dx < -30) handleDirectionChange({x: -1, y: 0}); // Left
+    } else {
+      // Vertical swipe
+      if (dy > 30) handleDirectionChange({x: 0, y: 1}); // Down
+      else if (dy < -30) handleDirectionChange({x: 0, y: -1}); // Up
+    }
+  };
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -40,11 +68,15 @@ const SnakeGame = () => {
     if (!isRunning) return;
     
     intervalRef.current = setInterval(() => {
+      const dir = dirRef.current;
+      // FIX: Do not run collision logic if the snake hasn't started moving yet
+      if (dir.x === 0 && dir.y === 0) return; 
+
       const canvas = canvasRef.current;
+      if (!canvas) return;
       const ctx = canvas.getContext('2d');
       const snake = snakeRef.current;
       const food = foodRef.current;
-      const dir = dirRef.current;
 
       // Move snake
       const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
@@ -77,26 +109,39 @@ const SnakeGame = () => {
       ctx.fillStyle = '#FF0087'; // Snake color
       snake.forEach(s => ctx.fillRect(s.x * 20, s.y * 20, 18, 18));
       
-    }, 100);
+    }, 120);
 
     return () => clearInterval(intervalRef.current);
   }, [isRunning]);
 
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      containerRef.current?.requestFullscreen().catch(err => console.log(err));
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={containerRef}>
       <div className={`liquid-glass ${styles.scoreBoard}`}>
         <span>Score: <strong>{score}</strong></span>
-        <button className={styles.btn} onClick={startGame}>{gameOver ? '🔄 Restart' : '▶️ Start'}</button>
+        <div className={styles.btnGroup}>
+          <button className={styles.fsBtn} onClick={toggleFullscreen} title="Fullscreen">⛶</button>
+          <button className={styles.btn} onClick={startGame}>{gameOver ? '🔄 Restart' : '▶️ Start'}</button>
+        </div>
       </div>
       <canvas 
         ref={canvasRef} 
         width="400" 
         height="400" 
         className={`liquid-glass ${styles.canvas}`}
-        style={{ border: '2px solid var(--glass-border)' }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       />
       {gameOver && <h2 className={styles.gameOverText}>Game Over! Score: {score}</h2>}
-      <p className={styles.helpText}>Use Arrow Keys on desktop. (Swipe controls coming soon!)</p>
+      {!gameOver && !isRunning && <p className={styles.helpText}>Press Start! Use Arrow Keys or Swipe to play.</p>}
+      {isRunning && <p className={styles.helpText}>Swipe or use Arrow Keys.</p>}
     </div>
   );
 };
