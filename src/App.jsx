@@ -66,6 +66,7 @@ function AnimatedRoutes() {
       case 'add-pages-pdf': return 'theme-add-pages-pdf';
       case 'twitter-thread': return 'theme-twitter-thread';
       case 'pdf-watermark': return 'theme-pdf-watermark';
+      case 'epub-pdf-converter': return 'theme-ebook';
       case 'pdf-security': return 'theme-pdf-security';
       case 'fancy-text': return 'theme-fancy-text';
       case 'reddit-downloader': return 'theme-reddit';

@@ -22,6 +22,7 @@ const rawToolsList = [
   { id: 'fancy-text', icon: '✒️', name: 'Fancy Text Generator', desc: 'Create stylish Unicode text for Instagram bios, TikTok comments, and more.', category: 'Text Tools', rating: '4.9', users: '25.4k' },
   { id: 'fb-cover-resizer', icon: '🖼️', name: 'FB Cover Resizer', desc: 'Resize photos to perfect dimensions for Facebook cover photos.', category: 'Social Media Tools', rating: '4.7', users: '2.8k' },
   { id: 'fuel-prices', icon: '⛽', name: 'Live Fuel Price Tracker', desc: 'Check live fuel prices for countries and major cities with auto-updates.', category: 'Finance & Market', rating: '4.7', users: '8.9k' },
+  { id: 'epub-pdf-converter', icon: '📚', name: 'PDF ⇄ ePub Converter', desc: 'Convert PDF documents to ePub format for e-readers or ePub back to PDF instantly.', category: 'PDF Tools', rating: '4.7', users: '9.8k', isNew: true },
   { id: 'gif-maker', icon: '🎞️', name: 'GIF Maker', desc: 'Create animated GIFs from multiple images.', category: 'Image & Design', rating: '4.5', users: '7.2k' },
   { id: 'gold-price', icon: '🥇', name: 'Live Gold Price Checker', desc: 'Calculate live XAU prices for 24K, 22K and 18K instantly in all currencies.', category: 'Finance & Market', rating: '4.9', users: '18.2k', },
   { id: 'hashtag-generator', icon: '#️⃣', name: 'Hashtag Generator', desc: 'Generate trending and relevant hashtags for your social media posts.', category: 'Social Media Tools', rating: '4.8', users: '14.5k' },

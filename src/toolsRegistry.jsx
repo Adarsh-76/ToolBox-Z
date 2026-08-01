@@ -246,6 +246,8 @@ const PdfToTextInfo = React.lazy(() => import('./components/PdfToTextInfo'));
 const JsonToTs = React.lazy(() => import('./components/JsonToTs'));
 const JsonToTsInfo = React.lazy(() => import('./components/JsonToTsInfo'));
 const HtmlToPdfConverter = React.lazy(() => import('./components/HtmlToPdfConverter'));
+const EpubPdfConverter = React.lazy(() => import('./components/EpubPdfConverter'));
+const EpubPdfConverterInfo = React.lazy(() => import('./components/EpubPdfConverterInfo'));
 const HtmlToPdfConverterInfo = React.lazy(() => import('./components/HtmlToPdfConverterInfo'));
 
 // Other dynamic imports
@@ -263,6 +265,7 @@ export const toolsRegistry = {
   'pdf-generator': { Tool: PdfGenerator, Info: PdfGeneratorInfo },
   'pdf-to-word': { Tool: PdfToWordConverter, Info: PdfToWordConverterInfo },
   'images-to-pdf': { Tool: ImagesToPdfConverter, Info: ImagesToPdfConverterInfo },
+  'epub-pdf-converter': { Tool: EpubPdfConverter, Info: EpubPdfConverterInfo },
   'word-to-pdf': { Tool: WordToPdfConverter, Info: WordToPdfConverterInfo },
   'excel-to-pdf': { Tool: ExcelToPdfConverter, Info: ExcelToPdfConverterInfo },
   'pdf-to-excel': { Tool: PdfToExcelConverter, Info: PdfToExcelConverterInfo },

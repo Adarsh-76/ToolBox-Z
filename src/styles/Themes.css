@@ -1937,3 +1937,18 @@
   --blob-1: #e34c26;
   --blob-2: #c0392b;
 }
+/* Theme 126: E-Book Paper (PDF/ePub) */
+.theme-ebook {
+  --primary-gradient: linear-gradient(135deg, #d4a373 0%, #a47148 100%);
+  --bg-dark: #1a1a1a;
+  --bg-light: #F4F1EA;
+  --text-dark: #E2E8F0;
+  --text-light: #1a1a1a;
+  --accent-color: #d4a373; /* Warm Paper */
+  --glass-bg: rgba(212, 163, 115, 0.15);
+  --glass-border: rgba(212, 163, 115, 0.2);
+  --glass-highlight-top: rgba(255, 255, 255, 0.08);
+  --glass-highlight-bottom: rgba(0, 0, 0, 0.5);
+  --blob-1: #d4a373;
+  --blob-2: #a47148;
+}
