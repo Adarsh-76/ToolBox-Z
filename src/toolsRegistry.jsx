@@ -253,6 +253,14 @@ const EpubPdfConverterInfo = React.lazy(() => import('./components/EpubPdfConver
 const HtmlToPdfConverterInfo = React.lazy(() => import('./components/HtmlToPdfConverterInfo'));
 const FlattenPdf = React.lazy(() => import('./components/FlattenPdf'));
 const FlattenPdfInfo = React.lazy(() => import('./components/FlattenPdfInfo'));
+const SnakeGame = React.lazy(() => import('./components/SnakeGame'));
+const SnakeGameInfo = React.lazy(() => import('./components/SnakeGameInfo'));
+const MemoryGame = React.lazy(() => import('./components/MemoryGame'));
+const MemoryGameInfo = React.lazy(() => import('./components/MemoryGameInfo'));
+const ReactionTest = React.lazy(() => import('./components/ReactionTest'));
+const ReactionTestInfo = React.lazy(() => import('./components/ReactionTestInfo'));
+const BreakoutGame = React.lazy(() => import('./components/BreakoutGame'));
+const BreakoutGameInfo = React.lazy(() => import('./components/BreakoutGameInfo'));
 
 // Other dynamic imports
 const Recommendations = React.lazy(() => import('./components/Recommendations'));
@@ -385,6 +393,10 @@ export const toolsRegistry = {
   'bezier-curve': { Tool: BezierCurve, Info: BezierCurveInfo },
   'pulse-generator': { Tool: PulseGenerator, Info: PulseGeneratorInfo },
   'power-calculator': { Tool: PowerCalculator, Info: PowerCalculatorInfo },
+  'snake-game': { Tool: SnakeGame, Info: SnakeGameInfo },
+  'memory-game': { Tool: MemoryGame, Info: MemoryGameInfo },
+  'reaction-test': { Tool: ReactionTest, Info: ReactionTestInfo },
+  'breakout-game': { Tool: BreakoutGame, Info: BreakoutGameInfo },
   'pdf-signer': { Tool: PdfSigner, Info: PdfSignerInfo },
 
   // Wrapper components

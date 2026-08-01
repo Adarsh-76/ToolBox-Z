@@ -1,6 +1,6 @@
 const rawToolsList = [
   { id: 'add-pages-pdf', icon: '➕', name: 'Add Pages to PDF', desc: 'Insert new pages into existing PDF documents.', category: 'PDF Tools', rating: '4.7', users: '8.9k' },
-  { id: 'pdf-to-image', icon: '🖼️', name: 'PDF to Image Converter', desc: 'Convert PDF pages into high-quality PNG or JPEG images instantly.', category: 'PDF Tools', rating: '4.8', users: '15.1k', isNew: true },
+  { id: 'pdf-to-image', icon: '🖼️', name: 'PDF to Image Converter', desc: 'Convert PDF pages into high-quality PNG or JPEG images instantly.', category: 'PDF Tools', rating: '4.8', users: '15.1k', },
   { id: 'age-calculator', icon: '🎂', name: 'Age Calculator', desc: 'Calculate exact age from birth date to current date in years, months, and days.', category: 'Math & Calculators', rating: '4.8', users: '12.4k', },
   { id: 'background-remover', icon: '🪄', name: 'Background Remover', desc: 'Remove backgrounds from images automatically.', category: 'Image & Design', rating: '4.8', users: '15.2k' },
   { id: 'barcode-generator', icon: '📊', name: 'Barcode Generator', desc: 'Generate unlimited custom barcodes instantly and download as PNG.', category: 'Generators', rating: '4.7', users: '9.1k' },
@@ -13,12 +13,12 @@ const rawToolsList = [
   { id: 'compress-pdf', icon: '🗜️', name: 'Compress PDF Files', desc: 'Reduce PDF file size while maintaining quality.', category: 'PDF Tools', rating: '4.8', users: '21.3k' },
   { id: 'css-generator', icon: '📐', name: 'CSS Generator', desc: 'Create CSS gradients and shadows.', category: 'Developer Tools', rating: '4.7', users: '9.8k' },
   { id: 'cricket-scores', icon: '🏏', name: 'Live Cricket Scores', desc: 'Check live cricket scores and real-time match updates instantly.', category: 'Productivity', rating: '4.9', users: '25.1k', },
-  { id: 'html-to-pdf', icon: '📄', name: 'HTML to PDF Converter', desc: 'Convert HTML web pages or raw code into high-quality PDF format instantly.', category: 'PDF Tools', rating: '4.8', users: '12.3k', isNew: true },
+  { id: 'html-to-pdf', icon: '📄', name: 'HTML to PDF Converter', desc: 'Convert HTML web pages or raw code into high-quality PDF format instantly.', category: 'PDF Tools', rating: '4.8', users: '12.3k', },
   { id: 'currency-converter', icon: '💱', name: 'Currency Converter', desc: 'Convert currencies instantly using live TradingView exchange rates.', category: 'Finance & Market', rating: '4.9', users: '21.4k' },
   { id: 'emi-calculator', icon: '🏦', name: 'Loan EMI Calculator', desc: 'Calculate monthly EMI for Home, Car, Personal, and Education loans.', category: 'Finance & Market', rating: '4.9', users: '24.5k' },
   { id: 'emoji-mixer', icon: '🎭', name: 'Emoji Mixer', desc: 'Mixes two or more than two emojis for text.', category: 'Text Tools', rating: '4.9', users: '14.2k' },
   { id: 'emoji-keyboard', icon: '⌨️', name: 'Emoji Keyboard', desc: 'Copy and paste emojis easily for your social media posts.', category: 'Text Tools', rating: '4.8', users: '8.2k' },
-  { id: 'flatten-pdf', icon: '🔒', name: 'Flatten PDF Forms', desc: 'Convert interactive PDF forms into static, non-editable documents instantly.', category: 'PDF Tools', rating: '4.8', users: '7.2k', isNew: true },
+  { id: 'flatten-pdf', icon: '🔒', name: 'Flatten PDF Forms', desc: 'Convert interactive PDF forms into static, non-editable documents instantly.', category: 'PDF Tools', rating: '4.8', users: '7.2k', },
   { id: 'excel-to-pdf', icon: '📊', name: 'Excel to PDF Converter', desc: 'Convert Excel spreadsheets to PDF format.', category: 'PDF Tools', rating: '4.8', users: '15.3k' },
   { id: 'facebook-downloader', icon: '▶️', name: 'Facebook Video Downloader', desc: 'Download videos from Facebook posts and pages.', category: 'Social Media Tools', rating: '4.6', users: '22.1k' },
   { id: 'fancy-text', icon: '✒️', name: 'Fancy Text Generator', desc: 'Create stylish Unicode text for Instagram bios, TikTok comments, and more.', category: 'Text Tools', rating: '4.9', users: '25.4k' },
@@ -122,8 +122,12 @@ const rawToolsList = [
   { id: 'pulse-generator', icon: '💗', name: 'Pulse Animation Generator', desc: 'Generate CSS pulse animations for live indicators and buttons.', category: 'Generators', rating: '4.7', users: '6.8k',  },
   { id: 'power-calculator', icon: '🚀', name: 'Power & Root Calculator', desc: 'Calculate squares, cubes, square roots, and custom exponents instantly.', category: 'Math & Calculators', rating: '4.8', users: '5.4k', },
   { id: 'pdf-signer', icon: '✍️', name: 'Digital PDF Signer', desc: 'Draw your signature, embed it in a PDF, and get a tamper-detection hash.', category: 'PDF Tools', rating: '4.9', users: '14.5k', },
-  { id: 'pdf-to-text', icon: '📄', name: 'PDF Text Extractor', desc: 'Extract and copy plain text from PDF documents instantly.', category: 'PDF Tools', rating: '4.7', users: '10.2k', isNew: true },
-  { id: 'json-to-ts', icon: '🦾', name: 'JSON to TypeScript', desc: 'Convert any JSON object into TypeScript interfaces instantly.', category: 'Developer Tools', rating: '4.8', users: '5.1k', isNew: true },
+  { id: 'pdf-to-text', icon: '📄', name: 'PDF Text Extractor', desc: 'Extract and copy plain text from PDF documents instantly.', category: 'PDF Tools', rating: '4.7', users: '10.2k', },
+  { id: 'json-to-ts', icon: '🦾', name: 'JSON to TypeScript', desc: 'Convert any JSON object into TypeScript interfaces instantly.', category: 'Developer Tools', rating: '4.8', users: '5.1k', },
+  { id: 'snake-game', icon: '🐍', name: 'Snake Game', desc: 'Play the classic Snake game. Eat food, grow longer, and avoid hitting the walls!', category: 'Fun & Games', rating: '4.8', users: '18.2k', isExperimental: true },
+  { id: 'memory-game', icon: '🧠', name: 'Memory Match', desc: 'Test your memory by matching pairs of cards in this classic flip and match game.', category: 'Fun & Games', rating: '4.7', users: '12.5k', isExperimental: true },
+  { id: 'reaction-test', icon: '⚡', name: 'Reaction Time Test', desc: 'Measure your reflexes in milliseconds. Wait for green and click as fast as you can!', category: 'Fun & Games', rating: '4.9', users: '21.3k', isExperimental: true },
+  { id: 'breakout-game', icon: '🧱', name: 'Breakout Game', desc: 'Smash all the bricks with a ball and paddle in this timeless arcade classic.', category: 'Fun & Games', rating: '4.6', users: '9.8k', isExperimental: true },
   { id: 'ip-lookup', icon: '🌐', name: 'IP & DNS Lookup', desc: 'Lookup IP geolocation data and perform DNS record lookups instantly.', category: 'Developer Tools', rating: '4.8', users: '8.9k' }
 
 ];

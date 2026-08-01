@@ -160,6 +160,10 @@ function AnimatedRoutes() {
       case 'css-grid-generator': return 'theme-grid';
       case 'bezier-curve': return 'theme-bezier';
       case 'pulse-generator': return 'theme-pulse';
+      case 'snake-game': return 'theme-game';
+      case 'memory-game': return 'theme-game';
+      case 'reaction-test': return 'theme-game';
+      case 'breakout-game': return 'theme-game';
       default: return 'theme-navy';
     }
   };
