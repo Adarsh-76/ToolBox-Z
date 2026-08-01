@@ -1,4 +1,4 @@
-	mport React, { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './FlattenPdfInfo.module.css';
 import Reveal from './Reveal';
 
